@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Mirador de Teotihuacán — Taller, Axolotes y Vuelos en Dron</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --obsidian:#1C1815;
+    --obsidian-soft:#26211D;
+    --adobe:#B5652E;
+    --adobe-dark:#8A4A1F;
+    --stone:#E7DFC9;
+    --stone-dark:#b3a47b;
+    --jade:#2F6B5E;
+    --jade-dark:#1E463D;
+    --blush:#E8A79B;
+    --dawn:#8B96B4;
+    --ink:#241E19;
+    --paper:#FAF6EC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    color:var(--obsidian);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--adobe-dark);
+    display:flex;
+    align-items:center;
+    gap:0.6em;
+    margin-bottom:0.9em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:2px;
+    background:var(--adobe);
+    display:inline-block;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  :focus-visible{outline:3px solid var(--adobe);outline-offset:3px;}
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(28,24,21,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(231,223,201,0.12);
+  }
+  nav{
+    max-width:1120px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-family:'Fraunces',serif;font-weight:700;
+    color:var(--paper);font-size:1.15rem;letter-spacing:-0.01em;
+    display:flex;flex-direction:column;line-height:1.05;
+  }
+  .logo span{
+    font-family:'JetBrains Mono',monospace;font-weight:400;
+    font-size:0.62rem;letter-spacing:0.18em;color:var(--blush);
+    text-transform:uppercase;
+  }
+  .navlinks{display:flex;gap:28px;font-size:0.88rem;color:var(--stone);}
+  .navlinks a:hover{color:var(--blush);}
+  .navlinks{display:none;}
+  @media(min-width:820px){.navlinks{display:flex;}}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    background:linear-gradient(180deg,#3A4266 0%, #7F7FA0 32%, #C98F6E 58%, #1C1815 100%);
+    padding-top:90px;
+    overflow:hidden;
+  }
+  .hero-sky{position:absolute;inset:0;z-index:0;}
+  .balloon{position:absolute;opacity:0.92;animation:drift 14s ease-in-out infinite;}
+  .balloon.b2{animation-delay:-4s;animation-duration:18s;}
+  .balloon.b3{animation-delay:-9s;animation-duration:16s;}
+  @keyframes drift{
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-18px);}
+  }
+  .hero-content{
+    position:relative;z-index:2;
+    padding:60px 24px 0;
+    max-width:1120px;margin:0 auto;width:100%;
+  }
+  .hero h1{
+    color:var(--paper);
+    font-size:clamp(2.1rem,5.4vw,4rem);
+    max-width:14ch;
+    margin-bottom:0.4em;
+  }
+  .hero p{
+    color:var(--stone);
+    max-width:46ch;
+    font-size:1.05rem;
+    margin-bottom:2em;
+  }
+  .hero .eyebrow{color:var(--blush);}
+  .hero .eyebrow::before{background:var(--blush);}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:70px;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.82rem;letter-spacing:0.04em;
+    padding:14px 22px;border-radius:2px;
+    border:1px solid transparent;
+    transition:transform .15s ease, background .15s ease;
+    display:inline-block;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--adobe);color:var(--paper);}
+  .btn-primary:hover{background:var(--adobe-dark);}
+  .btn-secondary{border-color:rgba(250,246,236,0.4);color:var(--paper);}
+  .btn-secondary:hover{border-color:var(--paper);}
+
+  /* PYRAMID SIGNATURE DIVIDER */
+  .talud{
+    position:relative;z-index:1;
+    width:100%;height:70px;
+    display:flex;justify-content:center;align-items:flex-end;
+  }
+  .talud svg{height:100%;}
+
+  /* TIMELINE - signature stepped element */
+  .day{
+    background:var(--obsidian);
+    padding:110px 0 90px;
+  }
+  .day .eyebrow{color:var(--blush);}
+  .day .eyebrow::before{background:var(--blush);}
+  .day h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.5rem);max-width:16ch;margin-bottom:60px;}
+  .steps{list-style:none;position:relative;padding-left:0;}
+  .steps::before{
+    content:"";position:absolute;left:17px;top:6px;bottom:6px;width:1px;
+    background:linear-gradient(180deg, var(--blush), var(--adobe), var(--jade));
+    opacity:0.5;
+  }
+  .step{
+    display:grid;grid-template-columns:36px 1fr;gap:20px;
+    padding:22px 0;position:relative;
+    opacity:0;transform:translateX(-14px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .step.show{opacity:1;transform:translateX(0);}
+  .step-dot{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--obsidian-soft);border:1px solid rgba(232,167,155,0.4);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--blush);
+  }
+  .step-body time{
+    font-family:'JetBrains Mono',monospace;font-size:0.76rem;color:var(--adobe);
+    display:block;margin-bottom:4px;letter-spacing:0.04em;
+  }
+  .step-body h3{color:var(--paper);font-size:1.15rem;font-weight:600;margin-bottom:2px;}
+  .step-body p{color:var(--stone);font-size:0.92rem;max-width:52ch;}
+
+  /* AXOLOTL SECTION */
+  .axo{
+    background:radial-gradient(ellipse at 20% 20%, #3A7E70 0%, var(--jade-dark) 55%, #14302A 100%);
+    padding:100px 0;color:var(--paper);position:relative;
+  }
+  .axo-grid{display:grid;grid-template-columns:1fr;gap:50px;align-items:center;}
+  @media(min-width:860px){.axo-grid{grid-template-columns:1.1fr 0.9fr;}}
+  .axo h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:14ch;margin-bottom:18px;}
+  .axo p{color:#CFE6DF;max-width:48ch;margin-bottom:26px;}
+  .facts{display:flex;flex-direction:column;gap:14px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+  .facts div{border-top:1px solid rgba(255,255,255,0.18);padding-top:10px;display:flex;justify-content:space-between;gap:20px;color:#B9D9CF;}
+  .facts strong{color:var(--paper);font-weight:500;}
+  .axo-visual{
+    aspect-ratio:1/1;border-radius:8px;
+    background:linear-gradient(160deg,#2E6459,#173731);
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(232,167,155,0.25);
+  }
+
+  /* ARTESANIAS SECTION */
+  .taller{background:var(--stone);padding:100px 0;}
+  .taller-head{max-width:56ch;margin-bottom:56px;}
+  .taller h2{font-size:clamp(1.7rem,3.6vw,2.4rem);margin-bottom:16px;}
+  .taller-head p{color:#4A4038;max-width:52ch;}
+  .craft-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+  @media(min-width:700px){.craft-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:1020px){.craft-grid{grid-template-columns:repeat(4,1fr);}}
+  .craft-card{
+    background:var(--paper);border:1px solid var(--stone-dark);
+    padding:26px 22px;border-radius:4px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .craft-card:hover{border-color:var(--adobe);transform:translateY(-3px);}
+  .craft-card .num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--adobe-dark);margin-bottom:14px;display:block;}
+  .craft-card h3{font-size:1.05rem;margin-bottom:8px;}
+  .craft-card p{font-size:0.88rem;color:#5B5044;}
+
+  /* DRONE SECTION */
+  .dron{
+    background:linear-gradient(180deg,#3A4266,#7F7FA0 60%,#C98F6E);
+    padding:100px 0;color:var(--paper);
+  }
+  .dron-grid{display:grid;grid-template-columns:1fr;gap:50px;}
+  @media(min-width:900px){.dron-grid{grid-template-columns:0.9fr 1.1fr;}}
+  .dron h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:15ch;margin-bottom:16px;}
+  .dron > .wrap > .dron-grid > div > p{color:#EDE9F0;max-width:44ch;margin-bottom:18px;}
+  .pricing{border:1px solid rgba(255,255,255,0.3);border-radius:6px;overflow:hidden;background:rgba(28,24,21,0.28);}
+  .price-row{
+    display:flex;justify-content:space-between;gap:16px;
+    padding:20px 22px;border-bottom:1px solid rgba(255,255,255,0.16);
+    font-family:'JetBrains Mono',monospace;font-size:0.86rem;
+  }
+  .price-row:last-child{border-bottom:none;}
+  .price-row .name{font-family:'Karla',sans-serif;font-weight:700;font-size:0.98rem;display:block;margin-bottom:4px;}
+  .price-row .desc{font-family:'Karla',sans-serif;font-weight:400;font-size:0.82rem;color:#E7E3EE;}
+  .price-row .amount{white-space:nowrap;color:var(--blush);align-self:center;}
+
+  /* LOCATION */
+  .ubica{background:var(--obsidian);color:var(--paper);padding:100px 0;}
+  .ubica-grid{display:grid;grid-template-columns:1fr;gap:44px;}
+  @media(min-width:860px){.ubica-grid{grid-template-columns:1fr 1fr;}}
+  .ubica h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.3rem);max-width:16ch;margin-bottom:16px;}
+  .ubica p{color:var(--stone);max-width:42ch;margin-bottom:20px;}
+  .infolist div{
+    display:flex;justify-content:space-between;gap:16px;
+    padding:14px 0;border-top:1px solid rgba(231,223,201,0.14);
+    font-size:0.92rem;color:var(--stone);
+  }
+  .infolist span:first-child{font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:var(--blush);text-transform:uppercase;letter-spacing:0.06em;}
+  .map-box{
+    border-radius:6px;border:1px solid rgba(231,223,201,0.2);
+    background:repeating-linear-gradient(45deg, #26211D, #26211D 10px, #201B18 10px, #201B18 20px);
+    min-height:280px;display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--stone-dark);
+    text-align:center;padding:20px;
+  }
+
+  footer{background:var(--obsidian-soft);color:var(--stone-dark);padding:48px 0 28px;}
+  .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;padding-bottom:28px;border-bottom:1px solid rgba(231,223,201,0.12);margin-bottom:20px;}
+  footer .logo{color:var(--paper);}
+  .foot-links{display:flex;gap:22px;font-size:0.86rem;}
+  .foot-links a:hover{color:var(--blush);}
+  .fine{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#7A7168;line-height:1.7;}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">EL MIRADOR <span>Teotihuacán</span></div>
+    <div class="navlinks">
+      <a href="#taller">Taller</a>
+      <a href="#axolotes">Axolotes</a>
+      <a href="#dron">Vuelos en dron</a>
+      <a href="#ubicacion">Ubicación</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-sky">
+    <svg class="balloon b1" style="position:absolute;left:8%;top:14%;width:70px" viewBox="0 0 60 80" fill="none"><path d="M30 2C15 2 6 18 6 32c0 12 8 20 12 24l-2 8h28l-2-8c4-4 12-12 12-24C54 18 45 2 30 2Z" fill="#E8A79B" opacity="0.9"/><path d="M18 64h24l-3 8H21l-3-8Z" fill="#8A4A1F"/></svg>
+    <svg class="balloon b2" style="position:absolute;left:24%;top:6%;width:46px" viewBox="0 0 60 80" fill="none"><path d="M30 2C15 2 6 18 6 32c0 12 8 20 12 24l-2 8h28l-2-8c4-4 12-12 12-24C54 18 45 2 30 2Z" fill="#FAF6EC" opacity="0.85"/><path d="M18 64h24l-3 8H21l-3-8Z" fill="#8A4A1F"/></svg>
+    <svg class="balloon b3" style="position:absolute;right:14%;top:20%;width:56px" viewBox="0 0 60 80" fill="none"><path d="M30 2C15 2 6 18 6 32c0 12 8 20 12 24l-2 8h28l-2-8c4-4 12-12 12-24C54 18 45 2 30 2Z" fill="#B5652E" opacity="0.9"/><path d="M18 64h24l-3 8H21l-3-8Z" fill="#241E19"/></svg>
+  </div>
+  <div class="hero-content">
+    <p class="eyebrow">A pasos de la Zona Arqueológica</p>
+    <h1>Amanece en globo. Camina entre pirámides. Llévate Teotihuacán contigo.</h1>
+    <p>Taller y tienda de artesanía hecha a mano, un mirador con exhibición viva de axolotes, y grabación por dron de tu vuelo en globo aerostático, editada y lista antes de que te vayas.</p>
+    <div class="cta-row">
+      <a href="#dron" class="btn btn-primary">Reservar grabación de vuelo</a>
+      <a href="#taller" class="btn btn-secondary">Conocer el taller</a>
+    </div>
+  </div>
+  <div class="talud" aria-hidden="true">
+    <svg viewBox="0 0 400 70" preserveAspectRatio="none" width="100%" height="70">
+      <polygon points="0,70 400,70 400,50 340,50 340,32 280,32 280,14 240,14 240,0 200,0 200,14 160,14 160,32 100,32 100,50 40,50 40,70" fill="#1C1815"/>
+    </svg>
+  </div>
+</section>
+
+<section class="day" id="dia">
+  <div class="wrap">
+    <p class="eyebrow">Cómo se vive un día aquí</p>
+    <h2>Tu recorrido, paso a paso, desde el amanecer hasta el video en tu teléfono</h2>
+    <ul class="steps">
+      <li class="step"><div class="step-dot">01</div><div class="step-body"><time>05:30</time><h3>Despega tu globo sobre el Valle de Teotihuacán</h3><p>Tu vuelo comienza antes del amanecer, con vista completa a las pirámides desde el aire.</p></div></li>
+      <li class="step"><div class="step-dot">02</div><div class="step-body"><time>07:00</time><h3>Recorres la Zona Arqueológica</h3><p>La Pirámide del Sol y la Calzada de los Muertos, a pie y con calma.</p></div></li>
+      <li class="step"><div class="step-dot">03</div><div class="step-body"><time>08:30</time><h3>Descansas en nuestro mirador</h3><p>A unos metros de la zona, con vista directa y sombra para hacer una pausa.</p></div></li>
+      <li class="step"><div class="step-dot">04</div><div class="step-body"><time>08:45</time><h3>Conoces a nuestros axolotes</h3><p>Una exhibición viva de esta especie nativa, en peligro crítico de extinción.</p></div></li>
+      <li class="step"><div class="step-dot">05</div><div class="step-body"><time>09:15</time><h3>Eliges tu pieza de artesanía</h3><p>Obsidiana, barro y textil, trabajados por manos locales, en el mismo taller.</p></div></li>
+      <li class="step"><div class="step-dot">06</div><div class="step-body"><time>10:00</time><h3>Recibes el video de tu vuelo</h3><p>Grabado por dron durante tu globo, editado y entregado el mismo día.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="axo" id="axolotes">
+  <div class="wrap axo-grid">
+    <div>
+      <p class="eyebrow">Exhibición viva</p>
+      <h2>Ajolotes, no monstruos de acuario</h2>
+      <p>Nuestro mirador alberga una exhibición dedicada al ajolote, especie originaria de los canales de Xochimilco y hoy en peligro crítico. Aquí se puede observar de cerca, entender su biología y por qué su conservación importa, sin flash y sin golpear el cristal.</p>
+      <div class="facts">
+        <div><span>Nombre científico</span><strong>Ambystoma mexicanum</strong></div>
+        <div><span>Estado de conservación</span><strong>En peligro crítico</strong></div>
+        <div><span>Su particularidad</span><strong>Regenera extremidades completas</strong></div>
+        <div><span>Origen</span><strong>Lagos de Xochimilco, CDMX</strong></div>
+      </div>
+    </div>
+    <div class="axo-visual">
+      <img src="https://culturasinaloa.com/wp-content/uploads/ajolote-mexicano-en-su-habitat-768x430.jpg" alt="Ajolote en el mirador" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+  </div>
+</section>
+
+<section class="taller" id="taller">
+  <div class="wrap">
+    <div class="taller-head">
+      <p class="eyebrow">Taller y tienda</p>
+      <h2>Obsidiana, barro y telar, tal como se trabajan en el valle</h2>
+      <p>Cada pieza sale del mismo taller donde se hace: sin intermediarios, con las técnicas que se usan en la región desde hace generaciones.</p>
+    </div>
+    <div class="craft-grid">
+      <div class="craft-card"><span class="num">01</span><h3>Obsidiana tallada</h3><p>Espejos, puntas y figuras pulidas a mano a partir de piedra volcánica local.</p></div>
+      <div class="craft-card"><span class="num">02</span><h3>Textil de telar de cintura</h3><p>Fajas y tapetes tejidos con la técnica prehispánica de telar de cintura.</p></div>
+      <div class="craft-card"><span class="num">03</span><h3>Barro y cerámica</h3><p>Piezas de barro cocido, decoradas a mano con motivos del valle.</p></div>
+      <div class="craft-card"><span class="num">04</span><h3>Joyería en piedra volcánica</h3><p>Aretes y collares en obsidiana, jade local y plata.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="dron" id="dron">
+  <div class="wrap dron-grid">
+    <div>
+      <p class="eyebrow">Grabación por dron</p>
+      <h2>Tu vuelo en globo, visto desde arriba</h2>
+      <p>Volamos un dron durante tu ascenso en globo aerostático y grabamos el momento completo: el despegue, el valle y las pirámides desde el aire, y tu propia canastilla en vuelo.</p>
+      <p>Entrega el mismo día, antes de que salgas de la zona.</p>
+    </div>
+    <div class="pricing">
+      <div class="price-row">
+        <div><span class="name">Paquete Amanecer</span><span class="desc">Video corto de 60 segundos, entrega same-day</span></div>
+        <div class="amount">$ XXX MXN</div>
+      </div>
+      <div class="price-row">
+        <div><span class="name">Paquete Vuelo Completo</span><span class="desc">Video de 3–5 min + set de fotos aéreas</span></div>
+        <div class="amount">$ XXX MXN</div>
+      </div>
+      <div class="price-row">
+        <div><span class="name">Paquete Grupo</span><span class="desc">Para varias canastillas en el mismo vuelo</span></div>
+        <div class="amount">$ XXX MXN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ubica" id="ubicacion">
+  <div class="wrap ubica-grid">
+    <div>
+      <p class="eyebrow">Cómo llegar</p>
+      <h2>A unos metros de la Zona Arqueológica de Teotihuacán</h2>
+      <p>Fácil de encontrar al salir de la zona, con mirador propio y estacionamiento.</p>
+      <div class="infolist">
+        <div><span>Dirección</span><span>Escribe aquí tu dirección exacta</span></div>
+        <div><span>Horario</span><span>Escribe aquí tu horario</span></div>
+        <div><span>Teléfono / WhatsApp</span><span>Escribe aquí tu contacto</span></div>
+        <div><span>Reservas de dron</span><span>Escribe aquí el enlace o número</span></div>
+      </div>
+    </div>
+    <div class="map-box">Espacio reservado para tu mapa<br>(inserta aquí tu Google Maps embed)</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="logo">EL MIRADOR <span>Teotihuacán</span></div>
+      <div class="foot-links">
+        <a href="#taller">Taller</a>
+        <a href="#axolotes">Axolotes</a>
+        <a href="#dron">Dron</a>
+        <a href="#ubicacion">Ubicación</a>
+      </div>
+    </div>
+    <p class="fine">PLANTILLA DE DISEÑO — sustituye textos entre corchetes, precios "XXX" y el mapa por tu información real. Los íconos de axolote, globos y pirámide son ilustraciones propias del sitio, no fotografías.</p>
+  </div>
+</footer>
+
+<script>
+  const steps = document.querySelectorAll('.step');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } });
+  }, {threshold:0.3});
+  steps.forEach(s=>obs.observe(s));
+</script>
+
+</body>
+</html>
