@@ -178,24 +178,50 @@
   .step-body h3{color:var(--paper);font-size:1.15rem;font-weight:600;margin-bottom:2px;}
   .step-body p{color:var(--stone);font-size:0.92rem;max-width:52ch;}
 
-  /* AXOLOTL SECTION */
-  .axo{
-    background:radial-gradient(ellipse at 20% 20%, #3A7E70 0%, var(--jade-dark) 55%, #14302A 100%);
-    padding:100px 0;color:var(--paper);position:relative;
-  }
-  .axo-grid{display:grid;grid-template-columns:1fr;gap:50px;align-items:center;}
-  @media(min-width:860px){.axo-grid{grid-template-columns:1.1fr 0.9fr;}}
-  .axo h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:14ch;margin-bottom:18px;}
-  .axo p{color:#CFE6DF;max-width:48ch;margin-bottom:26px;}
-  .facts{display:flex;flex-direction:column;gap:14px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
-  .facts div{border-top:1px solid rgba(255,255,255,0.18);padding-top:10px;display:flex;justify-content:space-between;gap:20px;color:#B9D9CF;}
-  .facts strong{color:var(--paper);font-weight:500;}
-  .axo-visual{
-    aspect-ratio:1/1;border-radius:8px;
-    background:linear-gradient(160deg,#2E6459,#173731);
-    display:flex;align-items:center;justify-content:center;
-    border:1px solid rgba(232,167,155,0.25);
-  }
+/* AXOLOTL SECTION */
+.axo{
+  position:relative;
+  overflow:hidden;
+  min-height:600px;
+  padding:100px 0;
+  color:var(--paper);
+}
+.axo-grid{
+  position:relative;
+  z-index:2;
+  display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
+}
+@media(min-width:860px){.axo-grid{grid-template-columns:1.1fr 0.9fr;}}
+.axo h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:14ch;margin-bottom:18px;}
+.axo p{color:#CFE6DF;max-width:48ch;margin-bottom:26px;}
+.facts{display:flex;flex-direction:column;gap:14px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
+.facts div{border-top:1px solid rgba(255,255,255,0.18);padding-top:10px;display:flex;justify-content:space-between;gap:20px;color:#B9D9CF;}
+.facts strong{color:var(--paper);font-weight:500;}
+
+.axo-bg-video{
+  position:absolute;
+  top:0;
+  left:25%;
+  width:75%;
+  height:100%;
+  object-fit:cover;
+  filter:blur(6px);
+  z-index:0;
+}
+.axo-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(
+    to right,
+    #173731 0%,
+    #173731 20%,
+    transparent 55%
+  );
+  z-index:1;
+}
 
   /* ARTESANIAS SECTION */
   .taller{background:var(--stone);padding:100px 0;}
@@ -320,6 +346,9 @@
 </section>
 
 <section class="axo" id="axolotes">
+  <video class="axo-bg-video" src="multimedia/videoquesonlosajolotes.mp4" autoplay muted loop playsinline></video>
+  <div class="axo-overlay"></div>
+
   <div class="wrap axo-grid">
     <div>
       <p class="eyebrow">Exhibición viva</p>
@@ -332,9 +361,6 @@
         <div><span>Origen</span><strong>Lagos de Xochimilco, CDMX</strong></div>
       </div>
     </div>
-    <div class="axo-visual">
-      <video src="multimedia/videoquesonlosajolotes.mp4" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" autoplay muted loop playsinline>
-     </video>
   </div>
 </section>
 
