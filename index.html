@@ -106,7 +106,14 @@
     position:relative;z-index:2;
     padding:60px 24px 0;
     max-width:1120px;margin:0 auto;width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+    align-items:center;
   }
+@media(min-width:860px){
+  .hero-content{grid-template-columns:1.1fr 0.9fr;}
+}
   .hero h1{
     color:var(--paper);
     font-size:clamp(2.1rem,5.4vw,4rem);
@@ -135,6 +142,29 @@
   .btn-primary:hover{background:var(--adobe-dark);}
   .btn-secondary{border-color:rgba(250,246,236,0.4);color:var(--paper);}
   .btn-secondary:hover{border-color:var(--paper);}
+
+ .hero-visual{
+   position:relative;
+   border-radius:12px;
+   aspect-ratio:4/5;
+  }
+ .hero-visual video{
+   width:100%;height:100%;
+   object-fit:cover;
+   border-radius:12px;
+   position:relative;z-index:2;
+   border:1px solid rgba(232,167,155,0.35);
+  }
+  .hero-visual::before{
+   content:"";
+   position:absolute;
+   inset:-20px;
+   border-radius:24px;
+   background:linear-gradient(160deg,#E8A79B,#B5652E,#8A4A1F);
+   filter:blur(40px);
+   opacity:0.55;
+   z-index:1;
+  }
 
   /* PYRAMID SIGNATURE DIVIDER */
   .talud{
@@ -314,15 +344,23 @@
     <svg class="balloon b2" style="position:absolute;left:24%;top:6%;width:46px" viewBox="0 0 60 80" fill="none"><path d="M30 2C15 2 6 18 6 32c0 12 8 20 12 24l-2 8h28l-2-8c4-4 12-12 12-24C54 18 45 2 30 2Z" fill="#FAF6EC" opacity="0.85"/><path d="M18 64h24l-3 8H21l-3-8Z" fill="#8A4A1F"/></svg>
     <svg class="balloon b3" style="position:absolute;right:14%;top:20%;width:56px" viewBox="0 0 60 80" fill="none"><path d="M30 2C15 2 6 18 6 32c0 12 8 20 12 24l-2 8h28l-2-8c4-4 12-12 12-24C54 18 45 2 30 2Z" fill="#B5652E" opacity="0.9"/><path d="M18 64h24l-3 8H21l-3-8Z" fill="#241E19"/></svg>
   </div>
-  <div class="hero-content">
-    <p class="eyebrow">A pasos de la Zona Arqueológica</p>
-    <h1>Amanece con vista a las pirámides. Camina entre pirámides. Llévate Teotihuacán contigo.</h1>
-    <p>Taller y tienda de artesanía hecha a mano, un mirador con exhibición viva de axolotes, y grabación por dron de tu vuelo en globo aerostático, editada y lista antes de que te vayas.</p>
-    <div class="cta-row">
-      <a href="#dron" class="btn btn-primary">Reservar grabación de vuelo</a>
-      <a href="#taller" class="btn btn-secondary">Conocer el taller</a>
+
+  <div class="hero-grid">
+    <div class="hero-content">
+      <p class="eyebrow">A pasos de la Zona Arqueológica</p>
+      <h1>Amanece con vista a las pirámides. Camina entre pirámides. Llévate Teotihuacán contigo.</h1>
+      <p>Taller y tienda de artesanía hecha a mano, un mirador con exhibición viva de axolotes, y grabación por dron de tu vuelo en globo aerostático, editada y lista antes de que te vayas.</p>
+      <div class="cta-row">
+        <a href="#dron" class="btn btn-primary">Reservar grabación de vuelo</a>
+        <a href="#taller" class="btn btn-secondary">Conocer el santuario estilo Teocalpan</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <video src="multimedia/recorridocuatris.mp4" autoplay muted loop playsinline></video>
     </div>
   </div>
+
   <div class="talud" aria-hidden="true">
     <svg viewBox="0 0 400 70" preserveAspectRatio="none" width="100%" height="70">
       <polygon points="0,70 400,70 400,50 340,50 340,32 280,32 280,14 240,14 240,0 200,0 200,14 160,14 160,32 100,32 100,50 40,50 40,70" fill="#1C1815"/>
