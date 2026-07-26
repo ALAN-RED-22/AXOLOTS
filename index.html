@@ -94,6 +94,11 @@
     padding-top:90px;
     overflow:hidden;
   }
+  .hero-content{
+   position:relative;z-index:2;
+   padding:60px 24px 0;
+   max-width:1120px;margin:0 auto;width:100%;
+  }
   .hero-sky{position:absolute;inset:0;z-index:0;}
   .balloon{position:absolute;opacity:0.92;animation:drift 14s ease-in-out infinite;}
   .balloon.b2{animation-delay:-4s;animation-duration:18s;}
@@ -102,53 +107,22 @@
     0%,100%{transform:translateY(0px);}
     50%{transform:translateY(-18px);}
   }
-  .hero-content{
-    position:relative;z-index:2;
-    padding:60px 24px 0;
-    max-width:1120px;margin:0 auto;width:100%;
-    display:grid;
-    grid-template-columns:1fr;
-    gap:40px;
-    align-items:center;
+  .hero-grid{
+   display:grid;
+   grid-template-columns:1fr;
+   gap:40px;
+   align-items:center;
   }
-@media(min-width:860px){
-  .hero-content{grid-template-columns:1.1fr 0.9fr;}
-}
-  .hero h1{
-    color:var(--paper);
-    font-size:clamp(2.1rem,5.4vw,4rem);
-    max-width:14ch;
-    margin-bottom:0.4em;
+  @media(min-width:860px){
+  .hero-grid{grid-template-columns:1.1fr 0.9fr;}
   }
-  .hero p{
-    color:var(--stone);
-    max-width:46ch;
-    font-size:1.05rem;
-    margin-bottom:2em;
-  }
-  .hero .eyebrow{color:var(--blush);}
-  .hero .eyebrow::before{background:var(--blush);}
-  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:70px;}
-  .btn{
-    font-family:'JetBrains Mono',monospace;
-    font-size:0.82rem;letter-spacing:0.04em;
-    padding:14px 22px;border-radius:2px;
-    border:1px solid transparent;
-    transition:transform .15s ease, background .15s ease;
-    display:inline-block;
-  }
-  .btn:hover{transform:translateY(-2px);}
-  .btn-primary{background:var(--adobe);color:var(--paper);}
-  .btn-primary:hover{background:var(--adobe-dark);}
-  .btn-secondary{border-color:rgba(250,246,236,0.4);color:var(--paper);}
-  .btn-secondary:hover{border-color:var(--paper);}
 
- .hero-visual{
+  .hero-visual{
    position:relative;
    border-radius:12px;
    aspect-ratio:4/5;
   }
- .hero-visual video{
+  .hero-visual video{
    width:100%;height:100%;
    object-fit:cover;
    border-radius:12px;
@@ -453,7 +427,7 @@
         <div><span>Dirección</span><span>Bernal Díaz del Castillo, 55850 San Martín de las Pirámides, Méx.</span></div>
         <div><span>Horario</span><span>10am-4pm Todos los días</span></div>
         <div><span>Teléfono / WhatsApp</span><span>+52 5527735718</span></div>
-        <div><span>Reservas</span><span>127180013909784408 Banco Azteca, Alan Mendoza</span></div>
+        <div><span>Reservas</span><span>CLABE 127180013909784408 Banco Azteca, Alan Mendoza</span></div>
       </div>
     </div>
 <div class="map-box">
