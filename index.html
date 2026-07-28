@@ -637,8 +637,8 @@
 
   // Mide dónde está cada "$ XXX MXN" dentro de .pricing.
   // Solo se recalcula al cargar y al cambiar tamaño de ventana,
-  // porque la posición RELATIVA dentro de .pricing no
-   function measureTargets() {
+  // porque la posición RELATIVA dentro de .pricing no cambia con el scroll.
+  function measureTargets() {
     const pricingRect = pricing.getBoundingClientRect();
     const finalScale = 0.42;
 
