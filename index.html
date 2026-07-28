@@ -254,7 +254,30 @@
   @media(min-width:900px){.dron-grid{grid-template-columns:0.9fr 1.1fr;}}
   .dron h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:15ch;margin-bottom:16px;}
   .dron > .wrap > .dron-grid > div > p{color:#EDE9F0;max-width:44ch;margin-bottom:18px;}
-  .pricing{border:1px solid rgba(255,255,255,0.3);border-radius:6px;overflow:hidden;background:rgba(28,24,21,0.28);}
+  .pricing{position:relative;border:1px solid rgba(255,255,255,0.3);border-radius:6px;overflow:hidden;background:rgba(28,24,21,0.28);}
+
+  /* AJOLOTES QUE NADAN HACIA EL PRECIO */
+  .axolotl{
+    position:absolute;
+    top:0;left:0;
+    width:78px;height:78px;
+    z-index:1;
+    pointer-events:none;
+    opacity:0;
+    will-change:transform,opacity;
+  }
+  .axolotl svg{
+    width:100%;height:100%;
+    animation:axo-swim 1.3s ease-in-out infinite;
+  }
+  @keyframes axo-swim{
+    0%,100%{transform:rotate(-5deg) translateY(0);}
+    50%{transform:rotate(5deg) translateY(-3px);}
+  }
+  .axolotl.dorado svg{color:#E3A63E;}
+  .axolotl.rosa svg{color:var(--blush);}
+  .axolotl.negro svg{color:var(--obsidian);}
+  .price-row{position:relative;z-index:2;}
   .price-row{
     display:flex;justify-content:space-between;gap:16px;
     padding:20px 22px;border-bottom:1px solid rgba(255,255,255,0.16);
@@ -401,6 +424,61 @@
       <p>Entrega el mismo día, antes de que salgas de la zona.</p>
     </div>
     <div class="pricing">
+
+      <div class="axolotl dorado" id="axolotl-amanecer">
+        <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 40 Q -6 30 2 20 Q 10 32 20 36 Z" fill="currentColor" opacity=".85"/>
+          <ellipse cx="55" cy="42" rx="38" ry="20" fill="currentColor"/>
+          <ellipse cx="95" cy="38" rx="20" ry="16" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".8">
+            <path d="M84 26 Q 74 18 68 10"/><path d="M88 24 Q 80 14 76 4"/><path d="M93 23 Q 88 12 86 2"/>
+          </g>
+          <g stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".8">
+            <path d="M106 26 Q 116 18 122 10"/><path d="M102 24 Q 110 14 114 4"/>
+          </g>
+          <path d="M46 58 Q 40 66 32 66" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M68 58 Q 72 66 80 66" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <circle cx="102" cy="35" r="2.5" fill="#1C1815"/>
+          <path d="M96 46 Q 101 49 106 46" stroke="#1C1815" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="axolotl rosa" id="axolotl-completo">
+        <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 40 Q -6 30 2 20 Q 10 32 20 36 Z" fill="currentColor" opacity=".85"/>
+          <ellipse cx="55" cy="42" rx="38" ry="20" fill="currentColor"/>
+          <ellipse cx="95" cy="38" rx="20" ry="16" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".8">
+            <path d="M84 26 Q 74 18 68 10"/><path d="M88 24 Q 80 14 76 4"/><path d="M93 23 Q 88 12 86 2"/>
+          </g>
+          <g stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".8">
+            <path d="M106 26 Q 116 18 122 10"/><path d="M102 24 Q 110 14 114 4"/>
+          </g>
+          <path d="M46 58 Q 40 66 32 66" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M68 58 Q 72 66 80 66" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <circle cx="102" cy="35" r="2.5" fill="#1C1815"/>
+          <path d="M96 46 Q 101 49 106 46" stroke="#1C1815" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="axolotl negro" id="axolotl-grupo">
+        <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 40 Q -6 30 2 20 Q 10 32 20 36 Z" fill="currentColor" opacity=".85"/>
+          <ellipse cx="55" cy="42" rx="38" ry="20" fill="currentColor"/>
+          <ellipse cx="95" cy="38" rx="20" ry="16" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".8">
+            <path d="M84 26 Q 74 18 68 10"/><path d="M88 24 Q 80 14 76 4"/><path d="M93 23 Q 88 12 86 2"/>
+          </g>
+          <g stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".8">
+            <path d="M106 26 Q 116 18 122 10"/><path d="M102 24 Q 110 14 114 4"/>
+          </g>
+          <path d="M46 58 Q 40 66 32 66" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M68 58 Q 72 66 80 66" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <circle cx="102" cy="35" r="2.5" fill="var(--blush)"/>
+          <path d="M96 46 Q 101 49 106 46" stroke="var(--blush)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
       <div class="price-row">
         <div><span class="name">Paquete Amanecer</span><span class="desc">Video corto de 60 segundos, entrega same-day</span></div>
         <div class="amount">$ XXX MXN</div>
@@ -468,6 +546,86 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } });
   }, {threshold:0.3});
   steps.forEach(s=>obs.observe(s));
+</script>
+
+<script>
+(function () {
+  const pricing = document.querySelector('#dron .pricing');
+  if (!pricing) return;
+
+  const rows = pricing.querySelectorAll('.price-row');
+  const axolotls = [
+    document.getElementById('axolotl-amanecer'),
+    document.getElementById('axolotl-completo'),
+    document.getElementById('axolotl-grupo')
+  ];
+
+  // Cada ajolote tiene su propia "inercia": así no llegan ni se van
+  // exactamente sincronizados, se ve más natural.
+  const speeds = [0.07, 0.09, 0.11];
+  const state = axolotls.map(() => 0); // progreso suavizado actual de cada ajolote
+
+  let targets = []; // posición final (junto al precio) de cada ajolote, relativa a .pricing
+
+  // Mide dónde está cada "$ XXX MXN" dentro de .pricing.
+  // Solo se recalcula al cargar y al cambiar tamaño de ventana,
+  // porque la posición RELATIVA dentro de .pricing no cambia con el scroll.
+  function measureTargets() {
+    const pricingRect = pricing.getBoundingClientRect();
+    targets = Array.from(rows).map(row => {
+      const amountEl = row.querySelector('.amount');
+      const amountRect = amountEl.getBoundingClientRect();
+      return {
+        x: amountRect.left - pricingRect.left - 42,
+        y: amountRect.top - pricingRect.top + amountRect.height / 2 - 39,
+        scale: 0.42
+      };
+    });
+  }
+
+  // Progreso 0→1→0: 1 cuando .pricing está centrado en la pantalla,
+  // baja conforme .pricing se aleja del centro (ya sea por arriba o por abajo).
+  function targetProgress() {
+    const rect = pricing.getBoundingClientRect();
+    const sectionCenter = rect.top + rect.height / 2;
+    const viewportCenter = window.innerHeight / 2;
+    const distance = Math.abs(sectionCenter - viewportCenter);
+    const threshold = window.innerHeight * 0.95;
+    return Math.max(0, 1 - distance / threshold);
+  }
+
+  function frame() {
+    const tGoal = targetProgress();
+
+    axolotls.forEach((axolotl, i) => {
+      if (!axolotl) return;
+      const target = targets[i];
+      if (!target) return;
+
+      // suaviza el movimiento en vez de saltar directo al valor de scroll
+      state[i] += (tGoal - state[i]) * speeds[i];
+      const t = state[i];
+
+      const startX = -150;      // fuera de la vista, a la izquierda de .pricing
+      const startY = target.y;  // mismo alto que su fila: el viaje es horizontal
+      const startScale = 1;
+
+      const x = startX + (target.x - startX) * t;
+      const y = startY + (target.y - startY) * t;
+      const scale = startScale + (target.scale - startScale) * t;
+
+      axolotl.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      axolotl.style.opacity = Math.min(1, t * 3.5);
+    });
+
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('load', measureTargets);
+  window.addEventListener('resize', measureTargets);
+  measureTargets();
+  requestAnimationFrame(frame);
+})();
 </script>
 
 </body>
