@@ -89,6 +89,7 @@
   .hero{
     position:relative;
     min-height:100vh;
+    min-height:100dvh; /* usa la altura visible real en móvil, sin la barra del navegador */
     display:flex;flex-direction:column;justify-content:flex-end;
     background:linear-gradient(180deg,#202c60 0%, #5b5ba0 32%, #e29f78 58%, #3d3127 100%);
     padding-top:90px;
@@ -96,8 +97,11 @@
   }
   .hero-content{
    position:relative;z-index:2;
-   padding:60px 24px 0;
+   padding:40px 20px 0;
    max-width:1120px;margin:0 auto;width:100%;
+  }
+  @media(min-width:640px){
+    .hero-content{padding:60px 24px 0;}
   }
   .hero-sky{position:absolute;inset:0;z-index:0;}
   .balloon{position:absolute;opacity:0.92;animation:drift 14s ease-in-out infinite;}
@@ -138,6 +142,32 @@
    filter:blur(40px);
    opacity:0.55;
    z-index:1;
+  }
+
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+  }
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    padding:14px 20px;
+    border-radius:4px;
+    text-align:center;
+    border:1px solid transparent;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--adobe);color:var(--paper);}
+  .btn-primary:hover{opacity:0.9;}
+  .btn-secondary{background:transparent;color:var(--paper);border-color:rgba(250,246,236,0.5);}
+  .btn-secondary:hover{border-color:var(--paper);}
+  @media(max-width:520px){
+    .cta-row{flex-direction:column;}
+    .btn{width:100%;}
   }
 
   /* PYRAMID SIGNATURE DIVIDER */
@@ -205,8 +235,8 @@
 .axo-bg-video{
   position:absolute;
   top:0;
-  left:25%;
-  width:75%;
+  left:0;
+  width:100%;
   height:100%;
   object-fit:cover;
   filter:blur(6px);
@@ -218,13 +248,26 @@
   left:0;
   width:100%;
   height:100%;
+  /* en móvil el texto va arriba de todo (una sola columna), así que
+     el overlay oscurece parejo con más fuerza arriba para que se lea bien */
   background:linear-gradient(
-    to right,
+    180deg,
     #173731 0%,
-    #173731 20%,
-    transparent 55%
+    rgba(23,55,49,0.85) 45%,
+    rgba(23,55,49,0.4) 100%
   );
   z-index:1;
+}
+@media(min-width:860px){
+  .axo-bg-video{ left:25%; width:75%; }
+  .axo-overlay{
+    background:linear-gradient(
+      to right,
+      #173731 0%,
+      #173731 20%,
+      transparent 55%
+    );
+  }
 }
 
   /* ARTESANIAS SECTION */
@@ -303,9 +346,16 @@
   .map-box{
     border-radius:6px;border:1px solid rgba(231,223,201,0.2);
     background:repeating-linear-gradient(45deg, #26211D, #26211D 10px, #201B18 10px, #201B18 20px);
-    min-height:280px;display:flex;align-items:center;justify-content:center;
+    aspect-ratio: 4 / 3; /* se adapta al ancho disponible en vez de tener altura fija */
+    display:flex;align-items:center;justify-content:center;
     font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--stone-dark);
     text-align:center;padding:20px;
+    overflow:hidden;
+  }
+  .map-box iframe{ aspect-ratio: 4 / 3; }
+  @media(min-width:860px){
+    .map-box{ aspect-ratio: 16 / 10; }
+    .map-box iframe{ aspect-ratio: 16 / 10; }
   }
 
   footer{background:var(--obsidian-soft);color:var(--stone-dark);padding:48px 0 28px;}
@@ -318,6 +368,24 @@
   @media(prefers-reduced-motion:reduce){
     *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
     html{scroll-behavior:auto;}
+  }
+
+  /* ---- AJUSTES GENERALES PARA MÓVIL ---- */
+  @media(max-width:640px){
+    .day, .taller, .dron, .ubica{ padding:60px 0; }
+    .axo{ padding:70px 0; min-height:520px; }
+    footer{ padding:36px 0 24px; }
+
+    .steps::before{ left:17px; }
+    .step{ padding:16px 0; gap:14px; }
+
+    .craft-card{ padding:20px 18px; }
+
+    .price-row{ padding:16px 18px; }
+
+    /* los ajolotes un poco más chicos para no verse enormes
+       en un contenedor de precios angosto */
+    .axolotl{ width:54px; height:54px; }
   }
 </style>
 </head>
@@ -337,9 +405,9 @@
 
 <section class="hero">
   <div class="hero-sky">
-    <img class="balloon b1" src="multimedia/globo4.gif" alt="" style="position:absolute;left:6%;top:8%;width:80px">
-    <img class="balloon b2" src="multimedia/globo4.gif" alt="" style="position:absolute;left:16%;top:18%;width:50px">
-    <img class="balloon b3" src="multimedia/globo4.gif" alt="" style="position:absolute;left:31%;top:12%;width:60px">
+    <img class="balloon b1" src="multimedia/globo4.gif" alt="" style="position:absolute;left:4%;top:6%;width:56px">
+    <img class="balloon b2" src="multimedia/globo4.gif" alt="" style="position:absolute;left:60%;top:4%;width:38px">
+    <img class="balloon b3" src="multimedia/globo4.gif" alt="" style="position:absolute;left:78%;top:14%;width:44px">
   </div>
 
   <div class="hero-grid">
@@ -569,16 +637,25 @@
 
   // Mide dónde está cada "$ XXX MXN" dentro de .pricing.
   // Solo se recalcula al cargar y al cambiar tamaño de ventana,
-  // porque la posición RELATIVA dentro de .pricing no cambia con el scroll.
-  function measureTargets() {
+  // porque la posición RELATIVA dentro de .pricing no
+   function measureTargets() {
     const pricingRect = pricing.getBoundingClientRect();
-    targets = Array.from(rows).map(row => {
+    const finalScale = 0.42;
+
+    targets = Array.from(rows).map((row, i) => {
       const amountEl = row.querySelector('.amount');
       const amountRect = amountEl.getBoundingClientRect();
+
+      // el ajolote cambia de tamaño según el CSS activo (78px en escritorio,
+      // 54px en móvil) — usamos su tamaño real para centrarlo bien
+      const axolotl = axolotls[i];
+      const size = axolotl ? axolotl.offsetWidth : 78;
+      const halfFinal = (size * finalScale) / 2;
+
       return {
-        x: amountRect.left - pricingRect.left - 42,
-        y: amountRect.top - pricingRect.top + amountRect.height / 2 - 39,
-        scale: 0.42
+        x: amountRect.left - pricingRect.left - halfFinal - 4,
+        y: amountRect.top - pricingRect.top + amountRect.height / 2 - halfFinal,
+        scale: finalScale
       };
     });
   }
