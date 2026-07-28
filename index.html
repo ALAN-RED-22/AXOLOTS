@@ -67,15 +67,26 @@
     border-bottom:1px solid rgba(231,223,201,0.12);
   }
   nav{
-    max-width:1120px;margin:0 auto;padding:16px 24px;
+    max-width:1320px;margin:0 auto;padding:16px 32px;
     display:flex;align-items:center;justify-content:space-between;
   }
   .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .logo-img{
+    width:40px;height:40px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid rgba(232,167,155,0.4);
+  }
+  .logo-text{
     font-family:'Fraunces',serif;font-weight:700;
     color:var(--paper);font-size:1.15rem;letter-spacing:-0.01em;
     display:flex;flex-direction:column;line-height:1.05;
   }
-  .logo span{
+  .logo-text span{
     font-family:'JetBrains Mono',monospace;font-weight:400;
     font-size:0.62rem;letter-spacing:0.18em;color:var(--blush);
     text-transform:uppercase;
@@ -126,11 +137,15 @@
    border-radius:12px;
    aspect-ratio:4/5;
   }
-  .hero-visual video{
+  .hero-visual video,
+  .hero-visual iframe{
    width:100%;height:100%;
    object-fit:cover;
    border-radius:12px;
+   border:none;
    position:relative;z-index:2;
+  }
+  .hero-visual video{
    border:1px solid rgba(232,167,155,0.35);
   }
   .hero-visual::before{
@@ -393,7 +408,10 @@
 
 <header>
   <nav>
-    <div class="logo">AXOLOTS <span>Zona Arqueológica de Teotihuacán</span></div>
+    <div class="logo">
+      <img src="https://drive.google.com/uc?export=view&id=1tIsdxjajI_Ieo8XDseBKfxtYnVPqyjN0" alt="Logo AXOLOTS" class="logo-img">
+      <div class="logo-text">AXOLOTS <span>Zona Arqueológica de Teotihuacán</span></div>
+    </div>
     <div class="navlinks">
       <a href="#taller">Tienda</a>
       <a href="#axolotes">Axolotes</a>
@@ -422,7 +440,12 @@
     </div>
 
     <div class="hero-visual">
-      <video src="multimedia/trailer.mp4" autoplay muted loop playsinline></video>
+      <iframe
+        src="https://www.youtube.com/embed/y-qY0EsQ2MY?autoplay=1&mute=1&loop=1&playlist=y-qY0EsQ2MY&controls=0&playsinline=1&modestbranding=1"
+        title="Vuelo en globo — El Mirador de Teotihuacán"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 
@@ -548,20 +571,16 @@
       </div>
 
       <div class="price-row">
-        <div><span class="name">Paquete Axolots</span><span class="desc">Vuelo en globo aerostático, Videos con drone, Guia turística en Teotihuacan, Visita al Santuraio AXOLOTS, Taller de cacao, Cuevas</span></div>
-        <div class="amount">$ 2999 MXN/por persona</div>
+        <div><span class="name">Paquete Amanecer</span><span class="desc">Video corto de 60 segundos, entrega same-day</span></div>
+        <div class="amount">$ XXX MXN</div>
       </div>
       <div class="price-row">
-        <div><span class="name">Paquete Axolots</span><span class="desc">Videos con drone, Guia turística en Teotihuacan, Visita al Santuraio AXOLOTS, Taller de cacao, Cuevas</span></div>
-        <div class="amount">$ 1999 MXN</div>
+        <div><span class="name">Paquete Vuelo Completo</span><span class="desc">Video de 3–5 min + set de fotos aéreas</span></div>
+        <div class="amount">$ XXX MXN</div>
       </div>
       <div class="price-row">
-        <div><span class="name">Paquete Teotihuacan</span><span class="desc">Visita al Santuraio AXOLOTS, Taller de cacao, Cuevas</span></div>
-        <div class="amount">$ 999 MXN</div>
-      </div>
-      <div class="price-row">
-        <div><span class="name">Paquete Teocalpan</span><span class="desc"> Visita al Santuraio AXOLOTS, Taller de cacao</span></div>
-        <div class="amount">$ 399 MXN</div>
+        <div><span class="name">Paquete Grupo</span><span class="desc">Para varias canastillas en el mismo vuelo</span></div>
+        <div class="amount">$ XXX MXN</div>
       </div>
     </div>
   </div>
@@ -600,7 +619,7 @@
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div class="logo">AXOLOTS <span>Teotihuacán</span></div>
+      <div class="logo"><span class="logo-text">AXOLOTS <span>Teotihuacán</span></span></div>
       <div class="foot-links">
         <a href="#taller">Tienda</a>
         <a href="#axolotes">Axolotes</a>
