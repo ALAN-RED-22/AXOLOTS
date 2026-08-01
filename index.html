@@ -67,29 +67,36 @@
     border-bottom:1px solid rgba(231,223,201,0.12);
   }
   nav{
-    max-width:1320px;margin:0 auto;padding:16px 32px;
+    max-width:1320px;margin:0 auto;padding:8px 32px;
     display:flex;align-items:center;justify-content:space-between;
   }
   .logo{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:16px;
   }
   .logo-img{
-    width:40px;height:40px;
-    border-radius:50%;
+    height:64px;
+    width:auto;
+    aspect-ratio:16/9; /* respeta la proporción real de tu imagen, sin recortarla */
+    border-radius:6px;
     object-fit:cover;
     border:1px solid rgba(232,167,155,0.4);
   }
   .logo-text{
     font-family:'Fraunces',serif;font-weight:700;
-    color:var(--paper);font-size:1.15rem;letter-spacing:-0.01em;
+    color:var(--paper);font-size:1.35rem;letter-spacing:-0.01em;
     display:flex;flex-direction:column;line-height:1.05;
   }
   .logo-text span{
     font-family:'JetBrains Mono',monospace;font-weight:400;
-    font-size:0.62rem;letter-spacing:0.18em;color:var(--blush);
+    font-size:0.68rem;letter-spacing:0.16em;color:var(--blush);
     text-transform:uppercase;
+  }
+  @media(max-width:520px){
+    .logo-img{ height:48px; border-radius:5px; }
+    .logo-text{ font-size:1.05rem; }
+    .logo-text span{ font-size:0.58rem; }
   }
   .navlinks{display:flex;gap:28px;font-size:0.88rem;color:var(--stone);}
   .navlinks a:hover{color:var(--blush);}
@@ -103,7 +110,7 @@
     min-height:100dvh; /* usa la altura visible real en móvil, sin la barra del navegador */
     display:flex;flex-direction:column;justify-content:flex-end;
     background:linear-gradient(180deg,#202c60 0%, #5b5ba0 32%, #e29f78 58%, #3d3127 100%);
-    padding-top:90px;
+    padding-top:82px;
     overflow:hidden;
   }
   .hero-content{
@@ -440,12 +447,7 @@
     </div>
 
     <div class="hero-visual">
-      <iframe
-        src="https://www.youtube.com/embed/y-qY0EsQ2MY?autoplay=1&mute=1&loop=1&playlist=y-qY0EsQ2MY&controls=0&playsinline=1&modestbranding=1"
-        title="Vuelo en globo — El Mirador de Teotihuacán"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-      ></iframe>
+      <video src="multimedia/recorridocuatris.mp4" autoplay muted loop playsinline></video>
     </div>
   </div>
 
