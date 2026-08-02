@@ -129,6 +129,47 @@
     color:var(--obsidian);
   }
 
+  /* MENÚ MÓVIL */
+  .menu-toggle{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:38px;height:38px;
+    margin-left:10px;
+    background:transparent;
+    border:1px solid rgba(231,223,201,0.3);
+    border-radius:8px;
+    color:var(--paper);
+    cursor:pointer;
+  }
+  .menu-toggle .icon-close{display:none;}
+  .menu-toggle.open .icon-burger{display:none;}
+  .menu-toggle.open .icon-close{display:block;}
+  @media(max-width:819px){
+    .menu-toggle{display:flex;}
+  }
+
+  @media(max-width:819px){
+    .navlinks{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:0;right:0;
+      flex-direction:column;
+      gap:4px;
+      background:var(--obsidian);
+      padding:10px 24px 22px;
+      border-bottom:1px solid rgba(231,223,201,0.14);
+    }
+    .navlinks.open{display:flex;}
+    .navlinks a{
+      padding:12px 4px;
+      border-bottom:1px solid rgba(231,223,201,0.08);
+      font-size:0.95rem;
+    }
+    .navlinks a:last-child{border-bottom:none;}
+  }
+
   /* HERO */
   .hero{
     position:relative;
@@ -457,6 +498,17 @@
       <button type="button" class="lang-btn active" data-lang="es">ES</button>
       <button type="button" class="lang-btn" data-lang="en">EN</button>
     </div>
+    <button type="button" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg class="icon-burger" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+      <svg class="icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="5" y1="5" x2="19" y2="19"/>
+        <line x1="19" y1="5" x2="5" y2="19"/>
+      </svg>
+    </button>
   </nav>
 </header>
 
@@ -782,6 +834,36 @@
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+})();
+</script>
+
+<script>
+(function () {
+  const toggle = document.querySelector('.menu-toggle');
+  const navlinks = document.querySelector('.navlinks');
+  if (!toggle || !navlinks) return;
+
+  function closeMenu() {
+    navlinks.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = navlinks.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // cerrar el menú al elegir una sección
+  navlinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // si la ventana crece a tamaño de escritorio, cerrar el menú móvil
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 820) closeMenu();
   });
 })();
 </script>
