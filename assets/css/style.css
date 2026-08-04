@@ -222,12 +222,26 @@ footer .social-link:hover{border-color:var(--blush);color:var(--blush);}
   .hero-content{padding:60px 24px 0;}
 }
 .hero-sky{position:absolute;inset:0;z-index:0;}
-.balloon{position:absolute;opacity:0.92;animation:drift 14s ease-in-out infinite;}
-.balloon.b2{animation-delay:-4s;animation-duration:18s;}
-.balloon.b3{animation-delay:-9s;animation-duration:16s;}
+.balloon{
+  position:absolute;
+  opacity:0.94;
+  animation:drift 14s ease-in-out infinite;
+  filter:drop-shadow(0 10px 22px rgba(28,24,21,0.35));
+}
+/* tamaños variados = sensación de profundidad (más grande = más cerca) */
+.balloon.b1{ left:6%; top:9%; width:104px; }
+.balloon.b2{ left:24%; top:30%; width:52px; animation-delay:-4s; animation-duration:18s; }
+.balloon.b3{ left:66%; top:6%; width:132px; animation-delay:-9s; animation-duration:16s; }
+.balloon.b4{ left:85%; top:30%; width:46px; animation-delay:-6s; animation-duration:15s; }
 @keyframes drift{
   0%,100%{transform:translateY(0px);}
   50%{transform:translateY(-18px);}
+}
+@media(max-width:640px){
+  .balloon.b1{ width:64px; top:7%; }
+  .balloon.b2{ display:none; } /* reduce el desorden visual en pantallas angostas */
+  .balloon.b3{ width:78px; top:5%; left:60%; }
+  .balloon.b4{ width:34px; top:24%; left:82%; }
 }
 .hero-grid{
  display:grid;
