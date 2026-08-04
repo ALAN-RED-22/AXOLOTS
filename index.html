@@ -67,34 +67,108 @@
     border-bottom:1px solid rgba(231,223,201,0.12);
   }
   nav{
-    max-width:1320px;margin:0 auto;padding:16px 32px;
+    max-width:1320px;margin:0 auto;padding:8px 32px;
     display:flex;align-items:center;justify-content:space-between;
   }
   .logo{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:16px;
   }
   .logo-img{
-    width:40px;height:40px;
-    border-radius:50%;
+    height:72px;
+    width:auto;
+    aspect-ratio:16/9;
     object-fit:cover;
-    border:1px solid rgba(232,167,155,0.4);
+    border:none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+  }
+  @media(max-width:520px){
+    .logo-img{ height:52px; }
   }
   .logo-text{
     font-family:'Fraunces',serif;font-weight:700;
-    color:var(--paper);font-size:1.15rem;letter-spacing:-0.01em;
+    color:var(--paper);font-size:1.35rem;letter-spacing:-0.01em;
     display:flex;flex-direction:column;line-height:1.05;
   }
   .logo-text span{
     font-family:'JetBrains Mono',monospace;font-weight:400;
-    font-size:0.62rem;letter-spacing:0.18em;color:var(--blush);
+    font-size:0.68rem;letter-spacing:0.16em;color:var(--blush);
     text-transform:uppercase;
+  }
+  @media(max-width:520px){
+    .logo-text{ font-size:1.05rem; }
+    .logo-text span{ font-size:0.58rem; }
   }
   .navlinks{display:flex;gap:28px;font-size:0.88rem;color:var(--stone);}
   .navlinks a:hover{color:var(--blush);}
   .navlinks{display:none;}
   @media(min-width:820px){.navlinks{display:flex;}}
+
+  .lang-switch{
+    display:flex;
+    border:1px solid rgba(231,223,201,0.3);
+    border-radius:20px;
+    overflow:hidden;
+    margin-left:16px;
+  }
+  .lang-btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    padding:6px 12px;
+    background:transparent;
+    color:var(--stone);
+    border:none;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .lang-btn.active{
+    background:var(--blush);
+    color:var(--obsidian);
+  }
+
+  /* MENÚ MÓVIL */
+  .menu-toggle{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:38px;height:38px;
+    margin-left:10px;
+    background:transparent;
+    border:1px solid rgba(231,223,201,0.3);
+    border-radius:8px;
+    color:var(--paper);
+    cursor:pointer;
+  }
+  .menu-toggle .icon-close{display:none;}
+  .menu-toggle.open .icon-burger{display:none;}
+  .menu-toggle.open .icon-close{display:block;}
+  @media(max-width:819px){
+    .menu-toggle{display:flex;}
+  }
+
+  @media(max-width:819px){
+    .navlinks{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:0;right:0;
+      flex-direction:column;
+      gap:4px;
+      background:var(--obsidian);
+      padding:10px 24px 22px;
+      border-bottom:1px solid rgba(231,223,201,0.14);
+    }
+    .navlinks.open{display:flex;}
+    .navlinks a{
+      padding:12px 4px;
+      border-bottom:1px solid rgba(231,223,201,0.08);
+      font-size:0.95rem;
+    }
+    .navlinks a:last-child{border-bottom:none;}
+  }
 
   /* HERO */
   .hero{
@@ -103,7 +177,7 @@
     min-height:100dvh; /* usa la altura visible real en móvil, sin la barra del navegador */
     display:flex;flex-direction:column;justify-content:flex-end;
     background:linear-gradient(180deg,#202c60 0%, #5b5ba0 32%, #e29f78 58%, #3d3127 100%);
-    padding-top:90px;
+    padding-top:82px;
     overflow:hidden;
   }
   .hero-content{
@@ -254,7 +328,8 @@
   width:100%;
   height:100%;
   object-fit:cover;
-  filter:blur(6px);
+  object-position:left center; /* prioriza el lado izquierdo del video al recortar */
+  filter:blur(1.5px);
   z-index:0;
 }
 .axo-overlay{
@@ -264,12 +339,13 @@
   width:100%;
   height:100%;
   /* en móvil el texto va arriba de todo (una sola columna), así que
-     el overlay oscurece parejo con más fuerza arriba para que se lea bien */
+     el overlay oscurece más que nada arriba, dejando el resto del video
+     más despejado para poder distinguir a los ajolotes */
   background:linear-gradient(
     180deg,
     #173731 0%,
-    rgba(23,55,49,0.85) 45%,
-    rgba(23,55,49,0.4) 100%
+    rgba(23,55,49,0.55) 32%,
+    rgba(23,55,49,0.12) 100%
   );
   z-index:1;
 }
@@ -279,8 +355,8 @@
     background:linear-gradient(
       to right,
       #173731 0%,
-      #173731 20%,
-      transparent 55%
+      #173731 14%,
+      transparent 42%
     );
   }
 }
@@ -409,15 +485,30 @@
 <header>
   <nav>
     <div class="logo">
-      <img src="https://drive.google.com/uc?export=view&id=1tIsdxjajI_Ieo8XDseBKfxtYnVPqyjN0" alt="Logo AXOLOTS" class="logo-img">
-      <div class="logo-text">AXOLOTS <span>Zona Arqueológica de Teotihuacán</span></div>
+      <img src="multimedia/logo.png" alt="Logo AXOLOTS" class="logo-img">
+      <div class="logo-text">AXOLOTS <span data-en="Teotihuacán Archaeological Zone">Zona Arqueológica de Teotihuacán</span></div>
     </div>
     <div class="navlinks">
-      <a href="#taller">Tienda</a>
-      <a href="#axolotes">Axolotes</a>
-      <a href="#dron">Vuelos en dron</a>
-      <a href="#ubicacion">Ubicación</a>
+      <a href="#taller" data-en="Shop">Tienda</a>
+      <a href="#axolotes" data-en="Axolotls">Axolotes</a>
+      <a href="#dron" data-en="Drone Flights">Vuelos en dron</a>
+      <a href="#ubicacion" data-en="Location">Ubicación</a>
     </div>
+    <div class="lang-switch">
+      <button type="button" class="lang-btn active" data-lang="es">ES</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <button type="button" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg class="icon-burger" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+      <svg class="icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="5" y1="5" x2="19" y2="19"/>
+        <line x1="19" y1="5" x2="5" y2="19"/>
+      </svg>
+    </button>
   </nav>
 </header>
 
@@ -430,22 +521,17 @@
 
   <div class="hero-grid">
     <div class="hero-content">
-      <p class="eyebrow">A pasos de la Zona Arqueológica</p>
-      <h1>Amanece con vista a las pirámides. Camina entre pirámides. Llévate Teotihuacán contigo.</h1>
-      <p>Taller y tienda de artesanía hecha a mano, un mirador con exhibición viva de axolotes, y grabación por dron de tu vuelo en globo aerostático, editada y lista antes de que te vayas.</p>
+      <p class="eyebrow" data-en="Steps from the Archaeological Zone">A pasos de la Zona Arqueológica</p>
+      <h1 data-en="Wake up with a view of the pyramids. Walk among pyramids. Take Teotihuacán with you.">Amanece con vista a las pirámides. Camina entre pirámides. Llévate Teotihuacán contigo.</h1>
+      <p data-en="A workshop and shop of handmade crafts, a lookout with a live axolotl exhibit, and drone footage of your hot air balloon flight, edited and ready before you leave.">Taller y tienda de artesanía hecha a mano, un mirador con exhibición viva de axolotes, y grabación por dron de tu vuelo en globo aerostático, editada y lista antes de que te vayas.</p>
       <div class="cta-row">
-        <a href="#dron" class="btn btn-primary">Reservar grabación de vuelo</a>
-        <a href="#taller" class="btn btn-secondary">Conocer el santuario estilo Teocalpan</a>
+        <a href="#dron" class="btn btn-primary" data-en="Book your drone recording">Reservar grabación de vuelo</a>
+        <a href="#taller" class="btn btn-secondary" data-en="Discover our Teocalpan-style sanctuary">Conocer el santuario estilo Teocalpan</a>
       </div>
     </div>
 
     <div class="hero-visual">
-      <iframe
-        src="https://www.youtube.com/embed/y-qY0EsQ2MY?autoplay=1&mute=1&loop=1&playlist=y-qY0EsQ2MY&controls=0&playsinline=1&modestbranding=1"
-        title="Vuelo en globo — El Mirador de Teotihuacán"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-      ></iframe>
+      <video src="multimedia/recorridocuatris.mp4" autoplay muted loop playsinline></video>
     </div>
   </div>
 
@@ -458,15 +544,15 @@
 
 <section class="day" id="dia">
   <div class="wrap">
-    <p class="eyebrow">Cómo se vive un día aquí</p>
-    <h2>Tu recorrido, paso a paso, desde el amanecer hasta el video en tu teléfono</h2>
+    <p class="eyebrow" data-en="What a day here looks like">Cómo se vive un día aquí</p>
+    <h2 data-en="Your day, step by step, from sunrise to the video on your phone">Tu recorrido, paso a paso, desde el amanecer hasta el video en tu teléfono</h2>
     <ul class="steps">
-      <li class="step"><div class="step-dot">01</div><div class="step-body"><time>05:30</time><h3>Despega tu globo sobre el Valle de Teotihuacán</h3><p>Tu vuelo comienza antes del amanecer, con vista completa a las pirámides desde el aire.</p></div></li>
-      <li class="step"><div class="step-dot">02</div><div class="step-body"><time>07:00</time><h3>Recorres la Zona Arqueológica</h3><p>La Pirámide del Sol y la Calzada de los Muertos, a pie y con calma.</p></div></li>
-      <li class="step"><div class="step-dot">03</div><div class="step-body"><time>08:30</time><h3>Descansas en nuestro mirador</h3><p>A unos metros de la zona, con vista directa y sombra para hacer una pausa.</p></div></li>
-      <li class="step"><div class="step-dot">04</div><div class="step-body"><time>08:45</time><h3>Conoces a nuestros axolotes</h3><p>Una exhibición viva de esta especie nativa, en peligro crítico de extinción.</p></div></li>
-      <li class="step"><div class="step-dot">05</div><div class="step-body"><time>09:15</time><h3>Eliges tu pieza de artesanía</h3><p>Obsidiana, barro y textil, trabajados por manos locales, en el mismo taller.</p></div></li>
-      <li class="step"><div class="step-dot">06</div><div class="step-body"><time>10:00</time><h3>Recibes el video de tu vuelo</h3><p>Grabado por dron durante tu globo, editado y entregado el mismo día.</p></div></li>
+      <li class="step"><div class="step-dot">01</div><div class="step-body"><time>05:30</time><h3 data-en="Your balloon takes off over the Teotihuacán Valley">Despega tu globo sobre el Valle de Teotihuacán</h3><p data-en="Your flight begins before sunrise, with a full view of the pyramids from above.">Tu vuelo comienza antes del amanecer, con vista completa a las pirámides desde el aire.</p></div></li>
+      <li class="step"><div class="step-dot">02</div><div class="step-body"><time>07:00</time><h3 data-en="You explore the Archaeological Zone">Recorres la Zona Arqueológica</h3><p data-en="The Pyramid of the Sun and the Avenue of the Dead, on foot and at your own pace.">La Pirámide del Sol y la Calzada de los Muertos, a pie y con calma.</p></div></li>
+      <li class="step"><div class="step-dot">03</div><div class="step-body"><time>08:30</time><h3 data-en="You rest at our lookout">Descansas en nuestro mirador</h3><p data-en="Just steps from the site, with a direct view and shade to take a break.">A unos metros de la zona, con vista directa y sombra para hacer una pausa.</p></div></li>
+      <li class="step"><div class="step-dot">04</div><div class="step-body"><time>08:45</time><h3 data-en="You meet our axolotls">Conoces a nuestros axolotes</h3><p data-en="A live exhibit of this native species, critically endangered.">Una exhibición viva de esta especie nativa, en peligro crítico de extinción.</p></div></li>
+      <li class="step"><div class="step-dot">05</div><div class="step-body"><time>09:15</time><h3 data-en="You choose your handmade piece">Eliges tu pieza de artesanía</h3><p data-en="Obsidian, clay, and textiles, crafted by local hands, in the same workshop.">Obsidiana, barro y textil, trabajados por manos locales, en el mismo taller.</p></div></li>
+      <li class="step"><div class="step-dot">06</div><div class="step-body"><time>10:00</time><h3 data-en="You receive your flight video">Recibes el video de tu vuelo</h3><p data-en="Filmed by drone during your balloon ride, edited and delivered the same day.">Grabado por dron durante tu globo, editado y entregado el mismo día.</p></div></li>
     </ul>
   </div>
 </section>
@@ -477,14 +563,14 @@
 
   <div class="wrap axo-grid">
     <div>
-      <p class="eyebrow">Exhibición viva</p>
-      <h2>Ajolotes, no monstruos de acuario</h2>
-      <p>Nuestro mirador alberga una exhibición dedicada al ajolote, especie originaria de los canales de Xochimilco y hoy en peligro crítico. Aquí se puede observar de cerca, entender su biología y por qué su conservación importa, sin flash y sin golpear el cristal.</p>
+      <p class="eyebrow" data-en="Live Exhibit">Exhibición viva</p>
+      <h2 data-en="Axolotls, Not Aquarium Monsters">Ajolotes, no monstruos de acuario</h2>
+      <p data-en="Our lookout hosts an exhibit dedicated to the axolotl, a species native to the canals of Xochimilco and now critically endangered. Here you can observe them up close, learn about their biology, and understand why their conservation matters — no flash photography, no tapping the glass.">Nuestro mirador alberga una exhibición dedicada al ajolote, especie originaria de los canales de Xochimilco y hoy en peligro crítico. Aquí se puede observar de cerca, entender su biología y por qué su conservación importa, sin flash y sin golpear el cristal.</p>
       <div class="facts">
-        <div><span>Nombre científico</span><strong>Ambystoma mexicanum</strong></div>
-        <div><span>Estado de conservación</span><strong>En peligro crítico</strong></div>
-        <div><span>Su particularidad</span><strong>Regenera extremidades completas</strong></div>
-        <div><span>Origen</span><strong>Lagos de Xochimilco, CDMX</strong></div>
+        <div><span data-en="Scientific name">Nombre científico</span><strong>Ambystoma mexicanum</strong></div>
+        <div><span data-en="Conservation status">Estado de conservación</span><strong data-en="Critically endangered">En peligro crítico</strong></div>
+        <div><span data-en="What makes it unique">Su particularidad</span><strong data-en="Regenerates entire limbs">Regenera extremidades completas</strong></div>
+        <div><span data-en="Origin">Origen</span><strong data-en="Xochimilco Lakes, Mexico City">Lagos de Xochimilco, CDMX</strong></div>
       </div>
     </div>
   </div>
@@ -493,15 +579,15 @@
 <section class="taller" id="taller">
   <div class="wrap">
     <div class="taller-head">
-      <p class="eyebrow">Taller y tienda</p>
-      <h2>Obsidiana, barro y telar, tal como se trabajan en el valle</h2>
-      <p>Cada pieza sale del mismo taller donde se hace: sin intermediarios, con las técnicas que se usan en la región desde hace generaciones.</p>
+      <p class="eyebrow" data-en="Workshop & Shop">Taller y tienda</p>
+      <h2 data-en="Obsidian, Clay, and Weaving, Just as They're Made in the Valley">Obsidiana, barro y telar, tal como se trabajan en el valle</h2>
+      <p data-en="Every piece comes straight from the workshop where it's made — no middlemen, using techniques that have been practiced in the region for generations.">Cada pieza sale del mismo taller donde se hace: sin intermediarios, con las técnicas que se usan en la región desde hace generaciones.</p>
     </div>
     <div class="craft-grid">
-      <div class="craft-card"><span class="num">01</span><h3>Obsidiana tallada</h3><p>Espejos, puntas y figuras pulidas a mano a partir de piedra volcánica local.</p></div>
-      <div class="craft-card"><span class="num">02</span><h3>Textil de telar de cintura</h3><p>Fajas y tapetes tejidos con la técnica prehispánica de telar de cintura.</p></div>
-      <div class="craft-card"><span class="num">03</span><h3>Barro y cerámica</h3><p>Piezas de barro cocido, decoradas a mano con motivos del valle.</p></div>
-      <div class="craft-card"><span class="num">04</span><h3>Joyería en piedra volcánica</h3><p>Aretes y collares en obsidiana, jade local y plata.</p></div>
+      <div class="craft-card"><span class="num">01</span><h3 data-en="Carved Obsidian">Obsidiana tallada</h3><p data-en="Mirrors, points, and figures hand-polished from local volcanic stone.">Espejos, puntas y figuras pulidas a mano a partir de piedra volcánica local.</p></div>
+      <div class="craft-card"><span class="num">02</span><h3 data-en="Backstrap Loom Textiles">Textil de telar de cintura</h3><p data-en="Sashes and rugs woven using the pre-Hispanic backstrap loom technique.">Fajas y tapetes tejidos con la técnica prehispánica de telar de cintura.</p></div>
+      <div class="craft-card"><span class="num">03</span><h3 data-en="Clay & Ceramics">Barro y cerámica</h3><p data-en="Fired clay pieces, hand-decorated with motifs from the valley.">Piezas de barro cocido, decoradas a mano con motivos del valle.</p></div>
+      <div class="craft-card"><span class="num">04</span><h3 data-en="Volcanic Stone Jewelry">Joyería en piedra volcánica</h3><p data-en="Earrings and necklaces in obsidian, local jade, and silver.">Aretes y collares en obsidiana, jade local y plata.</p></div>
     </div>
   </div>
 </section>
@@ -509,10 +595,10 @@
 <section class="dron" id="dron">
   <div class="wrap dron-grid">
     <div>
-      <p class="eyebrow">Grabación por dron</p>
-      <h2>Tu vuelo en globo, visto desde arriba</h2>
-      <p>Volamos un dron durante tu ascenso en globo aerostático y grabamos el momento completo: el despegue, el valle y las pirámides desde el aire, y tu propia canastilla en vuelo.</p>
-      <p>Entrega el mismo día, antes de que salgas de la zona.</p>
+      <p class="eyebrow" data-en="Drone Recording">Grabación por dron</p>
+      <h2 data-en="Your Balloon Flight, Seen From Above">Tu vuelo en globo, visto desde arriba</h2>
+      <p data-en="We fly a drone during your hot air balloon ascent and capture the full moment: takeoff, the valley, and the pyramids from the air — plus your own basket in flight.">Volamos un dron durante tu ascenso en globo aerostático y grabamos el momento completo: el despegue, el valle y las pirámides desde el aire, y tu propia canastilla en vuelo.</p>
+      <p data-en="Delivered the same day, before you leave the area.">Entrega el mismo día, antes de que salgas de la zona.</p>
     </div>
     <div class="pricing">
 
@@ -571,16 +657,16 @@
       </div>
 
       <div class="price-row">
-        <div><span class="name">Paquete Amanecer</span><span class="desc">Video corto de 60 segundos, entrega same-day</span></div>
-        <div class="amount">$ XXX MXN</div>
+        <div><span class="name" data-en="Sunrise Package">Paquete Axolots</span><span class="desc" data-en="60-second short video, same-day delivery">Videos con dron, visita a cuevas, guía certificado dentro de Teotihuacan, taller del cacao, visita al teoalpan de Axolots, degustación de chocolate y licores</span></div>
+        <div class="amount">$ 1999 MXN</div>
       </div>
       <div class="price-row">
-        <div><span class="name">Paquete Vuelo Completo</span><span class="desc">Video de 3–5 min + set de fotos aéreas</span></div>
-        <div class="amount">$ XXX MXN</div>
+        <div><span class="name" data-en="Full Flight Package">Paquete Plus</span><span class="desc" data-en="3–5 min video + aerial photo set">Guía certificado dentro de Teotihuacan, taller del cacao, visita al teoalpan de Axolots, degustación de chocolate y licores</span></div>
+        <div class="amount">$ 1199 MXN</div>
       </div>
       <div class="price-row">
-        <div><span class="name">Paquete Grupo</span><span class="desc">Para varias canastillas en el mismo vuelo</span></div>
-        <div class="amount">$ XXX MXN</div>
+        <div><span class="name" data-en="Group Package">Paquete Visitante</span><span class="desc" data-en="For multiple baskets on the same flight">Taller del cacao, visita al teoalpan de Axolots, degustación de chocolate y licores</span></div>
+        <div class="amount">$ 599 MXN</div>
       </div>
     </div>
   </div>
@@ -589,14 +675,14 @@
 <section class="ubica" id="ubicacion">
   <div class="wrap ubica-grid">
     <div>
-      <p class="eyebrow">Cómo llegar</p>
-      <h2>A unos metros de la Zona Arqueológica de Teotihuacán</h2>
-      <p>Fácil de encontrar al salir de la zona, con mirador propio y estacionamiento.</p>
+      <p class="eyebrow" data-en="How to Get Here">Cómo llegar</p>
+      <h2 data-en="Steps from the Teotihuacán Archaeological Zone">A unos metros de la Zona Arqueológica de Teotihuacán</h2>
+      <p data-en="Easy to find right outside the site, with our own lookout and parking.">Fácil de encontrar al salir de la zona, con mirador propio y estacionamiento.</p>
       <div class="infolist">
-        <div><span>Dirección</span><span>Bernal Díaz del Castillo, 55850 San Martín de las Pirámides, Méx.</span></div>
-        <div><span>Horario</span><span>10am-4pm Todos los días</span></div>
-        <div><span>Teléfono / WhatsApp</span><span>+52 5527735718</span></div>
-        <div><span>Reservas</span><span>CLABE 127180013909784408 Banco Azteca, Alan Mendoza</span></div>
+        <div><span data-en="Address">Dirección</span><span>Bernal Díaz del Castillo, 55850 San Martín de las Pirámides, Méx.</span></div>
+        <div><span data-en="Hours">Horario</span><span data-en="10am-4pm Every day">10am-4pm Todos los días</span></div>
+        <div><span data-en="Phone / WhatsApp">Teléfono / WhatsApp</span><span>+52 5527735718</span></div>
+        <div><span data-en="Reservations">Reservas</span><span>CLABE 127180013909784408 Banco Azteca, Alan Mendoza</span></div>
       </div>
     </div>
 <div class="map-box">
@@ -621,13 +707,13 @@
     <div class="foot-grid">
       <div class="logo"><span class="logo-text">AXOLOTS <span>Teotihuacán</span></span></div>
       <div class="foot-links">
-        <a href="#taller">Tienda</a>
-        <a href="#axolotes">Axolotes</a>
-        <a href="#dron">Dron</a>
-        <a href="#ubicacion">Ubicación</a>
+        <a href="#taller" data-en="Shop">Tienda</a>
+        <a href="#axolotes" data-en="Axolotls">Axolotes</a>
+        <a href="#dron" data-en="Drone">Dron</a>
+        <a href="#ubicacion" data-en="Location">Ubicación</a>
       </div>
     </div>
-    <p class="fine">No lucramos con los ajolotes. Nuestra labor se centra en su preservación y educación ambiental, exhibiendo únicamente un número limitado de ejemplares en óptimas condiciones de bienestar, salud e higiene. Contamos con los permisos municipales correspondientes.</p>
+    <p class="fine" data-en="We do not profit from the axolotls. Our work focuses on their preservation and environmental education, exhibiting only a limited number of specimens in optimal conditions of welfare, health, and hygiene. We hold the corresponding municipal permits.">No lucramos con los ajolotes. Nuestra labor se centra en su preservación y educación ambiental, exhibiendo únicamente un número limitado de ejemplares en óptimas condiciones de bienestar, salud e higiene. Contamos con los permisos municipales correspondientes.</p>
   </div>
 </footer>
 
@@ -725,6 +811,60 @@
   window.addEventListener('resize', measureTargets);
   measureTargets();
   requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+(function () {
+  const translatable = document.querySelectorAll('[data-en]');
+  // guarda el texto original en español antes de tocar nada
+  translatable.forEach(el => { el.dataset.es = el.textContent; });
+
+  const buttons = document.querySelectorAll('.lang-btn');
+
+  function setLang(lang) {
+    translatable.forEach(el => {
+      el.textContent = (lang === 'en') ? el.dataset.en : el.dataset.es;
+    });
+    document.documentElement.lang = lang;
+    buttons.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+})();
+</script>
+
+<script>
+(function () {
+  const toggle = document.querySelector('.menu-toggle');
+  const navlinks = document.querySelector('.navlinks');
+  if (!toggle || !navlinks) return;
+
+  function closeMenu() {
+    navlinks.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = navlinks.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // cerrar el menú al elegir una sección
+  navlinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // si la ventana crece a tamaño de escritorio, cerrar el menú móvil
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 820) closeMenu();
+  });
 })();
 </script>
 
