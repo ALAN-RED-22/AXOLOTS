@@ -41,6 +41,21 @@ Landing page de una sola página (`index.html`) para AXOLOTS, negocio turístico
 ### Decisiones de negocio (no implementar sin confirmar)
 - [ ] **Tienda**: por ahora se recomendó negociar por WhatsApp (ya integrado: botón flotante + enlaces `wa.me/525527735718`), no construir e-commerce hasta validar volumen de ventas.
 - [x] **Diseño del hero**: los globos decorativos (`globo4.gif`) se agrandaron (antes 38-56px, ahora 46-132px con tamaños variados para dar profundidad), se movió su posicionamiento de `style` inline a clases CSS (`.balloon.b1-b4` en `style.css`), y se agregó un 4º globo + `drop-shadow` + variante para móvil (`b2` se oculta bajo 640px para no saturar).
+- [x] **Jerarquía de paquetes en `#dron`**: confirmado con el usuario que es intencional que solo el Paquete Axolots ($1999) incluya video de dron (upsell). Se agregó badge "Incluye video dron" en esa fila y una línea aclaratoria en la intro de la sección, para que no se sienta como promesa incumplida al llegar a precios desde el CTA del hero.
+
+## Audit UX/UI (resuelto en esta ronda)
+- [x] Contraste de `.pricing`: fondo pasó de `rgba(28,24,21,0.28)` (dependía del gradiente de atrás, caía a ~2.3:1 en la parte clara) a `rgba(20,17,15,0.92)` — ahora ~8:1+ independientemente de dónde caiga sobre el gradiente.
+- [x] Nombres/descripciones de paquetes en `data-en` no coincidían con el texto en español (parecían productos distintos al cambiar de idioma) — alineados como traducciones reales del mismo contenido.
+- [x] Nav apretado entre 820-900px + íconos sociales saturando la barra fija en móvil — `.social-links` dentro de `nav` ahora se oculta bajo 900px (sigue visible siempre en el footer; WhatsApp además cubierto por el botón flotante).
+
+### Pendiente (no tocado en esta ronda, ver conversación para detalle)
+- [ ] CTA secundario del hero ("Conocer el santuario estilo Teocalpan") apunta a `#taller` pero "Teocalpan"/"teoalpan" nunca se define en el sitio, y además se escribe distinto en el hero vs. en las descripciones de paquetes (Teocalpan vs teoalpan).
+- [ ] `.hero` es `100dvh` fijo sin techo de altura para el `<h1>` (usa el tamaño default del navegador) — riesgo de que el contenido se corte en móviles de poca altura.
+- [ ] Objetivos táctiles bajo 44×44px en `.social-link` (34px), `.menu-toggle` (38px) y `.lang-btn` (~32-36px).
+- [ ] `prefers-reduced-motion` apaga animaciones CSS pero no pausa los `<video autoplay>` del hero y de `#axolotes`.
+- [ ] Atributos duplicados en el `<iframe>` del mapa (`width`, `height`, `style`, `allowfullscreen`, `loading`, `referrerpolicy` cada uno aparece dos veces).
+- [ ] Selector CSS frágil `.dron > .wrap > .dron-grid > div > p` (4 niveles de descendencia).
+- [ ] `.lang-switch` sin `aria-pressed` en los botones ES/EN para lectores de pantalla.
 
 ## Notas de seguridad
 - Sitio 100% estático, sin formularios ni backend → sin superficie de XSS/SQLi/CSRF clásica.
