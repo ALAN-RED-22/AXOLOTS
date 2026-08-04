@@ -3,489 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Mirador de Teotihuacán — Taller, Axolotes y Vuelos en Dron</title>
+<title>AXOLOTS — Taller, Axolotes y Vuelos en Dron en Teotihuacán</title>
+<meta name="description" content="Taller y tienda de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático, a pasos de la Zona Arqueológica de Teotihuacán.">
+<meta name="theme-color" content="#1C1815">
+
+<!-- TODO: definir cuando el dominio de producción esté listo -->
+<!-- <link rel="canonical" href="https://tudominio.com/"> -->
+
+<!-- Open Graph / redes sociales -->
+<!-- og:image y og:url deben ser URLs absolutas para que Instagram/WhatsApp/Facebook
+     generen la vista previa: reemplazar "assets/img/ax.png" por
+     "https://tudominio.com/assets/img/ax.png" al tener dominio -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="AXOLOTS Teotihuacán">
+<meta property="og:title" content="AXOLOTS — Taller, Axolotes y Vuelos en Dron en Teotihuacán">
+<meta property="og:description" content="Taller y tienda de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático.">
+<meta property="og:image" content="assets/img/ax.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AXOLOTS — Taller, Axolotes y Vuelos en Dron en Teotihuacán">
+<meta name="twitter:description" content="Taller y tienda de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático.">
+<meta name="twitter:image" content="assets/img/ax.png">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="assets/img/logo.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --obsidian:#1C1815;
-    --obsidian-soft:#3a342e;
-    --adobe:#B5652E;
-    --adobe-dark:#8A4A1F;
-    --stone:#E7DFC9;
-    --stone-dark:#b3a47b;
-    --jade:#2F6B5E;
-    --jade-dark:#1E463D;
-    --blush:#E8A79B;
-    --dawn:#8B96B4;
-    --ink:#241E19;
-    --paper:#FAF6EC;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Karla',sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces',serif;
-    font-weight:700;
-    letter-spacing:-0.01em;
-    color:var(--obsidian);
-  }
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:0.72rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--adobe-dark);
-    display:flex;
-    align-items:center;
-    gap:0.6em;
-    margin-bottom:0.9em;
-  }
-  .eyebrow::before{
-    content:"";
-    width:22px;height:2px;
-    background:var(--adobe);
-    display:inline-block;
-  }
-  a{color:inherit;text-decoration:none;}
-  img,svg{display:block;max-width:100%;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
-  :focus-visible{outline:3px solid var(--adobe);outline-offset:3px;}
-
-  /* NAV */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    background:rgba(28,24,21,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid rgba(231,223,201,0.12);
-  }
-  nav{
-    max-width:1320px;margin:0 auto;padding:8px 32px;
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .logo{
-    display:flex;
-    align-items:center;
-    gap:16px;
-  }
-  .logo-img{
-    height:72px;
-    width:auto;
-    aspect-ratio:16/9;
-    object-fit:cover;
-    border:none;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
-  }
-  @media(max-width:520px){
-    .logo-img{ height:52px; }
-  }
-  .logo-text{
-    font-family:'Fraunces',serif;font-weight:700;
-    color:var(--paper);font-size:1.35rem;letter-spacing:-0.01em;
-    display:flex;flex-direction:column;line-height:1.05;
-  }
-  .logo-text span{
-    font-family:'JetBrains Mono',monospace;font-weight:400;
-    font-size:0.68rem;letter-spacing:0.16em;color:var(--blush);
-    text-transform:uppercase;
-  }
-  @media(max-width:520px){
-    .logo-text{ font-size:1.05rem; }
-    .logo-text span{ font-size:0.58rem; }
-  }
-  .navlinks{display:flex;gap:28px;font-size:0.88rem;color:var(--stone);}
-  .navlinks a:hover{color:var(--blush);}
-  .navlinks{display:none;}
-  @media(min-width:820px){.navlinks{display:flex;}}
-
-  .lang-switch{
-    display:flex;
-    border:1px solid rgba(231,223,201,0.3);
-    border-radius:20px;
-    overflow:hidden;
-    margin-left:16px;
-  }
-  .lang-btn{
-    font-family:'JetBrains Mono',monospace;
-    font-size:0.7rem;
-    letter-spacing:0.06em;
-    padding:6px 12px;
-    background:transparent;
-    color:var(--stone);
-    border:none;
-    cursor:pointer;
-    transition:background .15s ease, color .15s ease;
-  }
-  .lang-btn.active{
-    background:var(--blush);
-    color:var(--obsidian);
-  }
-
-  /* MENÚ MÓVIL */
-  .menu-toggle{
-    display:none;
-    align-items:center;
-    justify-content:center;
-    width:38px;height:38px;
-    margin-left:10px;
-    background:transparent;
-    border:1px solid rgba(231,223,201,0.3);
-    border-radius:8px;
-    color:var(--paper);
-    cursor:pointer;
-  }
-  .menu-toggle .icon-close{display:none;}
-  .menu-toggle.open .icon-burger{display:none;}
-  .menu-toggle.open .icon-close{display:block;}
-  @media(max-width:819px){
-    .menu-toggle{display:flex;}
-  }
-
-  @media(max-width:819px){
-    .navlinks{
-      display:none;
-      position:absolute;
-      top:100%;
-      left:0;right:0;
-      flex-direction:column;
-      gap:4px;
-      background:var(--obsidian);
-      padding:10px 24px 22px;
-      border-bottom:1px solid rgba(231,223,201,0.14);
-    }
-    .navlinks.open{display:flex;}
-    .navlinks a{
-      padding:12px 4px;
-      border-bottom:1px solid rgba(231,223,201,0.08);
-      font-size:0.95rem;
-    }
-    .navlinks a:last-child{border-bottom:none;}
-  }
-
-  /* HERO */
-  .hero{
-    position:relative;
-    min-height:100vh;
-    min-height:100dvh; /* usa la altura visible real en móvil, sin la barra del navegador */
-    display:flex;flex-direction:column;justify-content:flex-end;
-    background:linear-gradient(180deg,#202c60 0%, #5b5ba0 32%, #e29f78 58%, #3d3127 100%);
-    padding-top:82px;
-    overflow:hidden;
-  }
-  .hero-content{
-   position:relative;z-index:2;
-   padding:40px 20px 0;
-   max-width:1120px;margin:0 auto;width:100%;
-  }
-  @media(min-width:640px){
-    .hero-content{padding:60px 24px 0;}
-  }
-  .hero-sky{position:absolute;inset:0;z-index:0;}
-  .balloon{position:absolute;opacity:0.92;animation:drift 14s ease-in-out infinite;}
-  .balloon.b2{animation-delay:-4s;animation-duration:18s;}
-  .balloon.b3{animation-delay:-9s;animation-duration:16s;}
-  @keyframes drift{
-    0%,100%{transform:translateY(0px);}
-    50%{transform:translateY(-18px);}
-  }
-  .hero-grid{
-   display:grid;
-   grid-template-columns:1fr;
-   gap:40px;
-   align-items:center;
-  }
-  @media(min-width:860px){
-  .hero-grid{grid-template-columns:1.1fr 0.9fr;}
-  }
-
-  .hero-visual{
-   position:relative;
-   border-radius:12px;
-   aspect-ratio:4/5;
-  }
-  .hero-visual video,
-  .hero-visual iframe{
-   width:100%;height:100%;
-   object-fit:cover;
-   border-radius:12px;
-   border:none;
-   position:relative;z-index:2;
-  }
-  .hero-visual video{
-   border:1px solid rgba(232,167,155,0.35);
-  }
-  .hero-visual::before{
-   content:"";
-   position:absolute;
-   inset:-20px;
-   border-radius:24px;
-   background:linear-gradient(160deg,#E8A79B,#B5652E,#8A4A1F);
-   filter:blur(40px);
-   opacity:0.55;
-   z-index:1;
-  }
-
-  .cta-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-top:28px;
-  }
-  .btn{
-    font-family:'JetBrains Mono',monospace;
-    font-size:0.78rem;
-    letter-spacing:0.04em;
-    padding:14px 20px;
-    border-radius:4px;
-    text-align:center;
-    border:1px solid transparent;
-    transition:transform .15s ease, opacity .15s ease;
-  }
-  .btn:active{transform:scale(0.97);}
-  .btn-primary{background:var(--adobe);color:var(--paper);}
-  .btn-primary:hover{opacity:0.9;}
-  .btn-secondary{background:transparent;color:var(--paper);border-color:rgba(250,246,236,0.5);}
-  .btn-secondary:hover{border-color:var(--paper);}
-  @media(max-width:520px){
-    .cta-row{flex-direction:column;}
-    .btn{width:100%;}
-  }
-
-  /* PYRAMID SIGNATURE DIVIDER */
-  .talud{
-    position:relative;z-index:1;
-    width:100%;height:70px;
-    display:flex;justify-content:center;align-items:flex-end;
-  }
-  .talud svg{height:100%;}
-
-  /* TIMELINE - signature stepped element */
-  .day{
-    background:var(--obsidian);
-    padding:110px 0 90px;
-  }
-  .day .eyebrow{color:var(--blush);}
-  .day .eyebrow::before{background:var(--blush);}
-  .day h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.5rem);max-width:16ch;margin-bottom:60px;}
-  .steps{list-style:none;position:relative;padding-left:0;}
-  .steps::before{
-    content:"";position:absolute;left:17px;top:6px;bottom:6px;width:1px;
-    background:linear-gradient(180deg, var(--blush), var(--adobe), var(--jade));
-    opacity:0.5;
-  }
-  .step{
-    display:grid;grid-template-columns:36px 1fr;gap:20px;
-    padding:22px 0;position:relative;
-    opacity:0;transform:translateX(-14px);
-    transition:opacity .6s ease, transform .6s ease;
-  }
-  .step.show{opacity:1;transform:translateX(0);}
-  .step-dot{
-    width:36px;height:36px;border-radius:50%;
-    background:var(--obsidian-soft);border:1px solid rgba(232,167,155,0.4);
-    display:flex;align-items:center;justify-content:center;
-    font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--blush);
-  }
-  .step-body time{
-    font-family:'JetBrains Mono',monospace;font-size:0.76rem;color:var(--adobe);
-    display:block;margin-bottom:4px;letter-spacing:0.04em;
-  }
-  .step-body h3{color:var(--paper);font-size:1.15rem;font-weight:600;margin-bottom:2px;}
-  .step-body p{color:var(--stone);font-size:0.92rem;max-width:52ch;}
-
-/* AXOLOTL SECTION */
-.axo{
-  position:relative;
-  overflow:hidden;
-  min-height:600px;
-  padding:100px 0;
-  color:var(--paper);
-}
-.axo-grid{
-  position:relative;
-  z-index:2;
-  display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
-}
-@media(min-width:860px){.axo-grid{grid-template-columns:1.1fr 0.9fr;}}
-.axo h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:14ch;margin-bottom:18px;}
-.axo p{color:#CFE6DF;max-width:48ch;margin-bottom:26px;}
-.facts{display:flex;flex-direction:column;gap:14px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
-.facts div{border-top:1px solid rgba(255,255,255,0.18);padding-top:10px;display:flex;justify-content:space-between;gap:20px;color:#B9D9CF;}
-.facts strong{color:var(--paper);font-weight:500;}
-
-.axo-bg-video{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:left center; /* prioriza el lado izquierdo del video al recortar */
-  filter:blur(1.5px);
-  z-index:0;
-}
-.axo-overlay{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  /* en móvil el texto va arriba de todo (una sola columna), así que
-     el overlay oscurece más que nada arriba, dejando el resto del video
-     más despejado para poder distinguir a los ajolotes */
-  background:linear-gradient(
-    180deg,
-    #173731 0%,
-    rgba(23,55,49,0.55) 32%,
-    rgba(23,55,49,0.12) 100%
-  );
-  z-index:1;
-}
-@media(min-width:860px){
-  .axo-bg-video{ left:25%; width:75%; }
-  .axo-overlay{
-    background:linear-gradient(
-      to right,
-      #173731 0%,
-      #173731 14%,
-      transparent 42%
-    );
-  }
-}
-
-  /* ARTESANIAS SECTION */
-  .taller{background:var(--stone);padding:100px 0;}
-  .taller-head{max-width:56ch;margin-bottom:56px;}
-  .taller h2{font-size:clamp(1.7rem,3.6vw,2.4rem);margin-bottom:16px;}
-  .taller-head p{color:#4A4038;max-width:52ch;}
-  .craft-grid{display:grid;grid-template-columns:1fr;gap:20px;}
-  @media(min-width:700px){.craft-grid{grid-template-columns:repeat(2,1fr);}}
-  @media(min-width:1020px){.craft-grid{grid-template-columns:repeat(4,1fr);}}
-  .craft-card{
-    background:var(--paper);border:1px solid var(--stone-dark);
-    padding:26px 22px;border-radius:4px;
-    transition:border-color .2s ease, transform .2s ease;
-  }
-  .craft-card:hover{border-color:var(--adobe);transform:translateY(-3px);}
-  .craft-card .num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--adobe-dark);margin-bottom:14px;display:block;}
-  .craft-card h3{font-size:1.05rem;margin-bottom:8px;}
-  .craft-card p{font-size:0.88rem;color:#5B5044;}
-
-  /* DRONE SECTION */
-  .dron{
-    background:linear-gradient(180deg,#3A4266,#7F7FA0 60%,#C98F6E);
-    padding:100px 0;color:var(--paper);
-  }
-  .dron-grid{display:grid;grid-template-columns:1fr;gap:50px;}
-  @media(min-width:900px){.dron-grid{grid-template-columns:0.9fr 1.1fr;}}
-  .dron h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:15ch;margin-bottom:16px;}
-  .dron > .wrap > .dron-grid > div > p{color:#EDE9F0;max-width:44ch;margin-bottom:18px;}
-  .pricing{position:relative;border:1px solid rgba(255,255,255,0.3);border-radius:6px;overflow:hidden;background:rgba(28,24,21,0.28);}
-
-  /* AJOLOTES QUE NADAN HACIA EL PRECIO */
-  .axolotl{
-    position:absolute;
-    top:0;left:0;
-    width:78px;height:78px;
-    z-index:1;
-    pointer-events:none;
-    opacity:0;
-    will-change:transform,opacity;
-  }
-  .axolotl svg{
-    width:100%;height:100%;
-    animation:axo-swim 1.3s ease-in-out infinite;
-  }
-  @keyframes axo-swim{
-    0%,100%{transform:rotate(-5deg) translateY(0);}
-    50%{transform:rotate(5deg) translateY(-3px);}
-  }
-  .axolotl.dorado svg{color:#E3A63E;}
-  .axolotl.rosa svg{color:var(--blush);}
-  .axolotl.negro svg{color:var(--obsidian);}
-  .price-row{position:relative;z-index:2;}
-  .price-row{
-    display:flex;justify-content:space-between;gap:16px;
-    padding:20px 22px;border-bottom:1px solid rgba(255,255,255,0.16);
-    font-family:'JetBrains Mono',monospace;font-size:0.86rem;
-  }
-  .price-row:last-child{border-bottom:none;}
-  .price-row .name{font-family:'Karla',sans-serif;font-weight:700;font-size:0.98rem;display:block;margin-bottom:4px;}
-  .price-row .desc{font-family:'Karla',sans-serif;font-weight:400;font-size:0.82rem;color:#E7E3EE;}
-  .price-row .amount{white-space:nowrap;color:var(--blush);align-self:center;}
-
-  /* LOCATION */
-  .ubica{background:var(--obsidian);color:var(--paper);padding:100px 0;}
-  .ubica-grid{display:grid;grid-template-columns:1fr;gap:44px;}
-  @media(min-width:860px){.ubica-grid{grid-template-columns:1fr 1fr;}}
-  .ubica h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.3rem);max-width:16ch;margin-bottom:16px;}
-  .ubica p{color:var(--stone);max-width:42ch;margin-bottom:20px;}
-  .infolist div{
-    display:flex;justify-content:space-between;gap:16px;
-    padding:14px 0;border-top:1px solid rgba(231,223,201,0.14);
-    font-size:0.92rem;color:var(--stone);
-  }
-  .infolist span:first-child{font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:var(--blush);text-transform:uppercase;letter-spacing:0.06em;}
-  .map-box{
-    border-radius:6px;border:1px solid rgba(231,223,201,0.2);
-    background:repeating-linear-gradient(45deg, #26211D, #26211D 10px, #201B18 10px, #201B18 20px);
-    aspect-ratio: 4 / 3; /* se adapta al ancho disponible en vez de tener altura fija */
-    display:flex;align-items:center;justify-content:center;
-    font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--stone-dark);
-    text-align:center;padding:20px;
-    overflow:hidden;
-  }
-  .map-box iframe{ aspect-ratio: 4 / 3; }
-  @media(min-width:860px){
-    .map-box{ aspect-ratio: 16 / 10; }
-    .map-box iframe{ aspect-ratio: 16 / 10; }
-  }
-
-  footer{background:var(--obsidian-soft);color:var(--stone-dark);padding:48px 0 28px;}
-  .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;padding-bottom:28px;border-bottom:1px solid rgba(231,223,201,0.12);margin-bottom:20px;}
-  footer .logo{color:var(--paper);}
-  .foot-links{display:flex;gap:22px;font-size:0.86rem;}
-  .foot-links a:hover{color:var(--blush);}
-  .fine{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#7A7168;line-height:1.7;}
-
-  @media(prefers-reduced-motion:reduce){
-    *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
-    html{scroll-behavior:auto;}
-  }
-
-  /* ---- AJUSTES GENERALES PARA MÓVIL ---- */
-  @media(max-width:640px){
-    .day, .taller, .dron, .ubica{ padding:60px 0; }
-    .axo{ padding:70px 0; min-height:520px; }
-    footer{ padding:36px 0 24px; }
-
-    .steps::before{ left:17px; }
-    .step{ padding:16px 0; gap:14px; }
-
-    .craft-card{ padding:20px 18px; }
-
-    .price-row{ padding:16px 18px; }
-
-    /* los ajolotes un poco más chicos para no verse enormes
-       en un contenedor de precios angosto */
-    .axolotl{ width:54px; height:54px; }
-  }
-</style>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
 <header>
   <nav>
     <div class="logo">
-      <img src="multimedia/logo.png" alt="Logo AXOLOTS" class="logo-img">
+      <img src="assets/img/logo.png" alt="Logo AXOLOTS" class="logo-img">
       <div class="logo-text">AXOLOTS <span data-en="Teotihuacán Archaeological Zone">Zona Arqueológica de Teotihuacán</span></div>
     </div>
     <div class="navlinks">
@@ -493,6 +45,15 @@
       <a href="#axolotes" data-en="Axolotls">Axolotes</a>
       <a href="#dron" data-en="Drone Flights">Vuelos en dron</a>
       <a href="#ubicacion" data-en="Location">Ubicación</a>
+    </div>
+    <div class="social-links">
+      <!-- TODO: reemplazar "#" por la URL real de Instagram cuando exista la cuenta -->
+      <a class="social-link" href="#" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="social-link" href="https://wa.me/525527735718" aria-label="WhatsApp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91S17.5 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.1 1.64.77 1.92.91.28.14.47.21.54.33.07.12.07.7-.17 1.38z"/></svg>
+      </a>
     </div>
     <div class="lang-switch">
       <button type="button" class="lang-btn active" data-lang="es">ES</button>
@@ -514,9 +75,9 @@
 
 <section class="hero">
   <div class="hero-sky">
-    <img class="balloon b1" src="multimedia/globo4.gif" alt="" style="position:absolute;left:4%;top:6%;width:56px">
-    <img class="balloon b2" src="multimedia/globo4.gif" alt="" style="position:absolute;left:60%;top:4%;width:38px">
-    <img class="balloon b3" src="multimedia/globo4.gif" alt="" style="position:absolute;left:78%;top:14%;width:44px">
+    <img class="balloon b1" src="assets/img/globo4.gif" alt="" loading="lazy" style="position:absolute;left:4%;top:6%;width:56px">
+    <img class="balloon b2" src="assets/img/globo4.gif" alt="" loading="lazy" style="position:absolute;left:60%;top:4%;width:38px">
+    <img class="balloon b3" src="assets/img/globo4.gif" alt="" loading="lazy" style="position:absolute;left:78%;top:14%;width:44px">
   </div>
 
   <div class="hero-grid">
@@ -531,7 +92,7 @@
     </div>
 
     <div class="hero-visual">
-      <video src="multimedia/recorridocuatris.mp4" autoplay muted loop playsinline></video>
+      <video src="assets/video/recorridocuatris.mp4" preload="metadata" autoplay muted loop playsinline></video>
     </div>
   </div>
 
@@ -558,7 +119,7 @@
 </section>
 
 <section class="axo" id="axolotes">
-  <video class="axo-bg-video" src="multimedia/videoquesonlosajolotes.mp4" autoplay muted loop playsinline></video>
+  <video class="axo-bg-video" src="assets/video/videoquesonlosajolotes.mp4" preload="metadata" autoplay muted loop playsinline></video>
   <div class="axo-overlay"></div>
 
   <div class="wrap axo-grid">
@@ -681,7 +242,7 @@
       <div class="infolist">
         <div><span data-en="Address">Dirección</span><span>Bernal Díaz del Castillo, 55850 San Martín de las Pirámides, Méx.</span></div>
         <div><span data-en="Hours">Horario</span><span data-en="10am-4pm Every day">10am-4pm Todos los días</span></div>
-        <div><span data-en="Phone / WhatsApp">Teléfono / WhatsApp</span><span>+52 5527735718</span></div>
+        <div><span data-en="Phone / WhatsApp">Teléfono / WhatsApp</span><span><a href="tel:+525527735718">+52 55 2773 5718</a> · <a href="https://wa.me/525527735718" target="_blank" rel="noopener">WhatsApp</a></span></div>
         <div><span data-en="Reservations">Reservas</span><span>CLABE 127180013909784408 Banco Azteca, Alan Mendoza</span></div>
       </div>
     </div>
@@ -706,167 +267,36 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="logo"><span class="logo-text">AXOLOTS <span>Teotihuacán</span></span></div>
-      <div class="foot-links">
-        <a href="#taller" data-en="Shop">Tienda</a>
-        <a href="#axolotes" data-en="Axolotls">Axolotes</a>
-        <a href="#dron" data-en="Drone">Dron</a>
-        <a href="#ubicacion" data-en="Location">Ubicación</a>
+      <div class="foot-right">
+        <div class="foot-links">
+          <a href="#taller" data-en="Shop">Tienda</a>
+          <a href="#axolotes" data-en="Axolotls">Axolotes</a>
+          <a href="#dron" data-en="Drone">Dron</a>
+          <a href="#ubicacion" data-en="Location">Ubicación</a>
+        </div>
+        <div class="social-links">
+          <!-- TODO: reemplazar "#" por la URL real de Instagram cuando exista la cuenta -->
+          <a class="social-link" href="#" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="social-link" href="https://wa.me/525527735718" aria-label="WhatsApp" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91S17.5 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.1 1.64.77 1.92.91.28.14.47.21.54.33.07.12.07.7-.17 1.38z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
     <p class="fine" data-en="We do not profit from the axolotls. Our work focuses on their preservation and environmental education, exhibiting only a limited number of specimens in optimal conditions of welfare, health, and hygiene. We hold the corresponding municipal permits.">No lucramos con los ajolotes. Nuestra labor se centra en su preservación y educación ambiental, exhibiendo únicamente un número limitado de ejemplares en óptimas condiciones de bienestar, salud e higiene. Contamos con los permisos municipales correspondientes.</p>
   </div>
 </footer>
 
-<script>
-  const steps = document.querySelectorAll('.step');
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } });
-  }, {threshold:0.3});
-  steps.forEach(s=>obs.observe(s));
-</script>
+<a class="whatsapp-float" href="https://wa.me/525527735718" aria-label="WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91S17.5 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.1 1.64.77 1.92.91.28.14.47.21.54.33.07.12.07.7-.17 1.38z"/></svg>
+</a>
 
-<script>
-(function () {
-  const pricing = document.querySelector('#dron .pricing');
-  if (!pricing) return;
-
-  const rows = pricing.querySelectorAll('.price-row');
-  const axolotls = [
-    document.getElementById('axolotl-amanecer'),
-    document.getElementById('axolotl-completo'),
-    document.getElementById('axolotl-grupo')
-  ];
-
-  // Cada ajolote tiene su propia "inercia": así no llegan ni se van
-  // exactamente sincronizados, se ve más natural.
-  const speeds = [0.07, 0.09, 0.11];
-  const state = axolotls.map(() => 0); // progreso suavizado actual de cada ajolote
-
-  let targets = []; // posición final (junto al precio) de cada ajolote, relativa a .pricing
-
-  // Mide dónde está cada "$ XXX MXN" dentro de .pricing.
-  // Solo se recalcula al cargar y al cambiar tamaño de ventana,
-  // porque la posición RELATIVA dentro de .pricing no cambia con el scroll.
-  function measureTargets() {
-    const pricingRect = pricing.getBoundingClientRect();
-    const finalScale = 0.42;
-
-    targets = Array.from(rows).map((row, i) => {
-      const amountEl = row.querySelector('.amount');
-      const amountRect = amountEl.getBoundingClientRect();
-
-      // el ajolote cambia de tamaño según el CSS activo (78px en escritorio,
-      // 54px en móvil) — usamos su tamaño real para centrarlo bien
-      const axolotl = axolotls[i];
-      const size = axolotl ? axolotl.offsetWidth : 78;
-      const halfFinal = (size * finalScale) / 2;
-
-      return {
-        x: amountRect.left - pricingRect.left - halfFinal - 4,
-        y: amountRect.top - pricingRect.top + amountRect.height / 2 - halfFinal,
-        scale: finalScale
-      };
-    });
-  }
-
-  // Progreso 0→1→0: 1 cuando .pricing está centrado en la pantalla,
-  // baja conforme .pricing se aleja del centro (ya sea por arriba o por abajo).
-  function targetProgress() {
-    const rect = pricing.getBoundingClientRect();
-    const sectionCenter = rect.top + rect.height / 2;
-    const viewportCenter = window.innerHeight / 2;
-    const distance = Math.abs(sectionCenter - viewportCenter);
-    const threshold = window.innerHeight * 0.95;
-    return Math.max(0, 1 - distance / threshold);
-  }
-
-  function frame() {
-    const tGoal = targetProgress();
-
-    axolotls.forEach((axolotl, i) => {
-      if (!axolotl) return;
-      const target = targets[i];
-      if (!target) return;
-
-      // suaviza el movimiento en vez de saltar directo al valor de scroll
-      state[i] += (tGoal - state[i]) * speeds[i];
-      const t = state[i];
-
-      const startX = -150;      // fuera de la vista, a la izquierda de .pricing
-      const startY = target.y;  // mismo alto que su fila: el viaje es horizontal
-      const startScale = 1;
-
-      const x = startX + (target.x - startX) * t;
-      const y = startY + (target.y - startY) * t;
-      const scale = startScale + (target.scale - startScale) * t;
-
-      axolotl.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-      axolotl.style.opacity = Math.min(1, t * 3.5);
-    });
-
-    requestAnimationFrame(frame);
-  }
-
-  window.addEventListener('load', measureTargets);
-  window.addEventListener('resize', measureTargets);
-  measureTargets();
-  requestAnimationFrame(frame);
-})();
-</script>
-
-<script>
-(function () {
-  const translatable = document.querySelectorAll('[data-en]');
-  // guarda el texto original en español antes de tocar nada
-  translatable.forEach(el => { el.dataset.es = el.textContent; });
-
-  const buttons = document.querySelectorAll('.lang-btn');
-
-  function setLang(lang) {
-    translatable.forEach(el => {
-      el.textContent = (lang === 'en') ? el.dataset.en : el.dataset.es;
-    });
-    document.documentElement.lang = lang;
-    buttons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lang === lang);
-    });
-  }
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => setLang(btn.dataset.lang));
-  });
-})();
-</script>
-
-<script>
-(function () {
-  const toggle = document.querySelector('.menu-toggle');
-  const navlinks = document.querySelector('.navlinks');
-  if (!toggle || !navlinks) return;
-
-  function closeMenu() {
-    navlinks.classList.remove('open');
-    toggle.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  }
-
-  toggle.addEventListener('click', () => {
-    const isOpen = navlinks.classList.toggle('open');
-    toggle.classList.toggle('open', isOpen);
-    toggle.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  // cerrar el menú al elegir una sección
-  navlinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  // si la ventana crece a tamaño de escritorio, cerrar el menú móvil
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 820) closeMenu();
-  });
-})();
-</script>
+<script src="assets/js/timeline.js" defer></script>
+<script src="assets/js/pricing-axolotl.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/menu.js" defer></script>
 
 </body>
 </html>
