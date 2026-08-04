@@ -2,6 +2,13 @@
 
 Contexto de proyecto para Claude Code. Léelo antes de asumir nada del repo — esta sección de pendientes es la fuente de verdad de qué falta; actualízala cada vez que se resuelva o surja un punto nuevo, en vez de repetir el análisis completo del sitio.
 
+## Estado actual (actualizar en cada sesión)
+
+- **Última actualización:** 2026-08-04
+- **`main`:** `cac790e` — al día, incluye reestructura + fix de seguridad (CLABE) + rediseño de hero + docs (PR #3 y #4 mergeadas).
+- **`pruebas`:** 1 commit adelante de `origin/pruebas` sin pushear — `cf9534a` (fixes del audit UX/UI: contraste de precios, i18n de paquetes, nav responsive, badge de dron). Pendiente `git push origin pruebas` y abrir/mergear la siguiente PR.
+- **Branch protection en `main`:** activada por el usuario.
+
 ## Qué es esto
 
 Landing page de una sola página (`index.html`) para AXOLOTS, negocio turístico en San Martín de las Pirámides / Teotihuacán: vuelos en globo con grabación por dron, exhibición viva de axolotes, taller y venta de artesanías. Sitio estático: HTML/CSS/JS plano, sin framework, sin build, sin backend.
