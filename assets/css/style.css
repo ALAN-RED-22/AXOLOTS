@@ -50,11 +50,6 @@ img,svg{display:block;max-width:100%;}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
 :focus-visible{outline:3px solid var(--adobe);outline-offset:3px;}
 
-
-
-
-
-
 /* ==========================================================================
    NAV / HEADER (Alineación Simétrica Asegurada)
    ========================================================================== */
@@ -219,16 +214,11 @@ footer .social-link { border-color: rgba(231, 223, 201, 0.2); color: var(--stone
   .whatsapp-float svg { width: 25px; height: 25px; }
 }
 
-
-
-
-
-
 /* HERO */
 .hero{
   position:relative;
   min-height:100vh;
-  min-height:100dvh; /* usa la altura visible real en móvil, sin la barra del navegador */
+  min-height:100dvh;
   display:flex;flex-direction:column;justify-content:flex-end;
   background:linear-gradient(180deg,#202c60 0%, #5b5ba0 32%, #e29f78 58%, #3d3127 100%);
   padding-top:82px;
@@ -249,7 +239,6 @@ footer .social-link { border-color: rgba(231, 223, 201, 0.2); color: var(--stone
   animation:drift 14s ease-in-out infinite;
   filter:drop-shadow(0 10px 22px rgba(28,24,21,0.35));
 }
-/* tamaños variados = sensación de profundidad (más grande = más cerca) */
 .balloon.b1{ left:6%; top:9%; width:104px; }
 .balloon.b2{ left:24%; top:30%; width:52px; animation-delay:-4s; animation-duration:18s; }
 .balloon.b3{ left:66%; top:6%; width:132px; animation-delay:-9s; animation-duration:16s; }
@@ -260,7 +249,7 @@ footer .social-link { border-color: rgba(231, 223, 201, 0.2); color: var(--stone
 }
 @media(max-width:640px){
   .balloon.b1{ width:64px; top:7%; }
-  .balloon.b2{ display:none; } /* reduce el desorden visual en pantallas angostas */
+  .balloon.b2{ display:none; }
   .balloon.b3{ width:78px; top:5%; left:60%; }
   .balloon.b4{ width:34px; top:24%; left:82%; }
 }
@@ -369,12 +358,9 @@ footer .social-link { border-color: rgba(231, 223, 201, 0.2); color: var(--stone
 .step-body h3{color:var(--paper);font-size:1.15rem;font-weight:600;margin-bottom:2px;}
 .step-body p{color:var(--stone);font-size:0.92rem;max-width:52ch;}
 
-
-
 /* AXOLOTL SECTION */
 .axo{
 position:relative;
-/* Evita de raíz que los ajolotes generen scroll horizontal al alejarse por JS */
 overflow:hidden; 
 min-height:600px;
 padding:100px 0;
@@ -391,24 +377,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
 .facts{display:flex;flex-direction:column;gap:14px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;}
 .facts div{border-top:1px solid rgba(255,255,255,0.18);padding-top:10px;display:flex;justify-content:space-between;gap:20px;color:#B9D9CF;}
 .facts strong{color:var(--paper);font-weight:500;}
-
-/* MEDIDAS BASE SEGUROS PARA LOS AJOLOTES (Móvil)
-   Mantenemos sus posiciones dinámicas intactas para tu script de Scroll */
-.axolotl {
-  position: absolute;
-  width: 75px; /* Tamaño controlado para no pisar el texto en pantallas pequeñas */
-  height: auto;
-  z-index: 1;
-  pointer-events: none;
-  /* Respeta las transiciones nativas y opacidades que controle tu JS */
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out; 
-}
-
-@media(min-width: 768px) {
-  .axolotl {
-    width: 120px; /* Recuperan su tamaño ideal en desktop */
-  }
-}
 
 .axo-bg-video{
   position:absolute;
@@ -451,11 +419,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   }
 }
 
-
-
-
-
-
 /* ==========================================================================
    ARTESANIAS SECTION (OPTIMIZADA PARA MÓVIL 9:16)
    ========================================================================== */
@@ -464,14 +427,12 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   position: relative;
   overflow: hidden;
   transition: background-image 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-  background-size: contain; /* Cambiado a contain para evitar el efecto de zoom en móvil */
+  background-size: contain;
   background-position: center top;
   background-repeat: no-repeat;
   background-color: #1C1815; 
   z-index: 1;
 }
-
-/* Filtro de fondo adaptado para pantallas verticales */
 .taller::before {
   content: '';
   position: absolute;
@@ -479,7 +440,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   background: linear-gradient(180deg, rgba(28,24,21,0.3) 0%, rgba(28,24,21,0.75) 100%);
   z-index: -1;
 }
-
 .taller-head {
   max-width: 56ch;
   margin-bottom: 56px;
@@ -487,21 +447,17 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   z-index: 2;
   padding: 0 20px;
 }
-
 .taller h2 {
   font-size: clamp(1.7rem, 3.6vw, 2.4rem);
   margin-bottom: 16px;
   color: #ffffff;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
-
 .taller-head p {
   color: #f2eeea;
   max-width: 52ch;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
-
-/* Contenedor del Carrusel */
 .coverflow-container {
   position: relative;
   width: 100%;
@@ -510,7 +466,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   perspective: 1000px;
   z-index: 2;
 }
-
 .coverflow-track {
   position: relative;
   width: 100%;
@@ -520,8 +475,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   justify-content: center;
   align-items: center;
 }
-
-/* Láminas con soporte de imagen de fondo interna */
 .coverflow-card {
   position: absolute;
   width: 280px;  
@@ -547,8 +500,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
               visibility 0.5s ease,
               border-color .2s ease;
 }
-
-/* Capa interna opcional para asegurar legibilidad del texto sobre la foto de la lámina */
 .coverflow-card::after {
   content: '';
   position: absolute;
@@ -556,19 +507,15 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   background: linear-gradient(0deg, rgba(28,24,21,0.95) 0%, rgba(28,24,21,0.4) 70%, transparent 100%);
   z-index: 1;
 }
-
 .coverflow-card:hover {
   border-color: var(--adobe);
 }
-
-/* Ajustes de capas para que el texto flote sobre el fondo de la lámina */
 .coverflow-card .num,
 .coverflow-card h3,
 .coverflow-card p {
   position: relative;
   z-index: 2;
 }
-
 .coverflow-card .num {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
@@ -579,23 +526,19 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   display: block;
   text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
-
 .coverflow-card h3 {
   font-size: 1.15rem;
   margin-bottom: 6px;
-  color: #ffffff; /* Texto blanco para resaltar sobre el degradado de la lámina */
+  color: #ffffff;
   text-shadow: 0 2px 5px rgba(0,0,0,0.8);
 }
-
 .coverflow-card p {
   font-size: 0.88rem;
-  color: #e3deda; /* Color claro para excelente lectura */
+  color: #e3deda;
   margin: 0;
   line-height: 1.4;
   text-shadow: 0 1px 4px rgba(0,0,0,0.8);
 }
-
-/* Botones de control */
 .coverflow-controls {
   display: flex;
   justify-content: center;
@@ -604,7 +547,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   position: relative;
   z-index: 20; 
 }
-
 .ctrl-btn {
   background: var(--paper);
   border: 1px solid var(--stone-dark);
@@ -619,17 +561,14 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   justify-content: center;
   transition: all 0.25s ease;
 }
-
 .ctrl-btn:hover {
   background: var(--adobe);
   color: var(--paper);
   border-color: var(--adobe);
 }
-
-/* Optimización móvil rigurosa */
 @media (max-width: 768px) {
   .taller {
-    background-size: cover; /* Cambia a cover en móvil para rellenar el viewport vertical correctamente */
+    background-size: cover;
   }
   .coverflow-track {
     height: 380px;
@@ -639,3 +578,66 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
     padding: 20px;
   }
 }
+
+/* ==========================================================================
+   AJUSTES FINALES RESPONSIVOS Y COLOR DE AJOLOTES (SECCIÓN DRON & UBICACIÓN)
+   ========================================================================== */
+
+/* 1. Blindar sección de reservas contra desbordes laterales */
+.dron {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Grid de escritorio para la sección dron */
+@media(min-width: 860px) {
+  .dron-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .ubica-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+}
+
+/* 2. Forzar comportamiento fluido y apilado en móvil */
+@media(max-width: 859px) {
+  .dron-grid, .ubica-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .map-box {
+    width: 100%;
+    height: 350px;
+  }
+}
+
+/* 3. Inyección de color fija para los SVGs animados */
+.axolotl {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out; 
+}
+.axolotl svg {
+  display: block;
+  width: 75px; /* Tamaño ideal responsivo en móvil */
+  max-width: none !important; /* Anula aplastamientos globales */
+  height: auto;
+}
+@media(min-width: 768px) {
+  .axolotl svg { 
+    width: 120px; /* Tamaño original de escritorio */
+  }
+}
+
+/* Paleta cromática coordinada para las clases del HTML */
+.axolotl.dorado { color: #E29F78; }    
+.axolotl.rosa { color: var(--blush); }     
+.axolotl.negro { color: var(--obsidian); }
