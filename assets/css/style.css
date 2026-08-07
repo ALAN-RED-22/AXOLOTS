@@ -55,9 +55,8 @@ img,svg{display:block;max-width:100%;}
 
 
 
-
 /* ==========================================================================
-   NAV / HEADER
+   NAV / HEADER (Alineación Simétrica Asegurada)
    ========================================================================== */
 header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
@@ -67,9 +66,9 @@ header {
 }
 
 nav {
-  max-width: 1000px; /* Alineado perfecto con tus secciones y el carrusel */
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 8px 16px; /* Protege los bordes simétricos en móvil */
+  padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -80,10 +79,10 @@ nav {
 .logo {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 .logo-img {
-  height: 72px;
+  height: 64px;
   width: auto;
   aspect-ratio: 16/9;
   object-fit: cover;
@@ -92,25 +91,25 @@ nav {
   mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
 }
 @media(max-width: 520px) {
-  .logo-img { height: 52px; }
+  .logo-img { height: 46px; }
 }
 
 .logo-text {
   font-family: 'Fraunces', serif; font-weight: 700;
-  color: var(--paper); font-size: 1.35rem; letter-spacing: -0.01em;
+  color: var(--paper); font-size: 1.2rem; letter-spacing: -0.01em;
   display: flex; flex-direction: column; line-height: 1.05;
 }
 .logo-text span {
   font-family: 'JetBrains Mono', monospace; font-weight: 400;
-  font-size: 0.68rem; letter-spacing: 0.16em; color: var(--blush);
+  font-size: 0.65rem; letter-spacing: 0.12em; color: var(--blush);
   text-transform: uppercase;
 }
 @media(max-width: 520px) {
-  .logo-text { font-size: 1.05rem; }
-  .logo-text span { font-size: 0.58rem; }
+  .logo-text { font-size: 0.95rem; max-width: 140px; }
+  .logo-text span { font-size: 0.55rem; letter-spacing: 0.05em; }
 }
 
-/* ENLACES DE NAVEGACIÓN (Escritorio) */
+/* ENLACES DE NAVEGACIÓN */
 .navlinks { display: flex; gap: 28px; font-size: 0.88rem; color: var(--stone); }
 .navlinks a:hover { color: var(--blush); }
 .navlinks { display: none; }
@@ -122,13 +121,12 @@ nav {
   border: 1px solid rgba(231, 223, 201, 0.3);
   border-radius: 20px;
   overflow: hidden;
-  margin-left: 0;
 }
 .lang-btn {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.06em;
-  padding: 6px 12px;
+  padding: 5px 10px;
   background: transparent;
   color: var(--stone);
   border: none;
@@ -140,22 +138,17 @@ nav {
   color: var(--obsidian);
 }
 
-/* CONTENEDORES DE LA DERECHA FLUIDOS */
+/* REDES SOCIALES (Ocultas en Header Móvil para salvar espacio) */
 .social-links {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 10px;
-  margin-left: 0; 
 }
-
-/* Agrupamos márgenes ordenados sólo cuando hay espacio en pantalla grande */
 @media(min-width: 820px) {
-  .lang-switch, .social-links {
-    margin-left: 20px;
-  }
+  .social-links { display: flex; margin-left: 20px; }
+  .lang-switch { margin-left: 20px; }
 }
 
-/* BOTONES DE REDES SOCIALES */
 .social-link {
   display: flex;
   align-items: center;
@@ -164,22 +157,20 @@ nav {
   border-radius: 50%;
   border: 1px solid rgba(231, 223, 201, 0.3);
   color: var(--stone);
-  transition: border-color .15s ease, color .15s ease;
 }
-.social-link:hover { border-color: var(--blush); color: var(--blush); }
 .social-link svg { width: 17px; height: 17px; }
 
-footer .social-links { margin-left: 0; }
+/* Mantener estilos de redes sociales nativas para el Footer */
+footer .social-links { display: flex; gap: 10px; margin-left: 0; }
 footer .social-link { border-color: rgba(231, 223, 201, 0.2); color: var(--stone-dark); }
-footer .social-link:hover { border-color: var(--blush); color: var(--blush); }
 
-/* MENÚ MÓVIL (CORREGIDO PARA EVITAR DESBORDES) */
+/* BOTÓN MENÚ MÓVIL */
 .menu-toggle {
   display: none;
   align-items: center;
   justify-content: center;
   width: 38px; height: 38px;
-  margin-left: 0; /* Cambiado a 0 en móvil para evitar empujar elementos afuera */
+  margin-left: 10px;
   background: transparent;
   border: 1px solid rgba(231, 223, 201, 0.3);
   border-radius: 8px;
@@ -191,13 +182,12 @@ footer .social-link:hover { border-color: var(--blush); color: var(--blush); }
 .menu-toggle.open .icon-close { display: block; }
 
 @media(max-width: 819px) {
-  .menu-toggle { display: flex; margin-left: 10px; } /* Añadimos el margen sólo aquí de forma segura */
+  .menu-toggle { display: flex; }
   
   .navlinks {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0; right: 0;
+    top: 100%; left: 0; right: 0;
     flex-direction: column;
     gap: 4px;
     background: var(--obsidian);
@@ -213,7 +203,7 @@ footer .social-link:hover { border-color: var(--blush); color: var(--blush); }
   .navlinks a:last-child { border-bottom: none; }
 }
 
-/* BOTÓN FLOTANTE DE WHATSAPP */
+/* WHATSAPP FLOTANTE */
 .whatsapp-float {
   position: fixed;
   right: 20px; bottom: 20px;
@@ -223,16 +213,11 @@ footer .social-link:hover { border-color: var(--blush); color: var(--blush); }
   background: #25D366;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-  transition: transform .15s ease;
 }
-.whatsapp-float:hover { transform: scale(1.06); }
-.whatsapp-float svg { width: 28px; height: 28px; color: #fff; }
 @media(max-width: 520px) {
   .whatsapp-float { width: 50px; height: 50px; right: 16px; bottom: 16px; }
   .whatsapp-float svg { width: 25px; height: 25px; }
 }
-
-
 
 
 
@@ -384,10 +369,13 @@ footer .social-link:hover { border-color: var(--blush); color: var(--blush); }
 .step-body h3{color:var(--paper);font-size:1.15rem;font-weight:600;margin-bottom:2px;}
 .step-body p{color:var(--stone);font-size:0.92rem;max-width:52ch;}
 
+
+
 /* AXOLOTL SECTION */
 .axo{
 position:relative;
-overflow:hidden;
+/* Evita de raíz que los ajolotes generen scroll horizontal al alejarse por JS */
+overflow:hidden; 
 min-height:600px;
 padding:100px 0;
 color:var(--paper);
@@ -404,6 +392,24 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
 .facts div{border-top:1px solid rgba(255,255,255,0.18);padding-top:10px;display:flex;justify-content:space-between;gap:20px;color:#B9D9CF;}
 .facts strong{color:var(--paper);font-weight:500;}
 
+/* MEDIDAS BASE SEGUROS PARA LOS AJOLOTES (Móvil)
+   Mantenemos sus posiciones dinámicas intactas para tu script de Scroll */
+.axolotl {
+  position: absolute;
+  width: 75px; /* Tamaño controlado para no pisar el texto en pantallas pequeñas */
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  /* Respeta las transiciones nativas y opacidades que controle tu JS */
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out; 
+}
+
+@media(min-width: 768px) {
+  .axolotl {
+    width: 120px; /* Recuperan su tamaño ideal en desktop */
+  }
+}
+
 .axo-bg-video{
   position:absolute;
   top:0;
@@ -411,7 +417,7 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:left center; /* prioriza el lado izquierdo del video al recortar */
+  object-position:left center;
   filter:blur(1.5px);
   z-index:0;
 }
@@ -421,9 +427,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   left:0;
   width:100%;
   height:100%;
-  /* en móvil el texto va arriba de todo (una sola columna), así que
-     el overlay oscurece más que nada arriba, dejando el resto del video
-     más despejado para poder distinguir a los ajolotes */
   background:linear-gradient(
     180deg,
     #173731 0%,
@@ -433,23 +436,20 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   z-index:1;
 }
 @media(min-width:860px){
-  /* Cambiado de left:25% y width:75% a estos valores para desplazarlo a la izquierda */
   .axo-bg-video { 
     left: 8%; 
     width: 92%; 
-    object-position: center center; /* Centramos el encuadre interno ya que movimos la caja */
+    object-position: center center;
   }
   .axo-overlay {
     background: linear-gradient(
       to right,
       #173731 0%,
-      #173731 20%, /* Extendemos un poco más el color sólido para cubrir el movimiento */
+      #173731 20%,
       transparent 55%
     );
   }
 }
-}
-
 
 
 
