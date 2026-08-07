@@ -145,12 +145,44 @@
       <h2 data-en="Obsidian, Clay, and Weaving, Just as They're Made in the Valley">Obsidiana, barro y telar, tal como se trabajan en el valle</h2>
       <p data-en="Every piece comes straight from the workshop where it's made — no middlemen, using techniques that have been practiced in the region for generations.">Cada pieza sale del mismo taller donde se hace: sin intermediarios, con las técnicas que se usan en la región desde hace generaciones.</p>
     </div>
-    <div class="craft-grid">
-      <div class="craft-card"><span class="num">01</span><h3 data-en="Carved Obsidian">Obsidiana tallada</h3><p data-en="Mirrors, points, and figures hand-polished from local volcanic stone.">Espejos, puntas y figuras pulidas a mano a partir de piedra volcánica local.</p></div>
-      <div class="craft-card"><span class="num">02</span><h3 data-en="Backstrap Loom Textiles">Textil de telar de cintura</h3><p data-en="Sashes and rugs woven using the pre-Hispanic backstrap loom technique.">Fajas y tapetes tejidos con la técnica prehispánica de telar de cintura.</p></div>
-      <div class="craft-card"><span class="num">03</span><h3 data-en="Clay & Ceramics">Barro y cerámica</h3><p data-en="Fired clay pieces, hand-decorated with motifs from the valley.">Piezas de barro cocido, decoradas a mano con motivos del valle.</p></div>
-      <div class="craft-card"><span class="num">04</span><h3 data-en="Volcanic Stone Jewelry">Joyería en piedra volcánica</h3><p data-en="Earrings and necklaces in obsidian, local jade, and silver.">Aretes y collares en obsidiana, jade local y plata.</p></div>
+
+    <!-- CONTENEDOR PRINCIPAL DEL CARRUSEL 3D -->
+    <div class="coverflow-container" id="coverflow-shop">
+      <div class="coverflow-track">
+        
+        <div class="coverflow-card active" data-bg="assets/img/obsidiana.jpg">
+          <span class="num">01</span>
+          <h3 data-en="Carved Obsidian">Obsidiana tallada</h3>
+          <p data-en="Mirrors, points, and figures hand-polished from local volcanic stone.">Espejos, puntas y figuras pulidas a mano a partir de piedra volcánica local.</p>
+        </div>
+
+        <div class="coverflow-card" data-bg="assets/img/textil.jpg">
+          <span class="num">02</span>
+          <h3 data-en="Backstrap Loom Textiles">Textil de telar de cintura</h3>
+          <p data-en="Sashes and rugs woven using the pre-Hispanic backstrap loom technique.">Fajas y tapetes tejidos con la técnica prehispánica de telar de cintura.</p>
+        </div>
+
+        <div class="coverflow-card" data-bg="assets/img/barro.jpg">
+          <span class="num">03</span>
+          <h3 data-en="Clay & Ceramics">Barro y cerámica</h3>
+          <p data-en="Fired clay pieces, hand-decorated with motifs from the valley.">Piezas de barro cocido, decoradas a mano con motivos del valle.</p>
+        </div>
+
+        <div class="coverflow-card" data-bg="assets/img/joyeria.jpg">
+          <span class="num">04</span>
+          <h3 data-en="Volcanic Stone Jewelry">Joyería en piedra volcánica</h3>
+          <p data-en="Earrings and necklaces in obsidian, local jade, and silver.">Aretes y collares en obsidiana, jade local y plata.</p>
+        </div>
+
+      </div>
+      
+      <!-- Controles de navegación -->
+      <div class="coverflow-controls">
+        <button type="button" class="ctrl-btn prev" aria-label="Anterior">←</button>
+        <button type="button" class="ctrl-btn next" aria-label="Siguiente">→</button>
+      </div>
     </div>
+
   </div>
 </section>
 
