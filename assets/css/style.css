@@ -397,34 +397,174 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   z-index:1;
 }
 @media(min-width:860px){
-  .axo-bg-video{ left:25%; width:75%; }
-  .axo-overlay{
-    background:linear-gradient(
+  /* Cambiado de left:25% y width:75% a estos valores para desplazarlo a la izquierda */
+  .axo-bg-video { 
+    left: 8%; 
+    width: 92%; 
+    object-position: center center; /* Centramos el encuadre interno ya que movimos la caja */
+  }
+  .axo-overlay {
+    background: linear-gradient(
       to right,
       #173731 0%,
-      #173731 14%,
-      transparent 42%
+      #173731 20%, /* Extendemos un poco más el color sólido para cubrir el movimiento */
+      transparent 55%
     );
   }
 }
+}
+
+
+
 
 /* ARTESANIAS SECTION */
-.taller{background:var(--stone);padding:100px 0;}
-.taller-head{max-width:56ch;margin-bottom:56px;}
-.taller h2{font-size:clamp(1.7rem,3.6vw,2.4rem);margin-bottom:16px;}
-.taller-head p{color:#4A4038;max-width:52ch;}
-.craft-grid{display:grid;grid-template-columns:1fr;gap:20px;}
-@media(min-width:700px){.craft-grid{grid-template-columns:repeat(2,1fr);}}
-@media(min-width:1020px){.craft-grid{grid-template-columns:repeat(4,1fr);}}
-.craft-card{
-  background:var(--paper);border:1px solid var(--stone-dark);
-  padding:26px 22px;border-radius:4px;
-  transition:border-color .2s ease, transform .2s ease;
+.taller {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  transition: background-image 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #1C1815; /* Fondo base elegante mientras subes las imágenes */
+  z-index: 1;
 }
-.craft-card:hover{border-color:var(--adobe);transform:translateY(-3px);}
-.craft-card .num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--adobe-dark);margin-bottom:14px;display:block;}
-.craft-card h3{font-size:1.05rem;margin-bottom:8px;}
-.craft-card p{font-size:0.88rem;color:#5B5044;}
+
+/* Filtro de opacidad reducido (del 94% al 45%) para dar muchísima más luz a tus imágenes de fondo */
+.taller::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(28,24,21,0.45) 0%, rgba(28,24,21,0.6) 100%);
+  z-index: -1;
+}
+
+.taller-head {
+  max-width: 56ch;
+  margin-bottom: 56px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Título de la tienda resaltado en blanco puro con sombra de lectura */
+.taller h2 {
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  margin-bottom: 16px;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+}
+
+/* Párrafo descriptivo "Cada pieza sale del mismo taller..." resaltado en blanco hueso */
+.taller-head p {
+  color: #f2eeea;
+  max-width: 52ch;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.65);
+}
+
+/* Estructura del Entorno 3D */
+.coverflow-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 40px auto 0 auto;
+  perspective: 1000px;
+  z-index: 2;
+}
+
+.coverflow-track {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tarjetas interactivas adaptadas al espacio tridimensional */
+.coverflow-card {
+  position: absolute;
+  width: 280px;  
+  max-width: 85vw; 
+  height: 380px;
+  background: var(--paper); /* Usamos tu color claro de fondo original */
+  border: 1px solid var(--stone-dark); /* Usamos tu borde original */
+  border-radius: 4px; /* Tus bordes redondeados originales */
+  padding: 26px 22px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              opacity 0.5s ease, 
+              visibility 0.5s ease,
+              border-color .2s ease;
+}
+
+.coverflow-card:hover {
+  border-color: var(--adobe);
+}
+
+/* El número de la tarjeta (01, 02, etc.) */
+.coverflow-card .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--adobe-dark);
+  position: absolute;
+  top: 26px; 
+  right: 22px;
+  display: block;
+}
+
+/* Los títulos dentro de las tarjetas "Obsidiana tallada", etc. */
+.coverflow-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: #1C1815; /* Oscuro para leerse perfectamente dentro de var(--paper) */
+}
+
+/* El texto interior de la tarjeta */
+.coverflow-card p {
+  font-size: 0.88rem;
+  color: #5B5044;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Botones de control del Carrusel */
+.coverflow-controls {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 20; 
+}
+
+.ctrl-btn {
+  background: var(--paper);
+  border: 1px solid var(--stone-dark);
+  color: #1C1815;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.ctrl-btn:hover {
+  background: var(--adobe);
+  color: var(--paper);
+  border-color: var(--adobe);
+}
+
 
 /* DRONE SECTION */
 .dron{
@@ -485,7 +625,7 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
 .map-box{
   border-radius:6px;border:1px solid rgba(231,223,201,0.2);
   background:repeating-linear-gradient(45deg, #26211D, #26211D 10px, #201B18 10px, #201B18 20px);
-  aspect-ratio: 4 / 3; /* se adapta al ancho disponible en vez de tener altura fija */
+  aspect-ratio: 4 / 3; 
   display:flex;align-items:center;justify-content:center;
   font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--stone-dark);
   text-align:center;padding:20px;
@@ -519,135 +659,12 @@ footer .logo{color:var(--paper);}
   .steps::before{ left:17px; }
   .step{ padding:16px 0; gap:14px; }
 
-  .craft-card{ padding:20px 18px; }
-
   .price-row{ padding:16px 18px; }
 
-  /* los ajolotes un poco más chicos para no verse enormes
-     en un contenedor de precios angosto */
   .axolotl{ width:54px; height:54px; }
 }
 
-/* ==========================================================================
-   CARRUSEL 3D COVERFLOW RESPONSIVO
-   ========================================================================== */
-
-.taller {
-  position: relative;
-  overflow: hidden;
-  transition: background-image 0.6s ease;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #1C1815; /* Fondo de respaldo mientras subes las imágenes */
-  z-index: 1;
-  padding: 60px 0;
-}
-
-.taller::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(180deg, rgba(28,24,21,0.94) 0%, rgba(28,24,21,0.88) 100%);
-  z-index: -1;
-}
-
-.coverflow-container {
-  position: relative;
-  width: 100%;
-  max-width: 1000px;
-  margin: 40px auto 0 auto;
-  perspective: 1000px; /* Activador del entorno espacial */
-}
-
-.coverflow-track {
-  position: relative;
-  width: 100%;
-  height: 420px;
-  transform-style: preserve-3d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.coverflow-card {
-  position: absolute;
-  width: 280px;  /* Ancho ideal para pantallas de laptop y móviles modernos */
-  max-width: 85vw; /* Evita desbordamiento en teléfonos muy pequeños */
-  height: 380px;
-  background: #26211e;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  cursor: pointer;
-  user-select: none;
-  box-sizing: border-box;
-  /* Animación fluida de rotación en el eje Y */
-  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), 
-              opacity 0.5s ease, 
-              visibility 0.5s ease;
-}
-
-.coverflow-card .num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.08);
-  position: absolute;
-  top: 20px; right: 25px;
-}
-
-.coverflow-card h3 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.5rem;
-  color: #fff;
-  margin: 0 0 10px 0;
-}
-
-.coverflow-card p {
-  font-family: 'Karla', sans-serif;
-  font-size: 0.9rem;
-  color: #c9c4c0;
-  line-height: 1.4;
-  margin: 0;
-}
-
-/* Zona de Controles */
-.coverflow-controls {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  margin-top: 20px;
-  position: relative;
-  z-index: 20; /* Garantiza que queden por encima de las láminas 3D */
-}
-
-.ctrl-btn {
-  background: #26211e;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.25s ease;
-}
-
-.ctrl-btn:hover {
-  background: #fff;
-  color: #1C1815;
-  border-color: #fff;
-}
-
-/* Adaptación estricta para pantallas Móviles */
+/* Ajustes de responsive fino para el Carrusel */
 @media (max-width: 768px) {
   .coverflow-track {
     height: 360px;
@@ -655,8 +672,5 @@ footer .logo{color:var(--paper);}
   .coverflow-card {
     height: 330px;
     padding: 20px;
-  }
-  .coverflow-card h3 {
-    font-size: 1.3rem;
   }
 }
