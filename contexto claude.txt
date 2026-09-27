@@ -1,0 +1,1 @@
+un carrusel 3D tipo "coverflow": la tarjeta activa está de frente y grande al centro, las demás se curvan hacia los lados como láminas giradas en el espacio (usando perspectiva 3D real, no solo opacidad), y el fondo cambia de tono según cuál está seleccionada.

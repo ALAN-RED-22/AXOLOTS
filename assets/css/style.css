@@ -50,171 +50,178 @@ img,svg{display:block;max-width:100%;}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
 :focus-visible{outline:3px solid var(--adobe);outline-offset:3px;}
 
-/* NAV */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:50;
-  background:rgba(28,24,21,0.92);
-  backdrop-filter:blur(6px);
-  border-bottom:1px solid rgba(231,223,201,0.12);
+/* ==========================================================================
+   NAV / HEADER (Alineación Simétrica Asegurada)
+   ========================================================================== */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  background: rgba(28, 24, 21, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(231, 223, 201, 0.12);
 }
-nav{
-  max-width:1320px;margin:0 auto;padding:8px 32px;
-  display:flex;align-items:center;justify-content:space-between;
+
+nav {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
-.logo{
-  display:flex;
-  align-items:center;
-  gap:16px;
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-.logo-img{
-  height:72px;
-  width:auto;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  border:none;
+.logo-img {
+  height: 64px;
+  width: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border: none;
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
 }
-@media(max-width:520px){
-  .logo-img{ height:52px; }
-}
-.logo-text{
-  font-family:'Fraunces',serif;font-weight:700;
-  color:var(--paper);font-size:1.35rem;letter-spacing:-0.01em;
-  display:flex;flex-direction:column;line-height:1.05;
-}
-.logo-text span{
-  font-family:'JetBrains Mono',monospace;font-weight:400;
-  font-size:0.68rem;letter-spacing:0.16em;color:var(--blush);
-  text-transform:uppercase;
-}
-@media(max-width:520px){
-  .logo-text{ font-size:1.05rem; }
-  .logo-text span{ font-size:0.58rem; }
-}
-.navlinks{display:flex;gap:28px;font-size:0.88rem;color:var(--stone);}
-.navlinks a:hover{color:var(--blush);}
-.navlinks{display:none;}
-@media(min-width:820px){.navlinks{display:flex;}}
-
-.lang-switch{
-  display:flex;
-  border:1px solid rgba(231,223,201,0.3);
-  border-radius:20px;
-  overflow:hidden;
-  margin-left:16px;
-}
-.lang-btn{
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.7rem;
-  letter-spacing:0.06em;
-  padding:6px 12px;
-  background:transparent;
-  color:var(--stone);
-  border:none;
-  cursor:pointer;
-  transition:background .15s ease, color .15s ease;
-}
-.lang-btn.active{
-  background:var(--blush);
-  color:var(--obsidian);
+@media(max-width: 520px) {
+  .logo-img { height: 46px; }
 }
 
-/* REDES SOCIALES (nav + footer) */
-.social-links{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-left:16px;
+.logo-text {
+  font-family: 'Fraunces', serif; font-weight: 700;
+  color: var(--paper); font-size: 1.2rem; letter-spacing: -0.01em;
+  display: flex; flex-direction: column; line-height: 1.05;
 }
-/* En el nav (no en el footer) se ocultan hasta que hay espacio real:
-   entre 820-899px .navlinks ya se muestra y el menu-toggle ya se oculta,
-   así que meter también los íconos sociales ahí saturaba la barra. */
-nav .social-links{ display:none; }
-@media(min-width:900px){
-  nav .social-links{ display:flex; }
+.logo-text span {
+  font-family: 'JetBrains Mono', monospace; font-weight: 400;
+  font-size: 0.65rem; letter-spacing: 0.12em; color: var(--blush);
+  text-transform: uppercase;
 }
-.social-link{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:34px;height:34px;
-  border-radius:50%;
-  border:1px solid rgba(231,223,201,0.3);
-  color:var(--stone);
-  transition:border-color .15s ease, color .15s ease;
-}
-.social-link:hover{border-color:var(--blush);color:var(--blush);}
-.social-link svg{width:17px;height:17px;}
-footer .social-links{margin-left:0;}
-footer .social-link{border-color:rgba(231,223,201,0.2);color:var(--stone-dark);}
-footer .social-link:hover{border-color:var(--blush);color:var(--blush);}
-
-/* BOTÓN FLOTANTE DE WHATSAPP */
-.whatsapp-float{
-  position:fixed;
-  right:20px;bottom:20px;
-  z-index:60;
-  width:56px;height:56px;
-  border-radius:50%;
-  background:#25D366;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 18px rgba(0,0,0,0.35);
-  transition:transform .15s ease;
-}
-.whatsapp-float:hover{transform:scale(1.06);}
-.whatsapp-float svg{width:28px;height:28px;color:#fff;}
-@media(max-width:520px){
-  .whatsapp-float{width:50px;height:50px;right:16px;bottom:16px;}
-  .whatsapp-float svg{width:25px;height:25px;}
+@media(max-width: 520px) {
+  .logo-text { font-size: 0.95rem; max-width: 140px; }
+  .logo-text span { font-size: 0.55rem; letter-spacing: 0.05em; }
 }
 
-/* MENÚ MÓVIL */
-.menu-toggle{
-  display:none;
-  align-items:center;
-  justify-content:center;
-  width:38px;height:38px;
-  margin-left:10px;
-  background:transparent;
-  border:1px solid rgba(231,223,201,0.3);
-  border-radius:8px;
-  color:var(--paper);
-  cursor:pointer;
+/* ENLACES DE NAVEGACIÓN */
+.navlinks { display: flex; gap: 28px; font-size: 0.88rem; color: var(--stone); }
+.navlinks a:hover { color: var(--blush); }
+.navlinks { display: none; }
+@media(min-width: 820px) { .navlinks { display: flex; } }
+
+/* SELECTOR DE IDIOMA */
+.lang-switch {
+  display: flex;
+  border: 1px solid rgba(231, 223, 201, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
 }
-.menu-toggle .icon-close{display:none;}
-.menu-toggle.open .icon-burger{display:none;}
-.menu-toggle.open .icon-close{display:block;}
-@media(max-width:819px){
-  .menu-toggle{display:flex;}
+.lang-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 5px 10px;
+  background: transparent;
+  color: var(--stone);
+  border: none;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.lang-btn.active {
+  background: var(--blush);
+  color: var(--obsidian);
 }
 
-@media(max-width:819px){
-  .navlinks{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;right:0;
-    flex-direction:column;
-    gap:4px;
-    background:var(--obsidian);
-    padding:10px 24px 22px;
-    border-bottom:1px solid rgba(231,223,201,0.14);
+/* REDES SOCIALES (Ocultas en Header Móvil para salvar espacio) */
+.social-links {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+@media(min-width: 820px) {
+  .social-links { display: flex; margin-left: 20px; }
+  .lang-switch { margin-left: 20px; }
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(231, 223, 201, 0.3);
+  color: var(--stone);
+}
+.social-link svg { width: 17px; height: 17px; }
+
+/* Mantener estilos de redes sociales nativas para el Footer */
+footer .social-links { display: flex; gap: 10px; margin-left: 0; }
+footer .social-link { border-color: rgba(231, 223, 201, 0.2); color: var(--stone-dark); }
+
+/* BOTÓN MENÚ MÓVIL */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  margin-left: 10px;
+  background: transparent;
+  border: 1px solid rgba(231, 223, 201, 0.3);
+  border-radius: 8px;
+  color: var(--paper);
+  cursor: pointer;
+}
+.menu-toggle .icon-close { display: none; }
+.menu-toggle.open .icon-burger { display: none; }
+.menu-toggle.open .icon-close { display: block; }
+
+@media(max-width: 819px) {
+  .menu-toggle { display: flex; }
+  
+  .navlinks {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--obsidian);
+    padding: 10px 24px 22px;
+    border-bottom: 1px solid rgba(231, 223, 201, 0.14);
   }
-  .navlinks.open{display:flex;}
-  .navlinks a{
-    padding:12px 4px;
-    border-bottom:1px solid rgba(231,223,201,0.08);
-    font-size:0.95rem;
+  .navlinks.open { display: flex; }
+  .navlinks a {
+    padding: 12px 4px;
+    border-bottom: 1px solid rgba(231, 223, 201, 0.08);
+    font-size: 0.95rem;
   }
-  .navlinks a:last-child{border-bottom:none;}
+  .navlinks a:last-child { border-bottom: none; }
+}
+
+/* WHATSAPP FLOTANTE */
+.whatsapp-float {
+  position: fixed;
+  right: 20px; bottom: 20px;
+  z-index: 60;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+/* restaurado: color del ícono y hover (se perdieron en la reescritura de esta hoja) */
+.whatsapp-float svg { color: #fff; }
+.whatsapp-float:hover { transform: scale(1.06); }
+@media(max-width: 520px) {
+  .whatsapp-float { width: 50px; height: 50px; right: 16px; bottom: 16px; }
+  .whatsapp-float svg { width: 25px; height: 25px; }
 }
 
 /* HERO */
 .hero{
   position:relative;
   min-height:100vh;
-  min-height:100dvh; /* usa la altura visible real en móvil, sin la barra del navegador */
+  min-height:100dvh;
   display:flex;flex-direction:column;justify-content:flex-end;
   background:linear-gradient(180deg,#202c60 0%, #5b5ba0 32%, #e29f78 58%, #3d3127 100%);
   padding-top:82px;
@@ -235,7 +242,6 @@ footer .social-link:hover{border-color:var(--blush);color:var(--blush);}
   animation:drift 14s ease-in-out infinite;
   filter:drop-shadow(0 10px 22px rgba(28,24,21,0.35));
 }
-/* tamaños variados = sensación de profundidad (más grande = más cerca) */
 .balloon.b1{ left:6%; top:9%; width:104px; }
 .balloon.b2{ left:24%; top:30%; width:52px; animation-delay:-4s; animation-duration:18s; }
 .balloon.b3{ left:66%; top:6%; width:132px; animation-delay:-9s; animation-duration:16s; }
@@ -246,7 +252,7 @@ footer .social-link:hover{border-color:var(--blush);color:var(--blush);}
 }
 @media(max-width:640px){
   .balloon.b1{ width:64px; top:7%; }
-  .balloon.b2{ display:none; } /* reduce el desorden visual en pantallas angostas */
+  .balloon.b2{ display:none; }
   .balloon.b3{ width:78px; top:5%; left:60%; }
   .balloon.b4{ width:34px; top:24%; left:82%; }
 }
@@ -358,7 +364,7 @@ footer .social-link:hover{border-color:var(--blush);color:var(--blush);}
 /* AXOLOTL SECTION */
 .axo{
 position:relative;
-overflow:hidden;
+overflow:hidden; 
 min-height:600px;
 padding:100px 0;
 color:var(--paper);
@@ -382,7 +388,7 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:left center; /* prioriza el lado izquierdo del video al recortar */
+  object-position:left center;
   filter:blur(1.5px);
   z-index:0;
 }
@@ -392,9 +398,6 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   left:0;
   width:100%;
   height:100%;
-  /* en móvil el texto va arriba de todo (una sola columna), así que
-     el overlay oscurece más que nada arriba, dejando el resto del video
-     más despejado para poder distinguir a los ajolotes */
   background:linear-gradient(
     180deg,
     #173731 0%,
@@ -404,69 +407,259 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   z-index:1;
 }
 @media(min-width:860px){
-  .axo-bg-video{ left:25%; width:75%; }
-  .axo-overlay{
-    background:linear-gradient(
+  .axo-bg-video { 
+    left: 8%; 
+    width: 92%; 
+    object-position: center center;
+  }
+  .axo-overlay {
+    background: linear-gradient(
       to right,
       #173731 0%,
-      #173731 14%,
-      transparent 42%
+      #173731 20%,
+      transparent 55%
     );
   }
 }
 
-/* ARTESANIAS SECTION */
-.taller{background:var(--stone);padding:100px 0;}
-.taller-head{max-width:56ch;margin-bottom:56px;}
-.taller h2{font-size:clamp(1.7rem,3.6vw,2.4rem);margin-bottom:16px;}
-.taller-head p{color:#4A4038;max-width:52ch;}
-.craft-grid{display:grid;grid-template-columns:1fr;gap:20px;}
-@media(min-width:700px){.craft-grid{grid-template-columns:repeat(2,1fr);}}
-@media(min-width:1020px){.craft-grid{grid-template-columns:repeat(4,1fr);}}
-.craft-card{
-  background:var(--paper);border:1px solid var(--stone-dark);
-  padding:26px 22px;border-radius:4px;
-  transition:border-color .2s ease, transform .2s ease;
+/* ==========================================================================
+   ARTESANIAS SECTION (OPTIMIZADA PARA MÓVIL 9:16)
+   ========================================================================== */
+.taller {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  transition: background-image 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: #1C1815; 
+  z-index: 1;
 }
-.craft-card:hover{border-color:var(--adobe);transform:translateY(-3px);}
-.craft-card .num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--adobe-dark);margin-bottom:14px;display:block;}
-.craft-card h3{font-size:1.05rem;margin-bottom:8px;}
-.craft-card p{font-size:0.88rem;color:#5B5044;}
+.taller::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(28,24,21,0.3) 0%, rgba(28,24,21,0.75) 100%);
+  z-index: -1;
+}
+.taller-head {
+  max-width: 56ch;
+  margin-bottom: 56px;
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+}
+.taller h2 {
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  margin-bottom: 16px;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+.taller-head p {
+  color: #f2eeea;
+  max-width: 52ch;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+}
+.coverflow-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 40px auto 0 auto;
+  perspective: 1000px;
+  z-index: 2;
+}
+.coverflow-track {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.coverflow-card {
+  position: absolute;
+  width: 280px;  
+  max-width: 85vw; 
+  height: 400px;
+  background-color: var(--paper);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid var(--stone-dark); 
+  border-radius: 8px; 
+  padding: 26px 22px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              opacity 0.5s ease, 
+              visibility 0.5s ease,
+              border-color .2s ease;
+}
+.coverflow-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 60%;
+  background: linear-gradient(0deg, rgba(28,24,21,0.95) 0%, rgba(28,24,21,0.4) 70%, transparent 100%);
+  z-index: 1;
+}
+.coverflow-card:hover {
+  border-color: var(--adobe);
+}
+.coverflow-card .num,
+.coverflow-card h3,
+.coverflow-card p {
+  position: relative;
+  z-index: 2;
+}
+.coverflow-card .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--adobe);
+  position: absolute;
+  top: 22px; 
+  right: 22px;
+  display: block;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+.coverflow-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+  color: #ffffff;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+.coverflow-card p {
+  font-size: 0.88rem;
+  color: #e3deda;
+  margin: 0;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.coverflow-controls {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 25px;
+  position: relative;
+  z-index: 20; 
+}
+.ctrl-btn {
+  background: var(--paper);
+  border: 1px solid var(--stone-dark);
+  color: #1C1815;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+.ctrl-btn:hover {
+  background: var(--adobe);
+  color: var(--paper);
+  border-color: var(--adobe);
+}
+@media (max-width: 768px) {
+  .taller {
+    background-size: cover;
+  }
+  .coverflow-track {
+    height: 380px;
+  }
+  .coverflow-card {
+    height: 360px;
+    padding: 20px;
+  }
+}
 
-/* DRONE SECTION */
-.dron{
-  background:linear-gradient(180deg,#3A4266,#7F7FA0 60%,#C98F6E);
-  padding:100px 0;color:var(--paper);
+/* ==========================================================================
+   AJUSTES FINALES RESPONSIVOS Y COLOR DE AJOLOTES (SECCIÓN DRON & UBICACIÓN)
+   ========================================================================== */
+
+/* 1. Blindar sección de reservas contra desbordes laterales */
+.dron {
+  position: relative;
+  overflow: hidden;
+  /* restaurado: esta sección se quedó sin fondo/color al reescribir la hoja */
+  background: linear-gradient(180deg,#3A4266,#7F7FA0 60%,#C98F6E);
+  padding: 100px 0;
+  color: var(--paper);
 }
-.dron-grid{display:grid;grid-template-columns:1fr;gap:50px;}
-@media(min-width:900px){.dron-grid{grid-template-columns:0.9fr 1.1fr;}}
-.dron h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:15ch;margin-bottom:16px;}
-.dron > .wrap > .dron-grid > div > p{color:#EDE9F0;max-width:44ch;margin-bottom:18px;}
+.dron h2 { color: var(--paper); font-size: clamp(1.7rem,3.6vw,2.4rem); max-width: 15ch; margin-bottom: 16px; }
+.dron > .wrap > .dron-grid > div > p { color: #EDE9F0; max-width: 44ch; margin-bottom: 18px; }
+
+/* Grid de escritorio para la sección dron */
+@media(min-width: 860px) {
+  .dron-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .ubica-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+}
+
+/* 2. Forzar comportamiento fluido y apilado en móvil */
+@media(max-width: 859px) {
+  .dron-grid, .ubica-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .map-box {
+    width: 100%;
+    height: 350px;
+  }
+}
+
+/* 3. Inyección de color fija para los SVGs animados */
+.axolotl {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out; 
+}
+.axolotl svg {
+  display: block;
+  width: 75px; /* Tamaño ideal responsivo en móvil */
+  max-width: none !important; /* Anula aplastamientos globales */
+  height: auto;
+}
+@media(min-width: 768px) {
+  .axolotl svg { 
+    width: 120px; /* Tamaño original de escritorio */
+  }
+}
+
+/* Paleta cromática coordinada para las clases del HTML */
+.axolotl.dorado { color: #E29F78; }    
+.axolotl.rosa { color: var(--blush); }     
+.axolotl.negro { color: var(--obsidian); }
+
+/* ==========================================================================
+   RESTAURADO de `pruebas`: estas reglas existían antes de la reescritura de
+   esta hoja en `main` y sus clases se seguían usando en el HTML sin estilo.
+   ========================================================================== */
+
+/* PRECIOS (sección dron) */
 .pricing{position:relative;border:1px solid rgba(255,255,255,0.3);border-radius:6px;overflow:hidden;background:rgba(20,17,15,0.92);}
-
-/* AJOLOTES QUE NADAN HACIA EL PRECIO */
-.axolotl{
-  position:absolute;
-  top:0;left:0;
-  width:78px;height:78px;
-  z-index:1;
-  pointer-events:none;
-  opacity:0;
-  will-change:transform,opacity;
-}
-.axolotl svg{
-  width:100%;height:100%;
-  animation:axo-swim 1.3s ease-in-out infinite;
-}
-@keyframes axo-swim{
-  0%,100%{transform:rotate(-5deg) translateY(0);}
-  50%{transform:rotate(5deg) translateY(-3px);}
-}
-.axolotl.dorado svg{color:#E3A63E;}
-.axolotl.rosa svg{color:var(--blush);}
-.axolotl.negro svg{color:var(--obsidian);}
-.price-row{position:relative;z-index:2;}
 .price-row{
+  position:relative;z-index:2;
   display:flex;justify-content:space-between;gap:16px;
   padding:20px 22px;border-bottom:1px solid rgba(255,255,255,0.16);
   font-family:'JetBrains Mono',monospace;font-size:0.86rem;
@@ -488,10 +681,15 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
 .price-row .desc{font-family:'Karla',sans-serif;font-weight:400;font-size:0.82rem;color:#E7E3EE;}
 .price-row .amount{white-space:nowrap;color:var(--blush);align-self:center;}
 
-/* LOCATION */
+/* ola de nado del ajolote sobre el precio (pricing-axolotl.js ya mueve el contenedor .axolotl; esto solo anima el SVG interior) */
+.axolotl svg{ animation:axo-swim 1.3s ease-in-out infinite; }
+@keyframes axo-swim{
+  0%,100%{transform:rotate(-5deg) translateY(0);}
+  50%{transform:rotate(5deg) translateY(-3px);}
+}
+
+/* UBICACIÓN */
 .ubica{background:var(--obsidian);color:var(--paper);padding:100px 0;}
-.ubica-grid{display:grid;grid-template-columns:1fr;gap:44px;}
-@media(min-width:860px){.ubica-grid{grid-template-columns:1fr 1fr;}}
 .ubica h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.3rem);max-width:16ch;margin-bottom:16px;}
 .ubica p{color:var(--stone);max-width:42ch;margin-bottom:20px;}
 .infolist div{
@@ -504,7 +702,7 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
 .map-box{
   border-radius:6px;border:1px solid rgba(231,223,201,0.2);
   background:repeating-linear-gradient(45deg, #26211D, #26211D 10px, #201B18 10px, #201B18 20px);
-  aspect-ratio: 4 / 3; /* se adapta al ancho disponible en vez de tener altura fija */
+  aspect-ratio: 4 / 3;
   display:flex;align-items:center;justify-content:center;
   font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--stone-dark);
   text-align:center;padding:20px;
@@ -516,6 +714,7 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
   .map-box iframe{ aspect-ratio: 16 / 10; }
 }
 
+/* FOOTER */
 footer{background:var(--obsidian-soft);color:var(--stone-dark);padding:48px 0 28px;}
 .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;padding-bottom:28px;border-bottom:1px solid rgba(231,223,201,0.12);margin-bottom:20px;}
 footer .logo{color:var(--paper);}
@@ -527,22 +726,4 @@ footer .logo{color:var(--paper);}
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
   html{scroll-behavior:auto;}
-}
-
-/* ---- AJUSTES GENERALES PARA MÓVIL ---- */
-@media(max-width:640px){
-  .day, .taller, .dron, .ubica{ padding:60px 0; }
-  .axo{ padding:70px 0; min-height:520px; }
-  footer{ padding:36px 0 24px; }
-
-  .steps::before{ left:17px; }
-  .step{ padding:16px 0; gap:14px; }
-
-  .craft-card{ padding:20px 18px; }
-
-  .price-row{ padding:16px 18px; }
-
-  /* los ajolotes un poco más chicos para no verse enormes
-     en un contenedor de precios angosto */
-  .axolotl{ width:54px; height:54px; }
 }
