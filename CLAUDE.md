@@ -4,10 +4,10 @@ Contexto de proyecto para Claude Code. Léelo antes de asumir nada del repo — 
 
 ## Estado actual (actualizar en cada sesión)
 
-- **Última actualización:** 2026-08-04
-- **`main`:** `cac790e` — al día, incluye reestructura + fix de seguridad (CLABE) + rediseño de hero + docs (PR #3 y #4 mergeadas).
-- **`pruebas`:** 1 commit adelante de `origin/pruebas` sin pushear — `cf9534a` (fixes del audit UX/UI: contraste de precios, i18n de paquetes, nav responsive, badge de dron). Pendiente `git push origin pruebas` y abrir/mergear la siguiente PR.
-- **Branch protection en `main`:** activada por el usuario.
+- **Última actualización:** 2026-09-27.
+- **`main`:** `fb5d321` — PR #5 mergeada (landing portada a Next en `store/`, renombre "Tienda"→"Artesanías", y reconciliación con el carrusel "coverflow" de artesanías + fixes de header que un colaborador (`ALAN-RED-22`) subió directo a `main` sin pasar por `pruebas`). Ver "Incidente: reescritura de `style.css` en `main`" abajo — importante para no repetirlo.
+- **`pruebas`:** 1 commit adelante de `origin/main` sin PR abierta — `1f44587` (borra el archivo suelto `contexto claude.txt` que Alan dejó commiteado; trivial, falta subirlo a `main` cuando se abra la próxima PR).
+- **Branch protection en `main`:** activada por el usuario. **Validado con Alan (2026-09-27)** que a partir de ahora también trabaja desde `pruebas` en vez de pushear directo a `main`.
 
 ## Qué es esto
 
@@ -17,14 +17,23 @@ Landing page de una sola página (`index.html`) para AXOLOTS, negocio turístico
 
 - `index.html` — todo el marcado, bilingüe vía atributos `data-en` (el texto en español vive directo en el nodo; `assets/js/i18n.js` guarda ese texto como `data-es` al cargar y alterna con `data-en` al hacer switch de idioma).
 - `assets/css/style.css` — únicos estilos del sitio. Tokens de color en `:root` (paleta obsidiana/adobe/jade/blush, tema "Teotihuacán").
-- `assets/js/` — 4 módulos IIFE independientes, sin dependencias entre sí: `menu.js` (hamburguesa móvil), `i18n.js` (ES/EN), `timeline.js` (reveal on scroll de la sección "Cómo se vive un día aquí"), `pricing-axolotl.js` (animación de ajolotes nadando hacia los precios en `#dron`).
-- `assets/img/`, `assets/video/` — media del sitio (ver pendientes de optimización abajo).
+- `assets/js/` — 5 módulos IIFE independientes, sin dependencias entre sí: `menu.js` (hamburguesa móvil), `i18n.js` (ES/EN), `timeline.js` (reveal on scroll de la sección "Cómo se vive un día aquí"), `pricing-axolotl.js` (animación de ajolotes nadando hacia los precios en `#dron`), `shop-carousel.js` (carrusel 3D "coverflow" de la sección `#taller`, agregado por Alan — controla `.coverflow-track`/`.coverflow-card`/`.ctrl-btn.prev`/`.next`).
+- `assets/img/`, `assets/video/` — media del sitio (ver pendientes de optimización abajo). Incluye `barro.jpg`, `joyeria.jpg`, `obsidianatallada.jpg`, `textil.jpg` (fotos reales del carrusel de artesanías).
+- `store/` — app Next.js con la landing portada a React + la futura tienda (ver "Arquitectura de la tienda" abajo). Independiente del `index.html`/`style.css` de la raíz: tiene su propia copia de estilos (`store/src/app/landing.css`) y de media (`store/public/assets/`).
 - Breakpoints usados en el CSS: 520 / 640 / 700 / 819-820 / 860 / 900 / 1020px — mantener consistencia si se agregan nuevos.
 
 ## Ramas
 
 - `pruebas`: rama de trabajo/QA — es donde se hace el desarrollo activo.
 - `main`: producción. No mergear a `main` sin pasar por el checklist de "antes de producción" abajo.
+
+## Incidente: reescritura de `style.css` en `main` (resuelto 2026-09-27)
+
+Alan (`ALAN-RED-22`) pusheó una serie de commits directo a `main` (sin pasar por `pruebas`) que agregaron el carrusel 3D "coverflow" de la sección de artesanías y reescribieron `assets/css/style.css` casi por completo. Esa reescritura **borró sin querer** las reglas de `.pricing`/`.price-row` (precios en `#dron`), `.ubica`/`.infolist` (ficha de ubicación), `.map-box`, el `footer` completo y el color del ícono de WhatsApp flotante — el HTML seguía usando esas clases, pero se quedaron sin estilo en `main`. También se perdió la animación `@keyframes axo-swim` y la regla `prefers-reduced-motion`.
+
+Al abrir la PR de `pruebas` → `main` esto generó un conflicto real de merge (no solo de formato). Se resolvió conservando el carrusel y los fixes de header de Alan tal cual, y reinsertando las reglas perdidas con los mismos valores que tenían antes. Quedó documentado en el merge commit `21e4626`. **Validado con Alan (2026-09-27)** que de ahora en más también trabaja desde `pruebas`.
+
+Si vuelve a pasar: antes de abrir/mergear una PR, comparar `git diff origin/main origin/pruebas -- assets/css/style.css` y si hay reescrituras grandes, verificar con `comm` que ninguna clase usada en el HTML se quedó sin regla en el CSS (ver el método usado en esa sesión: extraer clases de `index.html` vs. selectores de `style.css`).
 
 ## Pendientes (actualizar aquí, no releer todo el sitio cada vez)
 
@@ -54,8 +63,8 @@ Landing page de una sola página (`index.html`) para AXOLOTS, negocio turístico
 - **Pendiente fiscal (bloqueante para cobrar)**: la constancia del usuario solo registra "Servicio de entrega de alimentos preparados por plataformas" (10%) + sueldos; falta dar de alta la actividad de venta de artesanías y confirmar régimen con contador ANTES de abrir cuentas Stripe/MP a su RFC.
 - **Stack**: Next.js (App Router) + TypeScript + Tailwind en Cloudflare (Pages/Workers con `@opennextjs/cloudflare`; alternativa de respaldo: Vercel Pro). Landing actual migra a `/`, tienda en `/tienda`. i18n ES/EN (turistas). Moneda MXN.
 - **Inventario**: un solo modelo de producto con `type = standard | unique`, `stock`, `drop_date` opcional; badge "quedan N", "agotado + avísame" (lista de espera por correo); reserva de stock ~15 min en checkout.
-- **Progreso (2026-09-27, rama `pruebas`)**: app Next.js 16 en `store/` (la landing estática en la raíz sigue intacta y es lo que sirve GitHub Pages). **Repo de trabajo movido fuera de OneDrive a `C:devAXOLOTS`** (OneDrive bloqueaba `.open-next`/`node_modules`; no volver a trabajar en la copia de OneDrive). Adaptador `@opennextjs/cloudflare` (`wrangler.jsonc`, worker `axolots-store`, cuenta Cloudflare sysium6566@gmail.com). **Desplegado en producción con dominio propio: https://axolotsmx.com y www** (custom domains vía `wrangler.jsonc`; hoy solo muestra página "muy pronto"). Deploy = `npm run deploy` desde `store/` (NO llamar `opennextjs-cloudflare deploy` solo: sube el build viejo). Modelo de datos en `store/src/db/schema.ts` (Drizzle), migración `0000_init` YA aplicada en Neon (9 tablas); `DATABASE_URL` vive en `store/.dev.vars` (gitignored). Pendiente: rotar contraseña de Neon (se expuso en el chat), configurar cache de OpenNext (R2), decidir si `store/` reemplaza la landing de la raíz, migrar dominio de GitHub Pages cuando la tienda esté lista.
-- **Landing portada a Next (2026-09-26, sin commitear ni desplegada)**: `store/src/app/page.tsx` + `store/src/components/landing/*` (i18n por contexto React `<T es en/>` en vez de `data-en`; menú, reveal de timeline y animación de ajolotes como hooks/efectos). Estilos en `store/src/app/landing.css` (copia de `assets/css/style.css`, fuentes vía `next/font`; ojo: tiene selectores de elemento `header/nav/footer` globales, acotarlos al montar `/tienda`). Media en `store/public/assets/`. `metadataBase` = https://axolotsmx.com (resuelve og:image absoluta). Al desplegar reemplaza la página "muy pronto". La landing estática de la raíz sigue siendo la que sirve GitHub Pages.
+- **Progreso (2026-09-27, mergeado a `main` vía PR #5)**: app Next.js 16 en `store/` (la landing estática en la raíz sigue intacta y es lo que sirve GitHub Pages). **Repo de trabajo movido fuera de OneDrive a `C:devAXOLOTS`** (OneDrive bloqueaba `.open-next`/`node_modules`; no volver a trabajar en la copia de OneDrive). Adaptador `@opennextjs/cloudflare` (`wrangler.jsonc`, worker `axolots-store`, cuenta Cloudflare sysium6566@gmail.com). **Desplegado en producción con dominio propio: https://axolotsmx.com y www** (custom domains vía `wrangler.jsonc`) sirviendo ya la landing portada a Next (`npm run deploy` desde `store/` reemplazó la página "muy pronto"; NO llamar `opennextjs-cloudflare deploy` solo, sube el build viejo). Modelo de datos en `store/src/db/schema.ts` (Drizzle), migración `0000_init` YA aplicada en Neon (9 tablas); `DATABASE_URL` vive en `store/.dev.vars` (gitignored). Pendiente: rotar contraseña de Neon (se expuso en el chat), configurar cache de OpenNext (R2), decidir si `store/` reemplaza definitivamente la landing de la raíz, migrar dominio de GitHub Pages cuando la tienda esté lista.
+- **Landing portada a Next**: `store/src/app/page.tsx` + `store/src/components/landing/*` (i18n por contexto React `<T es en/>` en vez de `data-en`; menú, reveal de timeline y animación de ajolotes como hooks/efectos). Estilos en `store/src/app/landing.css` (copia de `assets/css/style.css` desde antes del incidente con el carrusel de Alan — **no incluye el carrusel "coverflow" ni sus fotos**, sigue con las 4 tarjetas de artesanía originales; fuentes vía `next/font`; ojo: tiene selectores de elemento `header/nav/footer` globales, acotarlos al montar `/tienda`). Media en `store/public/assets/`. `metadataBase` = https://axolotsmx.com (resuelve og:image absoluta).
 - **Datos**: catálogo Y stock en Neon Postgres (Drizzle) — se decidió no usar Sanity al inicio para evitar sincronizar stock entre dos sistemas; altas de producto por script/Drizzle Studio hasta tener un admin. Sanity queda como opción futura solo para contenido editorial. Piezas únicas (obsidiana, minerales) = stock 1 con reserva temporal en checkout. Variantes para ropa/sombrero (talla). Imágenes en Vercel Blob/Cloudinary (webp/avif).
 - **Servicios**: correo transaccional con Resend; guías y tarifas de envío vía agregador (Skydropx o Envía.com); feed de catálogo para Instagram/Facebook Shopping; Meta Pixel + Conversions API + GA4; aviso de privacidad (LFPDPPP).
 - **Entornos**: `pruebas` → preview + llaves Stripe test; `main` → producción + llaves live. Secretos solo en variables de entorno de Vercel, nunca en el repo.
@@ -70,6 +79,7 @@ Landing page de una sola página (`index.html`) para AXOLOTS, negocio turístico
 - [x] Nav apretado entre 820-900px + íconos sociales saturando la barra fija en móvil — `.social-links` dentro de `nav` ahora se oculta bajo 900px (sigue visible siempre en el footer; WhatsApp además cubierto por el botón flotante).
 
 ### Pendiente (no tocado en esta ronda, ver conversación para detalle)
+- [ ] **Divergencia `index.html` (raíz) vs. `store/`**: la sección de artesanías ya no es igual en ambas — la raíz tiene el carrusel "coverflow" con fotos reales (obsidiana/textil/barro/joyería) que agregó Alan; `store/` sigue con las 4 tarjetas estáticas originales. Decidir si se porta el carrusel a `store/` o se deja así hasta reemplazar la raíz.
 - [ ] CTA secundario del hero ("Conocer el santuario estilo Teocalpan") apunta a `#taller` pero "Teocalpan"/"teoalpan" nunca se define en el sitio, y además se escribe distinto en el hero vs. en las descripciones de paquetes (Teocalpan vs teoalpan).
 - [ ] `.hero` es `100dvh` fijo sin techo de altura para el `<h1>` (usa el tamaño default del navegador) — riesgo de que el contenido se corte en móviles de poca altura.
 - [ ] Objetivos táctiles bajo 44×44px en `.social-link` (34px), `.menu-toggle` (38px) y `.lang-btn` (~32-36px).
