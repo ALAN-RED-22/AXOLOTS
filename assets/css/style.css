@@ -209,6 +209,9 @@ footer .social-link { border-color: rgba(231, 223, 201, 0.2); color: var(--stone
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
+/* restaurado: color del ícono y hover (se perdieron en la reescritura de esta hoja) */
+.whatsapp-float svg { color: #fff; }
+.whatsapp-float:hover { transform: scale(1.06); }
 @media(max-width: 520px) {
   .whatsapp-float { width: 50px; height: 50px; right: 16px; bottom: 16px; }
   .whatsapp-float svg { width: 25px; height: 25px; }
@@ -587,7 +590,13 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
 .dron {
   position: relative;
   overflow: hidden;
+  /* restaurado: esta sección se quedó sin fondo/color al reescribir la hoja */
+  background: linear-gradient(180deg,#3A4266,#7F7FA0 60%,#C98F6E);
+  padding: 100px 0;
+  color: var(--paper);
 }
+.dron h2 { color: var(--paper); font-size: clamp(1.7rem,3.6vw,2.4rem); max-width: 15ch; margin-bottom: 16px; }
+.dron > .wrap > .dron-grid > div > p { color: #EDE9F0; max-width: 44ch; margin-bottom: 18px; }
 
 /* Grid de escritorio para la sección dron */
 @media(min-width: 860px) {
@@ -641,3 +650,80 @@ display:grid;grid-template-columns:1fr;gap:50px;align-items:center;
 .axolotl.dorado { color: #E29F78; }    
 .axolotl.rosa { color: var(--blush); }     
 .axolotl.negro { color: var(--obsidian); }
+
+/* ==========================================================================
+   RESTAURADO de `pruebas`: estas reglas existían antes de la reescritura de
+   esta hoja en `main` y sus clases se seguían usando en el HTML sin estilo.
+   ========================================================================== */
+
+/* PRECIOS (sección dron) */
+.pricing{position:relative;border:1px solid rgba(255,255,255,0.3);border-radius:6px;overflow:hidden;background:rgba(20,17,15,0.92);}
+.price-row{
+  position:relative;z-index:2;
+  display:flex;justify-content:space-between;gap:16px;
+  padding:20px 22px;border-bottom:1px solid rgba(255,255,255,0.16);
+  font-family:'JetBrains Mono',monospace;font-size:0.86rem;
+}
+.price-row:last-child{border-bottom:none;}
+.price-row .name{font-family:'Karla',sans-serif;font-weight:700;font-size:0.98rem;display:block;margin-bottom:4px;}
+.price-row .badge{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--obsidian);
+  background:var(--blush);
+  padding:2px 8px;
+  border-radius:20px;
+  margin-bottom:6px;
+}
+.price-row .desc{font-family:'Karla',sans-serif;font-weight:400;font-size:0.82rem;color:#E7E3EE;}
+.price-row .amount{white-space:nowrap;color:var(--blush);align-self:center;}
+
+/* ola de nado del ajolote sobre el precio (pricing-axolotl.js ya mueve el contenedor .axolotl; esto solo anima el SVG interior) */
+.axolotl svg{ animation:axo-swim 1.3s ease-in-out infinite; }
+@keyframes axo-swim{
+  0%,100%{transform:rotate(-5deg) translateY(0);}
+  50%{transform:rotate(5deg) translateY(-3px);}
+}
+
+/* UBICACIÓN */
+.ubica{background:var(--obsidian);color:var(--paper);padding:100px 0;}
+.ubica h2{color:var(--paper);font-size:clamp(1.7rem,3.6vw,2.3rem);max-width:16ch;margin-bottom:16px;}
+.ubica p{color:var(--stone);max-width:42ch;margin-bottom:20px;}
+.infolist div{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:14px 0;border-top:1px solid rgba(231,223,201,0.14);
+  font-size:0.92rem;color:var(--stone);
+}
+.infolist span:first-child{font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:var(--blush);text-transform:uppercase;letter-spacing:0.06em;}
+.infolist a:hover{color:var(--blush);}
+.map-box{
+  border-radius:6px;border:1px solid rgba(231,223,201,0.2);
+  background:repeating-linear-gradient(45deg, #26211D, #26211D 10px, #201B18 10px, #201B18 20px);
+  aspect-ratio: 4 / 3;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--stone-dark);
+  text-align:center;padding:20px;
+  overflow:hidden;
+}
+.map-box iframe{ aspect-ratio: 4 / 3; }
+@media(min-width:860px){
+  .map-box{ aspect-ratio: 16 / 10; }
+  .map-box iframe{ aspect-ratio: 16 / 10; }
+}
+
+/* FOOTER */
+footer{background:var(--obsidian-soft);color:var(--stone-dark);padding:48px 0 28px;}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;padding-bottom:28px;border-bottom:1px solid rgba(231,223,201,0.12);margin-bottom:20px;}
+footer .logo{color:var(--paper);}
+.foot-links{display:flex;gap:22px;font-size:0.86rem;}
+.foot-links a:hover{color:var(--blush);}
+.foot-right{display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.fine{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#7A7168;line-height:1.7;}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
+  html{scroll-behavior:auto;}
+}
