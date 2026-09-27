@@ -15,10 +15,12 @@ assets/
     i18n.js            Switch ES/EN (usa atributos data-en en el HTML)
     timeline.js         Animación de aparición del timeline "Cómo se vive un día aquí"
     pricing-axolotl.js   Animación de los ajolotes nadando hacia los precios (sección #dron)
-  img/                Fotos, logo, GIF decorativo
+    shop-carousel.js      Carrusel 3D "coverflow" de la sección de artesanías (#taller)
+  img/                Fotos, logo, GIF decorativo, fotos del carrusel de artesanías
   video/               Video del hero y video de fondo de la sección de axolotes
 favicon.svg
 robots.txt
+store/                App Next.js (landing portada a React + futura tienda) — ver store/README.md
 ```
 
 ## Desarrollo local
