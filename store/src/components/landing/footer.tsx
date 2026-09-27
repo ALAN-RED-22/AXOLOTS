@@ -2,7 +2,7 @@ import { T } from "./lang";
 import { SocialLinks } from "./social-links";
 
 const links = [
-  { href: "#taller", es: "Tienda", en: "Shop" },
+  { href: "#taller", es: "Artesanías", en: "Crafts" },
   { href: "#axolotes", es: "Axolotes", en: "Axolotls" },
   { href: "#dron", es: "Dron", en: "Drone" },
   { href: "#ubicacion", es: "Ubicación", en: "Location" },

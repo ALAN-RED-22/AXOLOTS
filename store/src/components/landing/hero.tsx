@@ -23,8 +23,8 @@ export function Hero() {
           </h1>
           <p>
             <T
-              es="Taller y tienda de artesanía hecha a mano, un mirador con exhibición viva de axolotes, y grabación por dron de tu vuelo en globo aerostático, editada y lista antes de que te vayas."
-              en="A workshop and shop of handmade crafts, a lookout with a live axolotl exhibit, and drone footage of your hot air balloon flight, edited and ready before you leave."
+              es="Taller de artesanía hecha a mano, un mirador con exhibición viva de axolotes, y grabación por dron de tu vuelo en globo aerostático, editada y lista antes de que te vayas."
+              en="A workshop of handmade crafts, a lookout with a live axolotl exhibit, and drone footage of your hot air balloon flight, edited and ready before you leave."
             />
           </p>
           <div className="cta-row">

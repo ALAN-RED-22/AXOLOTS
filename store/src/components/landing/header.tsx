@@ -6,7 +6,7 @@ import { T, useLang } from "./lang";
 import { SocialLinks } from "./social-links";
 
 const links = [
-  { href: "#taller", es: "Tienda", en: "Shop" },
+  { href: "#taller", es: "Artesanías", en: "Crafts" },
   { href: "#axolotes", es: "Axolotes", en: "Axolotls" },
   { href: "#dron", es: "Vuelos en dron", en: "Drone Flights" },
   { href: "#ubicacion", es: "Ubicación", en: "Location" },

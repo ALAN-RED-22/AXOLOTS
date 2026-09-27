@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://axolotsmx.com"),
   title,
   description:
-    "Taller y tienda de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático, a pasos de la Zona Arqueológica de Teotihuacán.",
+    "Taller de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático, a pasos de la Zona Arqueológica de Teotihuacán.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "AXOLOTS Teotihuacán",
     title,
     description:
-      "Taller y tienda de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático.",
+      "Taller de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático.",
     images: ["/assets/img/ax.png"],
   },
   twitter: { card: "summary_large_image", images: ["/assets/img/ax.png"] },

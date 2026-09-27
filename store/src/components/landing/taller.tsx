@@ -13,7 +13,7 @@ export function Taller() {
       <div className="wrap">
         <div className="taller-head">
           <p className="eyebrow">
-            <T es="Taller y tienda" en="Workshop & Shop" />
+            <T es="Taller y artesanías" en="Workshop & Crafts" />
           </p>
           <h2>
             <T
