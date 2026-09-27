@@ -1,29 +1,54 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Fraunces, Karla, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  axes: ["opsz"],
+});
+
+const karla = Karla({
+  variable: "--font-karla",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
 });
+
+const title = "AXOLOTS — Taller, Axolotes y Vuelos en Dron en Teotihuacán";
 
 export const metadata: Metadata = {
-  title: "AXOLOTS · Artesanías de México",
-  description: "Tienda de artesanías mexicanas: obsidiana, textil, cuero, minerales y más.",
+  metadataBase: new URL("https://axolotsmx.com"),
+  title,
+  description:
+    "Taller y tienda de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático, a pasos de la Zona Arqueológica de Teotihuacán.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_MX",
+    siteName: "AXOLOTS Teotihuacán",
+    title,
+    description:
+      "Taller y tienda de artesanía hecha a mano, mirador con exhibición viva de axolotes y grabación por dron de tu vuelo en globo aerostático.",
+    images: ["/assets/img/ax.png"],
+  },
+  twitter: { card: "summary_large_image", images: ["/assets/img/ax.png"] },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1C1815",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${karla.variable} ${jetbrains.variable}`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

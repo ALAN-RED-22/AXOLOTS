@@ -1,9 +1,30 @@
+import "./landing.css";
+import { Axolotes } from "@/components/landing/axolotes";
+import { Day } from "@/components/landing/day";
+import { Dron } from "@/components/landing/dron";
+import { Footer } from "@/components/landing/footer";
+import { Header } from "@/components/landing/header";
+import { Hero } from "@/components/landing/hero";
+import { WhatsAppIcon } from "@/components/landing/icons";
+import { LangProvider } from "@/components/landing/lang";
+import { WHATSAPP_URL } from "@/components/landing/site";
+import { Taller } from "@/components/landing/taller";
+import { Ubicacion } from "@/components/landing/ubicacion";
+
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-3 bg-[#14110f] px-6 text-center text-[#f3e9dc]">
-      <h1 className="text-4xl font-semibold tracking-wide">AXOLOTS</h1>
-      <p className="text-lg">Artesanías de México · muy pronto</p>
-      <p className="text-sm opacity-70">Mexican handcrafts · coming soon</p>
-    </main>
+    <LangProvider>
+      <Header />
+      <Hero />
+      <Day />
+      <Axolotes />
+      <Taller />
+      <Dron />
+      <Ubicacion />
+      <Footer />
+      <a className="whatsapp-float" href={WHATSAPP_URL} aria-label="WhatsApp" target="_blank" rel="noopener">
+        <WhatsAppIcon />
+      </a>
+    </LangProvider>
   );
 }
