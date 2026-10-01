@@ -89,7 +89,12 @@ pasos de dashboard, no hay forma de automatizarlos por API sin un token de
 cuenta:
 
 1. **Zero Trust > Access > Applications > Add an application > Self-hosted.**
-2. Dominio: `axolotsmx.com`, ruta: `/admin*`.
+2. Dominio: `axolotsmx.com`, ruta: `/admin*`. **Agregar también
+   `www.axolotsmx.com` como segundo "public hostname" en la misma
+   aplicación** (mismo path) — Access evalúa por hostname exacto, y
+   `www.axolotsmx.com` resuelve al mismo Worker pero es un hostname distinto
+   (confirmado: sin este segundo hostname, entrar por `www.` pasa de largo
+   sin pedir login).
 3. Política: "Allow" solo para los correos que deban administrar el catálogo
    (hoy en `wrangler.jsonc` → `ADMIN_EMAILS` solo está el correo de la cuenta
    de Cloudflare — agregar ahí también el de cualquier otro admin, ej. Alan,
