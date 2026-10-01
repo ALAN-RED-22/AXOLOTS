@@ -30,6 +30,12 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Generate Next route/layout types
+        # `tsc` sola no conoce tipos como `LayoutProps<"/">` — Next los genera en
+        # `.next/` al arrancar o buildear. Sin este paso, el typecheck falla en CI
+        # (no local, donde ya quedan cacheados de correr `next dev`/`build` antes).
+        run: npx next typegen
+
       - name: Typecheck
         run: npx tsc --noEmit
 
