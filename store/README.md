@@ -45,6 +45,60 @@ npx wrangler secret put STRIPE_WEBHOOK_SECRET
 Sin llaves reales, el catálogo (`/tienda`) funciona igual (no depende de
 Stripe) pero crear un checkout (`/api/checkout`) falla con un 500 claro.
 
+### Panel de administración (`/admin`)
+
+En desarrollo (`NEXTJS_ENV=development` en `.dev.vars`) no hace falta nada
+especial: `/admin` usa directamente el primer correo de `ADMIN_EMAILS` como si
+fuera quien entró, sin pedir login — por eso `ADMIN_EMAILS` es obligatorio
+incluso en local (poné tu propio correo).
+
+En producción hace falta configurar **Cloudflare Access** una sola vez — son
+pasos de dashboard, no hay forma de automatizarlos por API sin un token de
+cuenta:
+
+1. **Zero Trust > Access > Applications > Add an application > Self-hosted.**
+2. Dominio: `axolotsmx.com`, ruta: `/admin*`.
+3. Política: "Allow" solo para los correos que deban administrar el catálogo
+   (hoy en `wrangler.jsonc` → `ADMIN_EMAILS` solo está el correo de la cuenta
+   de Cloudflare — agregar ahí también el de cualquier otro admin, ej. Alan,
+   **y** en la política de Access; los dos lugares tienen que coincidir).
+4. Al guardar, el dashboard muestra el **Application Audience (AUD) Tag** —
+   copiarlo a `CF_ACCESS_AUD` en `wrangler.jsonc`.
+5. `CF_ACCESS_TEAM_DOMAIN` es el dominio de tu equipo de Zero Trust (algo como
+   `tu-equipo.cloudflareaccess.com`, visible en Zero Trust > Settings >
+   Custom Pages, o en la URL del dashboard de Zero Trust).
+6. Redesplegar (`npm run deploy`) para que el Worker lea los nuevos `vars`.
+
+Por qué Access y no una tabla de usuarios propia: son 1-2 personas de
+confianza administrando, no clientes — Cloudflare ya resuelve "quién puede
+entrar" gratis (hasta 50 usuarios) sin que la app tenga que guardar ni
+verificar contraseñas. La verificación del JWT de Access en
+`src/lib/admin-auth.ts` es una segunda capa (defensa en profundidad): si la
+política de Access se desconfigura por accidente, esto sigue frenando.
+
+### R2 (fotos de producto)
+
+El bucket (`axolots-product-images`, ver `wrangler.jsonc`) necesita que **R2
+esté habilitado en la cuenta de Cloudflare** — es un clic único en el
+dashboard (Cloudflare aún no lo tenía habilitado al escribir esto: `wrangler
+r2 bucket list` devuelve "Please enable R2 through the Cloudflare Dashboard").
+Pasos:
+
+1. Dashboard de Cloudflare > R2 > aceptar/activar (plan gratis: 10GB
+   almacenamiento, sin cargo por salida de datos).
+2. `npx wrangler r2 bucket create axolots-product-images`.
+3. (Opcional, para que las fotos se vean optimizadas en producción) Dashboard
+   > el dominio > Speed > Optimization > activar **Image Resizing** — sin
+   esto, las fotos se sirven igual pero sin redimensionar/convertir a webp
+   automáticamente (`src/lib/r2.ts` cae a servirlas tal cual si no está
+   activado; en `next dev` local SIEMPRE se sirven sin redimensionar, porque
+   `/cdn-cgi/image/...` lo resuelve el borde de Cloudflare, no existe en
+   local — confirmado con un 404 real al probarlo).
+
+En local, R2 se emula automáticamente (vía `initOpenNextCloudflareForDev()`,
+sin necesidad de bucket real ni cuenta con R2 habilitado) — las fotos que
+subas en desarrollo viven solo en tu máquina, no en la nube.
+
 ## Comandos
 
 ```bash
@@ -93,6 +147,21 @@ cuidado. NO llamar `opennextjs-cloudflare deploy` solo (sube el build viejo).
   `src/lib/shipping.ts` — pendiente integrar un agregador real como
   Skydropx/Envía.com, Fase 3). `local` (entrega por código postal) todavía no
   está implementado aunque el schema ya lo contempla.
+- **Admin (`/admin`)**: CRUD de productos/variantes/fotos con Server Actions
+  (`src/app/admin/actions.ts`). Protegido por Cloudflare Access en producción
+  + una segunda verificación propia del JWT (`src/lib/admin-auth.ts`, ver
+  sección de arriba). Fotos en R2 (`src/lib/r2.ts`), servidas por
+  `src/app/cdn/productos/[...key]/route.ts` y redimensionadas on-the-fly por
+  Cloudflare (gratis hasta 5,000 transformaciones/mes, sin el producto
+  "Cloudflare Images" de pago). Borrar una variante con pedidos asociados
+  falla por la FK de `order_items`/`stock_reservations` — se captura y se
+  muestra un aviso en vez de un 500 crudo; usar "stock en 0" o archivar el
+  producto en ese caso, no se puede borrar el historial.
+  - **`experimental.serverActions.bodySizeLimit`** subido a 10MB en
+    `next.config.ts` — el default de Next (1MB) rechazaba cualquier foto de
+    celular real antes de que nuestra propia validación de 8MB en `r2.ts`
+    llegara a correr (confirmado con una prueba real: una foto de 3.7MB daba
+    413 "Body exceeded 1 MB limit").
 
 ## Seguridad y confiabilidad — qué está cubierto y qué falta
 
@@ -124,5 +193,9 @@ cuidado. NO llamar `opennextjs-cloudflare deploy` solo (sube el build viejo).
   usa un iframe de Google Maps + Google Fonts + video, y una CSP mal armada la
   rompe; hacerla bien requiere mapear todos los orígenes permitidos primero.
 - Email transaccional de confirmación de pedido (Resend, Fase 3).
-- Panel de administración para altas de producto (hoy es Drizzle Studio /
-  scripts a mano).
+- **Cloudflare Access y R2 sin configurar todavía en la cuenta real** (ver
+  secciones de arriba) — el admin panel y la subida de fotos funcionan en
+  local con el bypass de desarrollo, pero en producción `/admin` rechazará
+  todo hasta que se complete esa configuración de dashboard.
+- Probado end-to-end en local con Chrome headless (crear producto, subir
+  foto, verificar en la base) pero no contra producción real todavía.

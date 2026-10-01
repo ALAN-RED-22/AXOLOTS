@@ -13,8 +13,18 @@
 	// nunca aquí): DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET.
 	"vars": {
 		"SITE_URL": "https://axolotsmx.com",
-		"USD_MXN_RATE": "18.5"
+		"USD_MXN_RATE": "18.5",
+		// Correos autorizados a entrar a /admin — segunda verificación propia,
+		// además de la política de Cloudflare Access (ver store/README.md).
+		"ADMIN_EMAILS": "sysium6566@gmail.com",
+		// Se llenan después de crear la aplicación de Access en el dashboard de
+		// Cloudflare Zero Trust (Access > Applications) — ver store/README.md.
+		"CF_ACCESS_TEAM_DOMAIN": "",
+		"CF_ACCESS_AUD": ""
 	},
+	"r2_buckets": [
+		{ "binding": "PRODUCT_IMAGES", "bucket_name": "axolots-product-images" }
+	],
 	"routes": [
 		{ "pattern": "axolotsmx.com", "custom_domain": true },
 		{ "pattern": "www.axolotsmx.com", "custom_domain": true }

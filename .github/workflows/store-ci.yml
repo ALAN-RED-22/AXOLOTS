@@ -36,6 +36,11 @@ jobs:
         # (no local, donde ya quedan cacheados de correr `next dev`/`build` antes).
         run: npx next typegen
 
+      - name: Generate Cloudflare binding types
+        # Igual que arriba, pero para los bindings de wrangler.jsonc (R2Bucket,
+        # ImagesBinding, etc.) — sin esto, `env.PRODUCT_IMAGES` no tipa.
+        run: npm run cf-typegen
+
       - name: Typecheck
         run: npx tsc --noEmit
 

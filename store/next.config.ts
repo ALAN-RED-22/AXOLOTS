@@ -15,6 +15,13 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  experimental: {
+    serverActions: {
+      // Default de Next es 1MB — muy poco para una foto de celular (ver
+      // src/lib/r2.ts, que ya valida su propio tope de 8MB más abajo).
+      bodySizeLimit: "10mb",
+    },
+  },
 };
 
 export default nextConfig;

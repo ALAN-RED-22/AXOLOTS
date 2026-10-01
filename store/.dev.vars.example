@@ -25,3 +25,16 @@ SITE_URL=http://localhost:3000
 # cobra en USD). Actualizar periódicamente a mano, no hay lógica de tipo de
 # cambio en vivo.
 USD_MXN_RATE=18.5
+
+# --- /admin ---
+# Correos autorizados a entrar al panel, separados por coma. En desarrollo
+# (NEXTJS_ENV=development) esto es lo ÚNICO que controla el acceso — no se
+# verifica Cloudflare Access en local, solo en producción. Poner aquí tu
+# propio correo para poder entrar a /admin en local.
+ADMIN_EMAILS=tu-correo@example.com
+
+# Vacíos en local (no se usan en desarrollo). En producción se llenan con los
+# datos de la aplicación de Cloudflare Access (Zero Trust > Access >
+# Applications) — ver store/README.md para los pasos completos.
+CF_ACCESS_TEAM_DOMAIN=
+CF_ACCESS_AUD=

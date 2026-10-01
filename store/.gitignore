@@ -39,6 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# generado por `npm run cf-typegen` (wrangler types) — regenerar localmente,
+# no commitear (608KB+ de tipos de runtime de workerd bundleados)
+cloudflare-env.d.ts
 
 # OpenNext
 .open-next
