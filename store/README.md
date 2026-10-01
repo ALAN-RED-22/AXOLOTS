@@ -45,6 +45,38 @@ npx wrangler secret put STRIPE_WEBHOOK_SECRET
 Sin llaves reales, el catálogo (`/tienda`) funciona igual (no depende de
 Stripe) pero crear un checkout (`/api/checkout`) falla con un 500 claro.
 
+**El `whsec_...` de `stripe listen` es SOLO para local.** Es un secreto
+temporal, propio de esa sesión de reenvío a `localhost` — no sirve para
+nada que le llegue a producción. Para que Stripe le mande webhooks de
+verdad a `axolotsmx.com`, hace falta un endpoint registrado aparte:
+
+```bash
+stripe webhook_endpoints create \
+  --url "https://axolotsmx.com/api/webhooks/stripe" \
+  --enabled-events "checkout.session.completed" \
+  --enabled-events "checkout.session.expired"
+```
+
+Esto imprime un `secret` (`whsec_...`) — ese es el que va como
+`STRIPE_WEBHOOK_SECRET` en producción (`wrangler secret put`), nunca el de
+`stripe listen`. Ya se hizo esto una vez en modo test (2026-10-01,
+`we_1ULbBDAnA3FqyOMawMLIx4zS`) — verificado con `stripe trigger` real
+llegando a producción y procesándose en `payment_events`. **Cuando se pase a
+llaves LIVE, hay que repetir este paso completo** (el modo test y el modo
+live tienen webhooks y secretos totalmente separados en Stripe, uno no
+sirve para el otro).
+
+### Secretos de producción (ya configurados, 2026-10-01)
+
+```bash
+npx wrangler secret list   # confirma cuáles están puestos, sin mostrar valores
+```
+
+`DATABASE_URL`, `STRIPE_SECRET_KEY` (modo test) y `STRIPE_WEBHOOK_SECRET`
+(del endpoint real de arriba, no de `stripe listen`) ya están puestos como
+secrets del Worker — nunca estuvieron antes del primer deploy con el código
+de la tienda, lo que dejó `/tienda` caída (500) hasta que se corrigió.
+
 ### Panel de administración (`/admin`)
 
 En desarrollo (`NEXTJS_ENV=development` en `.dev.vars`) no hace falta nada
@@ -193,9 +225,10 @@ cuidado. NO llamar `opennextjs-cloudflare deploy` solo (sube el build viejo).
   usa un iframe de Google Maps + Google Fonts + video, y una CSP mal armada la
   rompe; hacerla bien requiere mapear todos los orígenes permitidos primero.
 - Email transaccional de confirmación de pedido (Resend, Fase 3).
-- **Cloudflare Access y R2 sin configurar todavía en la cuenta real** (ver
-  secciones de arriba) — el admin panel y la subida de fotos funcionan en
-  local con el bypass de desarrollo, pero en producción `/admin` rechazará
-  todo hasta que se complete esa configuración de dashboard.
-- Probado end-to-end en local con Chrome headless (crear producto, subir
-  foto, verificar en la base) pero no contra producción real todavía.
+- [x] ~~Cloudflare Access y R2 sin configurar~~ — configurado y verificado en
+  producción 2026-10-01: `/admin` protegido por Access (confirmado con un
+  302 real al login), `/tienda` y el webhook de Stripe respondiendo 200/400
+  correctamente contra la base y Stripe reales.
+- Falta dar de alta productos reales (la tabla sigue vacía) y, cuando haya
+  llaves LIVE de Stripe, repetir el registro del webhook en modo live (ver
+  arriba) — el de hoy es modo test.
