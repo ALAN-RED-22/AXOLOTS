@@ -96,15 +96,26 @@ cuenta:
    (confirmado: sin este segundo hostname, entrar por `www.` pasa de largo
    sin pedir login).
 3. Política: "Allow" solo para los correos que deban administrar el catálogo
-   (hoy en `wrangler.jsonc` → `ADMIN_EMAILS` solo está el correo de la cuenta
-   de Cloudflare — agregar ahí también el de cualquier otro admin, ej. Alan,
-   **y** en la política de Access; los dos lugares tienen que coincidir).
+   (hoy en `wrangler.jsonc` → `ADMIN_EMAILS` tiene los 3 correos autorizados;
+   si se agrega un admin nuevo, hay que ponerlo en los DOS lugares — la
+   política de Access y `ADMIN_EMAILS` — o la segunda verificación propia en
+   `admin-auth.ts` lo va a rechazar aunque Access lo deje pasar).
 4. Al guardar, el dashboard muestra el **Application Audience (AUD) Tag** —
    copiarlo a `CF_ACCESS_AUD` en `wrangler.jsonc`.
 5. `CF_ACCESS_TEAM_DOMAIN` es el dominio de tu equipo de Zero Trust (algo como
    `tu-equipo.cloudflareaccess.com`, visible en Zero Trust > Settings >
    Custom Pages, o en la URL del dashboard de Zero Trust).
 6. Redesplegar (`npm run deploy`) para que el Worker lea los nuevos `vars`.
+7. **Identity Provider: "One-Time PIN" (código al correo)** — es el único que
+   hace falta, no requiere configurar nada externo. Seleccionarlo tanto a
+   nivel de cuenta (Zero Trust > Settings > Authentication) como dentro de la
+   aplicación misma (pestaña "Identity providers" al editarla) — son ajustes
+   separados. **Si el código no llega a ningún correo** (se probó con Gmail y
+   Hotmail, ninguno lo recibió, con la política ya asociada y OTP como único
+   método): quitar "One-Time PIN" de los Identity Providers de la aplicación y
+   volver a activarlo. Pasó una vez (2026-10-01) y un simple toggle off/on lo
+   destrabó — no hay una causa raíz confirmada más allá de eso, pero es rápido
+   de probar antes de sospechar de política/DNS/spam.
 
 Por qué Access y no una tabla de usuarios propia: son 1-2 personas de
 confianza administrando, no clientes — Cloudflare ya resuelve "quién puede
