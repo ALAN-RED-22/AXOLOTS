@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   boolean,
   check,
@@ -245,3 +245,34 @@ export const localDeliveryZones = pgTable("local_delivery_zones", {
   feeCents: integer("fee_cents").notNull(),
   active: boolean("active").notNull().default(true),
 });
+
+// Relaciones (solo metadata de Drizzle para `db.query.*.findMany({ with: ... })`;
+// no generan cambios de esquema en la base de datos, no requieren migración).
+export const productsRelations = relations(products, ({ many }) => ({
+  images: many(productImages),
+  variants: many(productVariants),
+}));
+
+export const productImagesRelations = relations(productImages, ({ one }) => ({
+  product: one(products, { fields: [productImages.productId], references: [products.id] }),
+}));
+
+export const productVariantsRelations = relations(productVariants, ({ one, many }) => ({
+  product: one(products, { fields: [productVariants.productId], references: [products.id] }),
+  reservations: many(stockReservations),
+}));
+
+export const ordersRelations = relations(orders, ({ many }) => ({
+  items: many(orderItems),
+  reservations: many(stockReservations),
+}));
+
+export const orderItemsRelations = relations(orderItems, ({ one }) => ({
+  order: one(orders, { fields: [orderItems.orderId], references: [orders.id] }),
+  variant: one(productVariants, { fields: [orderItems.variantId], references: [productVariants.id] }),
+}));
+
+export const stockReservationsRelations = relations(stockReservations, ({ one }) => ({
+  order: one(orders, { fields: [stockReservations.orderId], references: [orders.id] }),
+  variant: one(productVariants, { fields: [stockReservations.variantId], references: [productVariants.id] }),
+}));

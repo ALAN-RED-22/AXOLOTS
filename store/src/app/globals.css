@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+/*
+ * Paleta de marca compartida con la landing (ver assets/css/style.css en la
+ * raíz del repo) — declarada aquí como variables CSS planas (sin selectores
+ * de elemento como `header`/`nav`/`footer`) para que /tienda pueda usarla sin
+ * chocar con `landing.css`, que solo se carga en la página `/`.
+ */
+:root {
+  --obsidian: #1c1815;
+  --adobe: #b5652e;
+  --adobe-dark: #8a4a1f;
+  --stone: #e7dfc9;
+  --jade: #2f6b5e;
+  --blush: #e8a79b;
+  --paper: #faf6ec;
+}

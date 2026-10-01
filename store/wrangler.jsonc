@@ -9,6 +9,12 @@
 	],
 	"workers_dev": false,
 	"preview_urls": false,
+	// Vars NO sensibles (secretos reales van con `wrangler secret put <NOMBRE>`,
+	// nunca aquí): DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET.
+	"vars": {
+		"SITE_URL": "https://axolotsmx.com",
+		"USD_MXN_RATE": "18.5"
+	},
 	"routes": [
 		{ "pattern": "axolotsmx.com", "custom_domain": true },
 		{ "pattern": "www.axolotsmx.com", "custom_domain": true }

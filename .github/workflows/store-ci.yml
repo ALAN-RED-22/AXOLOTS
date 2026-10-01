@@ -1,0 +1,45 @@
+name: store CI
+
+on:
+  push:
+    branches: [main, pruebas]
+    paths: ["store/**", ".github/workflows/store-ci.yml"]
+  pull_request:
+    paths: ["store/**", ".github/workflows/store-ci.yml"]
+
+defaults:
+  run:
+    working-directory: store
+
+jobs:
+  verify:
+    name: lint + typecheck + test + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: store/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build
+        # El build no necesita secretos reales: las rutas que usan DB/Stripe
+        # están marcadas `dynamic = "force-dynamic"` y no se prerenderizan.
+        run: npm run build
+
+      - name: Dependency audit (no bloquea el pipeline, solo reporta)
+        run: npm audit --audit-level=high || true

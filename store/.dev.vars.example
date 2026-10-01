@@ -1,0 +1,27 @@
+# Copiar a .dev.vars (gitignored) y llenar con valores reales para desarrollo local.
+# En producción estos mismos nombres se configuran como secrets/vars de Wrangler
+# (`wrangler secret put <NOMBRE>` para los secretos, `vars` en wrangler.jsonc para
+# los que no son sensibles) — nunca en el repo.
+
+NEXTJS_ENV=development
+
+# Cadena de conexión de Neon Postgres (rol con los permisos mínimos necesarios,
+# no el superusuario de la cuenta).
+DATABASE_URL=postgresql://user:password@host/dbname?sslmode=require
+
+# Dashboard de Stripe > Developers > API keys. Usar SIEMPRE llaves de modo test
+# (sk_test_...) fuera de producción.
+STRIPE_SECRET_KEY=sk_test_...
+
+# Dashboard de Stripe > Developers > Webhooks > tu endpoint > "Signing secret".
+# En local, `stripe listen --forward-to localhost:3000/api/webhooks/stripe`
+# imprime un whsec_... temporal para usar aquí.
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+# URL pública del sitio, usada para construir success_url/cancel_url del checkout.
+SITE_URL=http://localhost:3000
+
+# Conversión MXN->USD solo para el precio demostrativo en pantalla (nunca se
+# cobra en USD). Actualizar periódicamente a mano, no hay lógica de tipo de
+# cambio en vivo.
+USD_MXN_RATE=18.5
