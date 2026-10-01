@@ -80,6 +80,25 @@ export async function handleStripeWebhook(
   return { status: 200, body: "ok" };
 }
 
-function isUniqueViolation(err: unknown): boolean {
-  return typeof err === "object" && err !== null && "code" in err && (err as { code?: string }).code === POSTGRES_UNIQUE_VIOLATION;
+/**
+ * Drizzle envuelve el error real de Postgres en un `DrizzleQueryError` cuyo
+ * `.code` es `undefined` — el código real (`23505` para violación de unicidad)
+ * vive en `.cause`. Confirmado con una prueba de extremo a extremo real contra
+ * Neon (reenviando el mismo evento de Stripe dos veces): sin recorrer `.cause`,
+ * un webhook duplicado devolvía 500 en vez de 200, porque el catch de más
+ * abajo nunca reconocía el error como duplicado y lo relanzaba.
+ */
+export function isUniqueViolation(err: unknown): boolean {
+  let current: unknown = err;
+  for (let depth = 0; depth < 5 && current; depth++) {
+    if (
+      typeof current === "object" &&
+      "code" in current &&
+      (current as { code?: string }).code === POSTGRES_UNIQUE_VIOLATION
+    ) {
+      return true;
+    }
+    current = typeof current === "object" && current !== null && "cause" in current ? (current as { cause?: unknown }).cause : undefined;
+  }
+  return false;
 }
