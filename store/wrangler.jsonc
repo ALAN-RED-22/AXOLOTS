@@ -17,7 +17,7 @@
 		// Correos autorizados a entrar a /admin — segunda verificación propia,
 		// además de la política de Cloudflare Access (ver store/README.md). Deben
 		// coincidir exactamente con los correos puestos en la política de Access.
-		"ADMIN_EMAILS": "sysium6566@gmail.com,c.resh13@gmail.com,maurojuareza@gmail.com",
+		"ADMIN_EMAILS": "sysium6566@gmail.com,c.resh13@hotmail.com,maurojuareza@gmail.com",
 		// Aplicación de Access creada 2026-10-01 para /admin* en axolotsmx.com.
 		"CF_ACCESS_TEAM_DOMAIN": "soft-thunder-db00.cloudflareaccess.com",
 		"CF_ACCESS_AUD": "9b3d885ed1ddea5f5255e6bcab17fab0e896035ae89cdd5ea8307068f72095ae"
